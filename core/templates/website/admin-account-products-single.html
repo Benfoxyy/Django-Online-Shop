@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <!-- Required Meta Tags Always Come First -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+  <!-- Title -->
+  <title>داشبورد ادمین</title>
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./favicon.ico" />
+
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- CSS Implementing Plugins -->
+  <link rel="stylesheet" href="./assets/css/vendor.min.css" />
+  <link rel="stylesheet" href="./assets/vendor/bootstrap-icons/font/bootstrap-icons.css" />
+
+
+  <!-- CSS Front Template -->
+  <link rel="stylesheet" href="./assets/css/theme.min.css?v=1.0" />
+</head>
+
+<body>
+  <!-- ========== HEADER ========== -->
+  <header id="header" class="navbar navbar-expand-lg navbar-end navbar-light">
+    <div class="container">
+      <nav class="js-mega-menu navbar-nav-wrap">
+        <!-- Default Logo -->
+        <a class="navbar-brand" href="/index.html" aria-label="Front">
+          <img class="navbar-brand-logo" src="/assets/svg/logos/logo.svg" alt="Logo">
+        </a>
+        <!-- End Default Logo -->
+
+        <!-- Toggler -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+          aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-default">
+            <i class="bi-list"></i>
+          </span>
+          <span class="navbar-toggler-toggled">
+            <i class="bi-x"></i>
+          </span>
+        </button>
+        <!-- End Toggler -->
+
+        <!-- Collapse -->
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="/index.html">صفحه اصلی</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="hs-has-sub-menu nav-item">
+              <a id="listingsDropdown" class="hs-mega-menu-invoker nav-link dropdown-toggle " href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">لیست محصولات</a>
+              <div class="hs-sub-menu dropdown-menu" aria-labelledby="listingsDropdown" style="min-width: 14rem;">
+                <a class="dropdown-item " href="/products-list.html">فهرست</a>
+                <a class="dropdown-item " href="/products-grid.html">فهرست (شبکه)</a>
+              </div>
+            </li>
+            <!-- End Dropdown -->
+
+            <li class="nav-item">
+              <a class="nav-link " href="/product-overview.html">بررسی اجمالی محصولات</a>
+            </li>
+
+            <!-- Pages -->
+            <li class="hs-has-mega-menu nav-item" data-hs-mega-menu-item-options='{
+                "desktop": {
+                  "position": "right",
+                  "maxWidth": "27rem"
+                }
+              }'>
+              <a id="pagesMegaMenu" class="hs-mega-menu-invoker nav-link dropdown-toggle " aria-current="page" href="#"
+                role="button" data-bs-toggle="dropdown" aria-expanded="false">صفحات</a>
+
+              <!-- Mega Menu -->
+              <div class="hs-mega-menu dropdown-menu" aria-labelledby="pagesMegaMenu" style="min-width: 27rem;">
+                <div class="navbar-dropdown-menu-inner">
+                  <span class="dropdown-header">عناصر</span>
+
+                  <div class="row">
+                    <div class="col-sm mb-3 mb-sm-0">
+                      <a class="dropdown-item " href="/categories.html">دسته بندی ها</a>
+                      <a class="dropdown-item " href="/categories-sidebar.html">نوار کناری دسته ها</a>
+                      <a class="dropdown-item " href="/empty-cart.html">سبد خالی</a>
+                    </div>
+                    <!-- End Col -->
+
+                    <div class="col-sm">
+                      <a class="dropdown-item " href="/cart.html">سبد خرید</a>
+                      <a class="dropdown-item " href="/checkout.html">بررسی</a>
+                      <a class="dropdown-item " href="/order-completed.html">سفارش تکمیل شد</a>
+                    </div>
+                    <!-- End Col -->
+                  </div>
+                  <!-- End Row -->
+                </div>
+
+                <!-- Mega Menu Banner -->
+                <div class="navbar-dropdown-menu-shop-banner">
+                  <div class="d-flex">
+                    <div class="flex-shrink-0">
+                      <img class="navbar-dropdown-menu-shop-banner-img" src="/assets/img/mockups/img4.png"
+                        alt="Image Description">
+                    </div>
+
+                    <div class="flex-grow-1 p-4">
+                      <span class="h4 d-block text-primary">برنده تی شرت</span>
+                      <p>یکی از تی شرت های برند Front ما را برنده شوید.</p>
+                      <a class="btn btn-sm btn-soft-primary btn-transition" href="/index.html">بیشتر بدانید <i
+                          class="bi-chevron-left small"></i></a>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Mega Menu Banner -->
+              </div>
+              <!-- End Mega Menu -->
+            </li>
+            <!-- End Pages -->
+
+            <li class="nav-item">
+              <!-- Search -->
+              <button class="btn btn-ghost-secondary btn-icon" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarSearch" aria-controls="offcanvasNavbarSearch">
+                <i class="bi-search"></i>
+              </button>
+              <!-- End Search -->
+
+              <!-- Shopping Cart -->
+              <button type="button" class="btn btn-ghost-secondary btn-icon" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbarShoppingCart" aria-controls="offcanvasNavbarShoppingCart">
+                <i class="bi-basket"></i>
+                <span class="cart-item-count ">3</span>
+              </button>
+              <!-- End Shopping Cart -->
+
+              <a class="btn btn-primary btn-transition" href="./page-login-simple.html">ورود</a>
+            </li>
+          </ul>
+        </div>
+        <!-- End Collapse -->
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== END HEADER ========== -->
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main id="content" role="main" class="bg-light">
+    <!-- Breadcrumb -->
+    <div class="navbar-dark bg-dark" style="
+          background-image: url(./assets/svg/components/wave-pattern-light.svg);
+        ">
+      <div class="container content-space-1 content-space-b-lg-3">
+        <div class="row align-items-center">
+          <div class="col">
+            <div class="d-none d-lg-block">
+              <h1 class="h2 text-white">داشبورد</h1>
+            </div>
+
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb breadcrumb-light mb-0">
+                <li class="breadcrumb-item">حساب</li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  داشبورد ادمین
+                </li>
+              </ol>
+            </nav>
+            <!-- End Breadcrumb -->
+          </div>
+          <!-- End Col -->
+
+          <div class="col-auto">
+            <!-- Responsive Toggle Button -->
+            <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse"
+              data-bs-target="#sidebarNav" aria-controls="sidebarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-default">
+                <i class="bi-list"></i>
+              </span>
+              <span class="navbar-toggler-toggled">
+                <i class="bi-x"></i>
+              </span>
+            </button>
+            <!-- End Responsive Toggle Button -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Content Section -->
+    <div class="container content-space-1 content-space-t-lg-0 content-space-b-lg-2 mt-lg-n10">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- Navbar -->
+          <div class="navbar-expand-lg navbar-light">
+            <div id="sidebarNav" class="collapse navbar-collapse navbar-vertical">
+              <!-- Card -->
+              <div class="card flex-grow-1 mb-5">
+                <div class="card-body">
+                  <!-- Avatar -->
+                  <div class="d-none d-lg-block text-center mb-5">
+                    <div class="avatar avatar-xxl avatar-circle mb-3">
+                      <img class="avatar-img" src="./assets/img/160x160/img9.jpg" alt="Image Description" />
+
+                    </div>
+
+                    <h4 class="card-title mb-0">ناتالی کورتیس</h4>
+                    <p class="card-text small">natalie@example.com</p>
+                  </div>
+                  <!-- End Avatar -->
+
+                  <!-- Nav -->
+                  <span class="text-cap">حساب</span>
+
+                  <!-- List -->
+                  <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
+                    <li class="nav-item">
+                      <a class="nav-link" href="./account-home.html">
+                        <i class="bi-person-badge nav-icon"></i>داشبورد
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="./account-security.html">
+                        <i class="bi-shield-shaded nav-icon"></i> امنیت
+                      </a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="./account-overview.html">
+                        <i class="bi-sliders nav-icon"></i> تنظیمات پروفایل
+                      </a>
+                    </li>
+                  </ul>
+                  <!-- End List -->
+
+                  <span class="text-cap">فروشگاه</span>
+
+                  <!-- List -->
+                  <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
+                    <li class="nav-item">
+                      <a class="nav-link " href="./admin-account-products.html">
+                        <i class="bi-shop-window nav-icon"></i> محصولات
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " href="./admin-account-order.html">
+                        <i class="bi-receipt-cutoff nav-icon"></i> سفارشات
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " href="./admin-account-support.html">
+                        <i class="bi-envelope nav-icon"></i> تیکت ها
+                      </a>
+                    </li>
+
+
+                  </ul>
+
+                  <span class="text-cap">کاربران</span>
+
+                  <!-- List -->
+                  <ul class="nav nav-sm nav-tabs nav-vertical mb-4">
+                    <li class="nav-item">
+                      <a class="nav-link " href="./admin-account-users.html">
+                        <i class="bi-person nav-icon"></i> لیست کاربران
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link " href="./admin-account-newsletter.html">
+                        <i class="bi-newspaper nav-icon"></i> خبرنامه
+                      </a>
+                    </li>
+
+                  </ul>
+
+                  <!-- End List -->
+
+                  <div class="d-lg-none">
+                    <div class="dropdown-divider"></div>
+
+                    <!-- List -->
+                    <ul class="nav nav-sm nav-tabs nav-vertical">
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">
+                          <i class="bi-box-arrow-right nav-icon"></i> خروج
+                        </a>
+                      </li>
+                    </ul>
+                    <!-- End List -->
+                  </div>
+                  <!-- End Nav -->
+                </div>
+              </div>
+              <!-- End Card -->
+            </div>
+          </div>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-lg-9">
+          <!-- Card -->
+          <div class="card">
+            <!-- Header -->
+            <div class="card-header border-bottom">
+              <h5 class="card-header-title">ویرایش/ساخت محصول</h5>
+            </div>
+            <!-- End Header -->
+
+            <!-- Body -->
+            <div class="card-body">
+              <form>
+                <div class="row d-flex ">
+                  <div class="col-md-6 mb-3">
+                    <label for="validationValidInput1">کد محصول</label>
+                    <input type="text" class="form-control is-valid" id="validationValidInput1" placeholder="">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationValidInput1">نام محصول</label>
+                    <input type="text" class="form-control is-valid" id="validationValidInput1" placeholder="">
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationValidInput1">تعداد</label>
+                    <input type="text" class="form-control is-valid" id="validationValidInput1" placeholder="">
+                  </div>
+
+                  <div class="col-md-6 mb-3">
+                    <label for="validationValidSelect1">وضعیت</label>
+                    <select class="form-select is-valid" id="validationValidSelect1">
+                      <option>Choose an option</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                    <span class="valid-feedback">Valid feedback</span>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="validationValidSelect1">دسته بندی</label>
+                    <select class="form-select is-valid" id="validationValidSelect1">
+                      <option>Choose an option</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                    </select>
+                    <span class="valid-feedback">Valid feedback</span>
+                  </div>
+                  <div class="col-md-4 mb-3">
+                    <label for="validationValidInput1">قیمت</label>
+                    <input type="text" class="form-control is-valid" id="validationValidInput1" placeholder="">
+                  </div>
+                  <div class="col-md-2 mb-3">
+                    <label for="validationValidInput1">درصد تخفیف</label>
+                    <input type="text" class="form-control is-valid" id="validationValidInput1" placeholder="">
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+                    <label for="validationValidSelect1">توضیحات</label>
+                    <div class="quill-custom">
+                      <div class="js-quill" style="height: 15rem;" data-hs-quill-options='{
+                           "placeholder": "Type your message...",
+                            "modules": {
+                              "toolbar": [
+                                ["bold", "italic", "underline", "strike", "link", "image", "blockquote", "code", {"list": "bullet"}]
+                              ]
+                            }
+                           }'>ذهن خلاق در Htmlstream
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-12 mb-3">
+                    <label for="validationValidFileInput1">تصویر محصول</label>
+                    <input type="file" id="validationValidFileInput1" class="form-control is-valid">
+                  </div>
+
+              </form>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class=" d-flex pt-5 justify-content-end">
+              <a class="btn btn-danger ms-3">حذف</a>
+              <a class="btn btn-secondary ms-3" href="./admin-account-products.html">بازگشت</a>
+              <a class="btn btn-primary ms-3">ثبت تغییرات</a>
+            </div>
+          </div>
+          <!-- End Body -->
+        </div>
+        <!-- End Card -->
+      </div>
+      <!-- End Col -->
+    </div>
+    <!-- End Row -->
+    </div>
+    <!-- End Content Section -->
+  </main>
+  <!-- ========== END MAIN CONTENT ========== -->
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-dark">
+    <div class="container pb-1 pb-lg-5">
+      <div class="row content-space-t-2">
+        <div class="col-lg-3 mb-7 mb-lg-0">
+          <!-- Logo -->
+          <div class="mb-5">
+            <a class="navbar-brand" href="./index.html" aria-label="Space">
+              <img class="navbar-brand-logo" src="./assets/svg/logos/logo-white.svg" alt="Image Description" />
+            </a>
+          </div>
+          <!-- End Logo -->
+
+          <!-- List -->
+          <ul class="list-unstyled list-py-1">
+            <li>
+              <a class="link-sm link-light" href="#"><i class="bi-geo-alt-fill me-1"></i> 153 ویلیامسون پلازا،
+                مگیبرگ</a>
+            </li>
+            <li>
+              <a class="link-sm link-light" href="tel:1-062-109-9222"><i class="bi-telephone-inbound-fill me-1"></i> +1
+                (062)
+                109-9222</a>
+            </li>
+          </ul>
+          <!-- End List -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm mb-7 mb-sm-0">
+          <h5 class="text-white mb-3">شرکت</h5>
+
+          <!-- List -->
+          <ul class="list-unstyled list-py-1 mb-0">
+            <li><a class="link-sm link-light" href="#">در باره</a></li>
+            <li>
+              <a class="link-sm link-light" href="#">مشاغل
+                <span class="badge bg-warning text-dark rounded-pill ms-1">استخدام می کنیم</span></a>
+            </li>
+            <li><a class="link-sm link-light" href="#">بلاگ</a></li>
+            <li>
+              <a class="link-sm link-light" href="#">مشتریان <i class="bi-box-arrow-up-right small ms-1"></i></a>
+            </li>
+            <li>
+              <a class="link-sm link-light" href="#">ما را استخدام کنید</a>
+            </li>
+          </ul>
+          <!-- End List -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm mb-7 mb-sm-0">
+          <h5 class="text-white mb-3">امکانات</h5>
+
+          <!-- List -->
+          <ul class="list-unstyled list-py-1 mb-0">
+            <li>
+              <a class="link-sm link-light" href="#">مطبوعات <i class="bi-box-arrow-up-right small ms-1"></i></a>
+            </li>
+            <li>
+              <a class="link-sm link-light" href="#">یادداشت های انتشار</a>
+            </li>
+            <li><a class="link-sm link-light" href="#">ادغام ها</a></li>
+            <li><a class="link-sm link-light" href="#">قیمت گذاری</a></li>
+          </ul>
+          <!-- End List -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm mb-7 mb-sm-0">
+          <h5 class="text-white mb-3">مستندات</h5>
+
+          <!-- List -->
+          <ul class="list-unstyled list-py-1 mb-0">
+            <li><a class="link-sm link-light" href="#">حمایت کردن</a></li>
+            <li><a class="link-sm link-light" href="#">اسناد</a></li>
+            <li><a class="link-sm link-light" href="#">وضعیت</a></li>
+            <li><a class="link-sm link-light" href="#">مرجع API</a></li>
+            <li><a class="link-sm link-light" href="#">الزامات فنی</a></li>
+          </ul>
+          <!-- End List -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-sm">
+          <h5 class="text-white mb-3">منابع</h5>
+
+          <!-- List -->
+          <ul class="list-unstyled list-py-1 mb-5">
+            <li>
+              <a class="link-sm link-light" href="#"><i class="bi-question-circle-fill me-1"></i> کمک</a>
+            </li>
+            <li>
+              <a class="link-sm link-light" href="#"><i class="bi-person-circle me-1"></i> حساب شما</a>
+            </li>
+          </ul>
+          <!-- End List -->
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+
+      <div class="border-top border-white-10 my-7"></div>
+
+      <div class="row mb-7">
+        <div class="col-sm mb-3 mb-sm-0">
+          <!-- Socials -->
+          <ul class="list-inline list-separator list-separator-light mb-0">
+            <li class="list-inline-item">
+              <a class="link-sm link-light" href="#">حریم خصوصی &amp; خط مشی</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="link-sm link-light" href="#">مقررات</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="link-sm link-light" href="#">نقشه سایت</a>
+            </li>
+          </ul>
+          <!-- End Socials -->
+        </div>
+
+        <div class="col-sm-auto">
+          <!-- Socials -->
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item">
+              <a class="btn btn-soft-light btn-xs btn-icon" href="#">
+                <i class="bi-facebook"></i>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+              <a class="btn btn-soft-light btn-xs btn-icon" href="#">
+                <i class="bi-google"></i>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+              <a class="btn btn-soft-light btn-xs btn-icon" href="#">
+                <i class="bi-twitter"></i>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+              <a class="btn btn-soft-light btn-xs btn-icon" href="#">
+                <i class="bi-github"></i>
+              </a>
+            </li>
+
+            <li class="list-inline-item">
+              <!-- Button Group -->
+              <div class="btn-group">
+                <button type="button" class="btn btn-soft-light btn-xs dropdown-toggle" id="footerSelectLanguage"
+                  data-bs-toggle="dropdown" aria-expanded="false" data-bs-dropdown-animation>
+                  <span class="d-flex align-items-center">
+                    <img class="avatar avatar-xss avatar-circle ms-2"
+                      src="./assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="Image description" width="16" />
+                    <span>انگلیسی</span>
+                  </span>
+                </button>
+
+                <div class="dropdown-menu" aria-labelledby="footerSelectLanguage">
+                  <a class="dropdown-item d-flex align-items-center active" href="#">
+                    <img class="avatar avatar-xss avatar-circle ms-2"
+                      src="./assets/vendor/flag-icon-css/flags/1x1/us.svg" alt="Image description" width="16" />
+                    <span>انگلیسی</span>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <img class="avatar avatar-xss avatar-circle ms-2"
+                      src="./assets/vendor/flag-icon-css/flags/1x1/de.svg" alt="Image description" width="16" />
+                    <span>آلمانی</span>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <img class="avatar avatar-xss avatar-circle ms-2"
+                      src="./assets/vendor/flag-icon-css/flags/1x1/es.svg" alt="Image description" width="16" />
+                    <span>اسپانیا</span>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <img class="avatar avatar-xss avatar-circle ms-2"
+                      src="./assets/vendor/flag-icon-css/flags/1x1/cn.svg" alt="Image description" width="16" />
+                    <span>چینی</span>
+                  </a>
+                </div>
+              </div>
+              <!-- End Button Group -->
+            </li>
+          </ul>
+          <!-- End Socials -->
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="w-md-85 text-lg-center mx-lg-auto">
+        <p class="text-white-50 small">
+          &copy; جلو. Htmlstream 2021. تمامی حقوق محفوظ است.
+        </p>
+        <p class="text-white-50 small">
+          هنگامی که از سایت‌ها، سرویس‌ها یا ابزارهای ما بازدید می‌کنید یا با
+          آنها تعامل می‌کنید، ما یا ارائه‌دهندگان خدمات مجاز ما ممکن است از
+          کوکی‌ها برای ذخیره اطلاعات استفاده کنیم تا تجربه بهتر، سریع‌تر و
+          ایمن‌تری و برای اهداف بازاریابی به شما ارائه کنیم.
+        </p>
+      </div>
+      <!-- End Copyright -->
+    </div>
+  </footer>
+
+  <!-- ========== END FOOTER ========== -->
+
+  <!-- ========== SECONDARY CONTENTS ========== -->
+
+
+  <!-- Go To -->
+  <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden" data-hs-go-to-options='{
+       "offsetTop": 700,
+       "position": {
+         "init": {
+           "right": "2rem"
+         },
+         "show": {
+           "bottom": "2rem"
+         },
+         "hide": {
+           "bottom": "-2rem"
+         }
+       }
+     }'>
+    <i class="bi-chevron-up"></i>
+  </a>
+
+  <!-- Offcanvas Search -->
+  <div class="offcanvas offcanvas-top offcanvas-navbar-search bg-light" tabindex="-1" id="offcanvasNavbarSearch">
+    <div class="offcanvas-body">
+      <div class="container">
+        <div class="w-lg-75 mx-lg-auto">
+          <div class="d-flex justify-content-end mb-3">
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+
+          <div class="mb-7">
+            <!-- Form -->
+            <form>
+              <!-- Input Card -->
+              <div class="input-card">
+                <div class="input-card-form">
+                  <input type="text" class="form-control form-control-lg" placeholder="جستجو محصولات"
+                    aria-label="جستجو محصولات" />
+                </div>
+                <button type="button" class="btn btn-primary btn-lg">
+                  جستجو
+                </button>
+              </div>
+              <!-- End Input Card -->
+            </form>
+            <!-- End Form -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JS Implementing Plugins -->
+  <script src="./assets/js/vendor.min.js"></script>
+
+  <!-- JS Front -->
+  <script src="./assets/js/theme.min.js"></script>
+
+  <!-- JS Plugins Init. -->
+  <script>
+    (function () {
+      // INITIALIZATION OF HEADER
+      // =======================================================
+      new HSHeader("#header").init();
+
+      // INITIALIZATION OF MEGA MENU
+      // =======================================================
+      new HSMegaMenu(".js-mega-menu", {
+        desktop: {
+          position: "left",
+        },
+      });
+
+      // INITIALIZATION OF SHOW ANIMATIONS
+      // =======================================================
+      new HSShowAnimation(".js-animation-link");
+
+      // INITIALIZATION OF BOOTSTRAP VALIDATION
+      // =======================================================
+      HSBsValidation.init(".js-validate", {
+        onSubmit: (data) => {
+          data.event.preventDefault();
+          alert("Submited");
+        },
+      });
+
+      // INITIALIZATION OF BOOTSTRAP DROPDOWN
+      // =======================================================
+      HSBsDropdown.init();
+
+      // INITIALIZATION OF GO TO
+      // =======================================================
+      new HSGoTo(".js-go-to");
+
+      // INITIALIZATION OF INPUT MASK
+      // =======================================================
+      HSCore.components.HSMask.init(".js-input-mask");
+
+      // INITIALIZATION OF SELECT
+      // =======================================================
+      HSCore.components.HSTomSelect.init(".js-select", {
+        render: {
+          option: function (data, escape) {
+            return data.optionTemplate;
+          },
+          item: function (data, escape) {
+            return data.optionTemplate;
+          },
+        },
+      });
+    })();
+    HSCore.components.HSQuill.init('.js-quill')
+  </script>
+
+</body>
+
+</html>
