@@ -59,13 +59,13 @@
                 <a class="nav-link active" href="{% url 'website:home' %}">صفحه اصلی</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'shop:list_grid' %}">محصولات</a>
+                <a class="nav-link active" href="{% url 'shop:list_grid' %}">مشاهده محصولات</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'website:home' %}">درباره ما</a>
+                <a class="nav-link active" href="{% url 'website:about' %}">درباره ما</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="{% url 'website:home' %}">ارتباط با ما</a>
+                <a class="nav-link active" href="{% url 'website:contact' %}">ارتباط با ما</a>
               </li>
               <li class="nav-item">
                 <!-- Search -->
@@ -86,7 +86,7 @@
                 <button class="btn btn-ghost-secondary btn-icon" id="dropdownMenuLink"
                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="avatar avatar-sm avatar-circle">
-                    <img class="avatar-img" src="https://filestore.community.support.microsoft.com/api/images/0ce956b2-9787-4756-a580-299568810730?upload=true"
+                    <img class="avatar-img" src="{{request.user.user_profile.avatar.url}}"
                         alt="Image Description">
                 </span>
                 </button>

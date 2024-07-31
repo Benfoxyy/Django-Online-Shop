@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
     <!-- Breadcrumb -->
@@ -368,7 +369,7 @@
         <div class="col-lg-9">
           <div class="row align-items-center mb-5">
             <div class="col-sm mb-3 mb-sm-0">
-              <h6 class="mb-0">110 محصول</h6>
+              <h6 class="mb-0">{{total_prod}} محصول</h6>
             </div>
 
             <div class="col-sm-auto">
@@ -412,125 +413,17 @@
 
           <div class="d-grid gap-3 mb-10">
             <!-- Card -->
+            {% for object in object_list %}  
             <div class="card card-bordered card-stretched-vertical shadow-none">
               <div class="row">
                 <div class="col-sm-4">
                   <div class="card-pinned">
-                    <img class="card-img-top" src="{% static '/img/300x180/img3.jpg' %}" alt="Image Description">
-
-                    <div class="card-pinned-top-start">
-                      <span class="badge bg-success rounded-pill">جدید</span>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تجهیزات جانبی</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">کوله پشتی هرشل به رنگ آبی تیره</a>
-                      </h4>
-                      <p class="card-text text-dark">$56.99</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">0</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img1.jpg' %}" alt="Image Description">
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تن پوش</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">هودی جلو</a>
-                      </h4>
-                      <p class="card-text text-dark">$91.88</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">40</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img4.jpg' %}" alt="Image Description">
-
+                    <img class="card-img-top" src="{{object.image.url}}" alt="Image Description">
+                    {% if object.stock == 0 %}
                     <div class="card-pinned-top-start">
                       <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
                     </div>
+                    {% endif %}
                   </div>
                 </div>
                 <!-- End Col -->
@@ -538,173 +431,23 @@
                 <div class="col-sm-8">
                   <div class="card-body">
                     <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تجهیزات جانبی</a>
+                      {% for cat in object.category.all %}
+                      <a class="link-sm link-secondary" href="#">{{cat}}</a>
+                      {% if not forloop.last %}
+                        ،
+                      {% endif %}
+                      {% endfor %}
                     </div>
 
                     <div class="mb-2">
                       <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">کوله پشتی هرشل به رنگ خاکستری</a>
+                        <a class="text-dark" href="/product-overview.html">{{object.title}}</a>
                       </h4>
-                      <p class="card-text text-dark">$29.99 <span class="text-body ms-1"><del>$33.99</del></span></p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">125</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img6.jpg' %}" alt="Image Description">
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تن پوش</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">تیشرت آدیکالر جلوی اورجینال با لوگوی سه تایی</a>
-                      </h4>
-                      <p class="card-text text-dark">$38.00</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">9</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img7.jpg' %}" alt="Image Description">
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تجهیزات جانبی</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">کلاه بیسبال مشبک جلو با آرم امضا</a>
-                      </h4>
-                      <p class="card-text text-dark">$8.8</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">9</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img2.jpg' %}" alt="Image Description">
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تجهیزات جانبی</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">تیشرت آدیکالر جلو اورجینال به رنگ خاکستری</a>
-                      </h4>
-                      <p class="card-text text-dark">$24</p>
+                      {% if object.discount_percent %}
+                      <p class="card-text text-dark">{{object.offer|intcomma}} تومان<span class="text-body ms-1"><del>{{object.price|intcomma}} تومان</del></span></p>
+                      {% else %}
+                      <p class="card-text text-dark">{{object.price|intcomma}} تومان</p>
+                      {% endif %}
                     </div>
 
                     <!-- Rating -->
@@ -735,137 +478,43 @@
               </div>
               <!-- End Row -->
             </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img5.jpg' %}" alt="Image Description">
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تن پوش</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">تی شرت چاپی مکانیکی یونیسکس COLLUSION</a>
-                      </h4>
-                      <p class="card-text text-dark">$43.99</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">35</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
-            <!-- End Card -->
-
-            <!-- Card -->
-            <div class="card card-bordered card-stretched-vertical shadow-none">
-              <div class="row">
-                <div class="col-sm-4">
-                  <div class="card-pinned">
-                    <img class="card-img" src="{% static '/img/300x180/img8.jpg' %}" alt="Image Description">
-                  </div>
-                </div>
-                <!-- End Col -->
-
-                <div class="col-sm-8">
-                  <div class="card-body">
-                    <div class="mb-2">
-                      <a class="link-sm link-secondary" href="#">تجهیزات جانبی</a>
-                    </div>
-
-                    <div class="mb-2">
-                      <h4 class="card-title">
-                        <a class="text-dark" href="/product-overview.html">Billabong Walled snapback سبز رنگ</a>
-                      </h4>
-                      <p class="card-text text-dark">$12.00</p>
-                    </div>
-
-                    <!-- Rating -->
-                    <div class="mb-3">
-                      <a class="d-inline-flex align-items-center" href="#">
-                        <div class="d-flex gap-1 ms-2">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                          <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                        </div>
-                        <span class="small">35</span>
-                      </a>
-                    </div>
-                    <!-- End Rating -->
-
-                    <div class="card-footer">
-                      <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
-                        <button type="button" class="btn btn-soft-secondary btn-sm btn-transition rounded-pill">
-                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <!-- End Col -->
-              </div>
-              <!-- End Row -->
-            </div>
+            {% endfor %}
             <!-- End Card -->
           </div>
 
           <!-- Pagination -->
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">
-                    <i class="bi-chevron-double-left small"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              {% if page_obj.has_previous %}
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
                   <span aria-hidden="true">
                     <i class="bi-chevron-double-right small"></i>
                   </span>
                 </a>
               </li>
+              <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+              {% if not page_obj.previous_page_number == 1 %}
+              <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a></li>
+              {% endif %}
+              {% endif %}
+              <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+              {% if page_obj.has_next %}
+              {% if not page_obj.next_page_number == page_obj.paginator.num_pages %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+              {% endif %}
+              {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
+              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              {% endif %}
+              <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a></li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                  <span aria-hidden="true">
+                    <i class="bi-chevron-double-left small"></i>
+                  </span>
+                </a>
+              </li>
+              {% endif %}
             </ul>
           </nav>
           <!-- End Pagination -->

@@ -443,10 +443,10 @@
                   </div>
 
                   <h4 class="card-title">
-                    <a class="text-dark" href="/product-overview.html">{{object.title}}</a>
+                    <a class="text-dark" href="{% url 'shop:detail' slug=object.slug %}">{{object.title}}</a>
                   </h4>
                   {% if object.discount_percent %}
-                  <p class="card-text text-dark">{{object.offer|intcomma}}<span class="text-body ms-1"><del>{{object.price|intcomma}}</del></span></p>
+                  <p class="card-text text-dark">{{object.offer|intcomma}} <span class="text-body ms-1"><del>{{object.price|intcomma}} تومان</del></span></p>
                   {% else %}
                   <p class="card-text text-dark">{{object.price|intcomma}} تومان</p>
                   {% endif %}
@@ -479,25 +479,36 @@
           <!-- Pagination -->
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">
-                    <i class="bi-chevron-double-left small"></i>
-                  </span>
-                </a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              {% if page_obj.has_previous %}
               <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
+                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
                   <span aria-hidden="true">
                     <i class="bi-chevron-double-right small"></i>
                   </span>
                 </a>
               </li>
+              <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+              {% if not page_obj.previous_page_number == 1 %}
+              <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a></li>
+              {% endif %}
+              {% endif %}
+              <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+              {% if page_obj.has_next %}
+              {% if not page_obj.next_page_number == page_obj.paginator.num_pages %}
+              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+              {% endif %}
+              {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
+              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              {% endif %}
+              <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a></li>
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                  <span aria-hidden="true">
+                    <i class="bi-chevron-double-left small"></i>
+                  </span>
+                </a>
+              </li>
+              {% endif %}
             </ul>
           </nav>
           <!-- End Pagination -->
