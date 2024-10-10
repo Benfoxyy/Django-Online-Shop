@@ -129,18 +129,21 @@
               <div class="d-sm-flex justify-content-sm-end align-items-center">
                 <!-- Select -->
                 <div class="mb-2 mb-sm-0 me-sm-2">
-                  <select class="form-select form-select-sm">
-                    <option value="Relevance" selected>ارتباط</option>
-                    <option value="mostRecent">اخیرا</option>
+                  <select class="form-select form-select-sm" id="order-by-filter">
+                    <option value="-created_date" selected>جدید ترین</option>
+                    <option value="created_date">قدیمی ترین</option>
                   </select>
                 </div>
                 <!-- End Select -->
 
                 <!-- Select -->
                 <div class="mb-2 mb-sm-0 me-sm-2">
-                  <select class="form-select form-select-sm">
-                    <option value="alphabeticalOrderSelect1" selected>A-to-Z</option>
-                    <option value="alphabeticalOrderSelect2">Z-to-A</option>
+                  <select class="form-select form-select-sm" id="page-size-filter">
+                    <option value="" selected>تعداد در صفحه</option>
+                    <option value="1">1</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>                    
                   </select>
                 </div>
                 <!-- End Select -->
@@ -233,32 +236,32 @@
             <ul class="pagination justify-content-center">
               {% if page_obj.has_previous %}
               <li class="page-item">
-                <a class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous">
+                <button class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous" onclick="changePage(`{{page_obj.previous_page_number}}`)">
                   <span aria-hidden="true">
                     <i class="bi-chevron-double-right small"></i>
                   </span>
-                </a>
+                </button>
               </li>
-              <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+              <li class="page-item"><button class="page-link" href="?page=1" onclick="changePage(1)">1</button></li>
               {% if not page_obj.previous_page_number == 1 %}
-              <li class="page-item"><a class="page-link" href="?page={{page_obj.previous_page_number}}">{{page_obj.previous_page_number}}</a></li>
+              <li class="page-item"><button class="page-link" href="?page={{page_obj.previous_page_number}}" onclick="changePage(`{{page_obj.previous_page_number}}`)">{{page_obj.previous_page_number}}</button></li>
               {% endif %}
               {% endif %}
-              <li class="page-item active"><a class="page-link" href="#">{{page_obj.number}}</a></li>
+              <li class="page-item active"><button class="page-link" href="?page={{ page_obj.number }}" onclick="changePage(`{{page_obj.number}}`)">{{page_obj.number}}</button></li>
               {% if page_obj.has_next %}
               {% if not page_obj.next_page_number == page_obj.paginator.num_pages %}
-              <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a></li>
+              <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
               {% endif %}
               {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
               <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
               {% endif %}
-              <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a></li>
+              <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
               <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                <button class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" onclick="changePage(`{{page_obj.next_page_number}}`)">
                   <span aria-hidden="true">
                     <i class="bi-chevron-double-left small"></i>
                   </span>
-                </a>
+                </button>
               </li>
               {% endif %}
             </ul>
@@ -339,3 +342,39 @@
     </div>
     <!-- End Clients -->
 {% endblock content %}
+{% block extera-js %}
+<script>
+$(document).ready(function(){
+  let urlParameters = new URLSearchParams(window.location.search)
+  $('#page-size-filter').val(urlParameters.get('page_size') || '')
+  $('#order-by-filter').val(urlParameters.get('order_by') || '-created_date')
+  $('#search-query-filter').val(urlParameters.get('q') || '')
+  $('#min-price-filter').val(urlParameters.get('min_price') || '')
+  $('#max-price-filter').val(urlParameters.get('max_price') || '')
+  $('#category-id-filter').val(urlParameters.get('category_id') || '')
+});
+
+$('#order-by-filter').change(function(){
+  let urlParameters = new URLSearchParams(window.location.search)
+  var selectedOption = $(this).val();
+  urlParameters.set('order_by',selectedOption)
+  let new_url = window.location.pathname + '?' + urlParameters
+  window.location.href = new_url
+});
+$('#page-size-filter').change(function(){
+  let urlParameters = new URLSearchParams(window.location.search)
+  var selectedOption = $(this).val();
+  urlParameters.set('page_size',selectedOption)
+  let new_url = window.location.pathname + '?' + urlParameters
+  window.location.href = new_url
+});
+</script>
+<script>
+function changePage(page_num){
+  let urlParameters = new URLSearchParams(window.location.search)
+  urlParameters.set('page',page_num)
+  let new_url = window.location.pathname + '?' + urlParameters
+  window.location.href = new_url
+};
+</script>
+{% endblock extera-js %}
