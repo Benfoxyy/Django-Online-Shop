@@ -290,14 +290,14 @@
 
           <div class="mb-7">
             <!-- Form -->
-            <form>
+            <form action="{% url 'shop:list_grid' %}">
               <!-- Input Card -->
               <div class="input-card">
                 <div class="input-card-form">
                   <input type="text" class="form-control form-control-lg" placeholder="جستجو محصولات"
-                    aria-label="جستجو محصولات">
+                    aria-label="جستجو محصولات" name="q">
                 </div>
-                <button type="button" class="btn btn-primary btn-lg">جستجو کردن</button>
+                <button type="submit" class="btn btn-primary btn-lg">جستجو کردن</button>
               </div>
               <!-- End Input Card -->
             </form>

@@ -1,0 +1,82 @@
+{% load static %}
+{% load humanize %}
+
+<!-- Card Grid -->
+<div class="container content-space-2 content-space-lg-3">
+    <!-- Title -->
+    <div class="w-md-75 w-lg-50 text-center mx-md-auto mb-5 mb-md-9">
+      <h2>محصولات اخیر</h2>
+    </div>
+    <!-- End Title -->
+  
+    <div class="row row-cols-sm-2 row-cols-md-3 row-cols-lg-4 mb-3">
+  
+      {% for latest_product in latest_products %}
+      <div class="col mb-4">
+        <!-- Card -->
+        <div class="card card-bordered shadow-none text-center h-100">
+          <div class="card-pinned">
+            <img class="card-img-top" src="{{latest_product.image.url}}" alt="Image Description">
+            {% if latest_product.stock == 0 %}
+            <div class="card-pinned-top-start">
+              <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
+            </div>
+            {% endif %}
+
+            <div class="card-pinned-top-end">
+              <button type="button" class="btn btn-outline-secondary btn-xs btn-icon rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق">
+                <i class="bi-heart"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="mb-2">
+              {% for cat in latest_product.category.all %}
+              <a class="link-sm link-secondary" href="#">{{cat}}</a>
+              {% if not forloop.last %}
+                ،
+              {% endif %}
+              {% endfor %}
+            </div>
+
+            <h4 class="card-title">
+              <a class="text-dark" href="{% url 'shop:detail' slug=latest_product.slug %}">{{latest_product.title}}</a>
+            </h4>
+            {% if latest_product.discount_percent %}
+            <p class="card-text text-dark">{{latest_product.offer|intcomma}} <span class="text-body ms-1"><del>{{latest_product.price|intcomma}} تومان</del></span></p>
+            {% else %}
+            <p class="card-text text-dark">{{latest_product.price|intcomma}} تومان</p>
+            {% endif %}
+          </div>
+
+          <div class="card-footer pt-0">
+            <!-- Rating -->
+            <a class="d-inline-flex align-items-center mb-3" href="#">
+              <div class="d-flex gap-1 ms-2">
+                <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
+                <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
+                <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
+                <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
+                <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
+              </div>
+              <span class="small">40</span>
+            </a>
+            <!-- End Rating -->
+
+            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
+          </div>
+        </div>
+        <!-- End Card -->
+      </div>
+      {% endfor %}
+    </div>
+    <!-- End Row -->
+  
+    <div class="text-center">
+      <a class="btn btn-outline-primary btn-transition rounded-pill" href="{% url 'shop:list_grid' %}"
+        >مشاهده تمامی محصولات</a
+      >
+    </div>
+  </div>
+  <!-- End Card Grid -->
