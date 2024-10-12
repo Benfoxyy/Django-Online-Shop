@@ -76,11 +76,10 @@
                 <!-- End Search -->
   
                 <!-- Shopping Cart -->
-                <button type="button" class="btn btn-ghost-secondary btn-icon" type="button" data-bs-toggle="offcanvas"
-                  data-bs-target="#offcanvasNavbarShoppingCart" aria-controls="offcanvasNavbarShoppingCart">
+                <a href="{% url 'cart:cart-summery' %}" class="btn btn-ghost-secondary btn-icon">
                   <i class="bi-basket"></i>
-                  <span class="cart-item-count ">3</span>
-                </button>
+                  <span class="cart-item-count" id="cart-item-count">{{cart.get_cart_quantity}}</span>
+                </a>
                 <!-- End Shopping Cart -->
                 {% if request.user.is_authenticated %}
                 <button class="btn btn-ghost-secondary btn-icon" id="dropdownMenuLink"

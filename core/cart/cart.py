@@ -1,3 +1,5 @@
+from shop.models import ProductModel,ProductStatus
+
 class CartSession:
     def __init__(self, session):
         self.session = session
@@ -21,6 +23,19 @@ class CartSession:
             self.cart['items'].append(new_prod)
         self.save()
 
+    def get_cart(self):
+        return self.cart
+    
+    def get_cart_items(self):
+        for item in self.cart['items']:
+            prod_obj = ProductModel.objects.get(id=item['product_id'],status=ProductStatus.active.value)
+            item.update({'prod_obj': prod_obj})
+        
+        return self.cart['items']
+    
+    def get_cart_quantity(self):
+        return sum(item['quantity'] for item in self.cart['items'])
+
     def clear(self):
         self.cart = self.session['cart'] = {
             'items':[],
@@ -30,4 +45,4 @@ class CartSession:
         self.save()
 
     def save(self):
-        self.session.modify = True
+        self.session.modified = True

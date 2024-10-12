@@ -221,7 +221,7 @@
                   </a>
                   <!-- End Rating -->
 
-                  <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
+                  <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
                 </div>
               </div>
               <!-- End Card -->
@@ -376,5 +376,24 @@ function changePage(page_num){
   let new_url = window.location.pathname + '?' + urlParameters
   window.location.href = new_url
 };
+</script>
+<script>
+function addProd(product_id) {
+  $.ajax({
+  type: "POST",
+  url: "{% url 'cart:add-prod' %}",
+  data: {
+    'product_id': product_id,
+    csrfmiddlewaretoken: '{{ csrf_token }}',
+  },
+  success: function(response){
+    $('#cart-item-count').html(response.total_quantity)
+    console.log(response)
+  },
+  error: function(jqXHR,textStatus,errorThrown) {
+    console.log(response)
+  }
+});
+}
 </script>
 {% endblock extera-js %}
