@@ -18,5 +18,7 @@ class CartView(TemplateView):
         cart = CartSession(self.request.session)
         context['cart_items'] = cart.get_cart_items()
         context['total_quantity'] = cart.get_cart_quantity()
+        context['total_price'] = cart.get_total_price()
+        
         return context
     

@@ -1,4 +1,5 @@
 from shop.models import ProductModel,ProductStatus
+from decimal import Decimal
 
 class CartSession:
     def __init__(self, session):
@@ -35,6 +36,17 @@ class CartSession:
     
     def get_cart_quantity(self):
         return sum(item['quantity'] for item in self.cart['items'])
+    
+    def get_total_price(self):
+        items = self.get_cart_items()
+        for item in items:
+            if not item.get('prod_obj').discount_percent:
+                self.cart['total_price'] += item.get('prod_obj').price
+            else:
+                self.cart['total_price'] += item.get('prod_obj').offer()
+        tax = self.cart['total_price'] * Decimal('0.09')
+        
+        return int(self.cart['total_price'] + tax)
 
     def clear(self):
         self.cart = self.session['cart'] = {

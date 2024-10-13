@@ -174,7 +174,7 @@
               <div class="card card-bordered shadow-none text-center h-100">
                 <div class="card-pinned">
                   <img class="card-img-top" src="{{object.image.url}}" alt="Image Description">
-                  {% if object.stock == 0 %}
+                  {% if not object.stock %}
                   <div class="card-pinned-top-start">
                     <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
                   </div>
@@ -220,8 +220,11 @@
                     <span class="small">40</span>
                   </a>
                   <!-- End Rating -->
-
-                  <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
+                   {% if not object.stock %}
+                   <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">موجود شد بهم اطلاع بده</button>
+                   {% else %}
+                   <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
+                   {% endif %}
                 </div>
               </div>
               <!-- End Card -->
