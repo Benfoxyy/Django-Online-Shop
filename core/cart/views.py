@@ -2,13 +2,29 @@ from django.views.generic import View,TemplateView
 from django.http import JsonResponse
 from .cart import CartSession
 
-class AddProd(View):
+class AddProdView(View):
     def post(self, request, *args, **kwargs):
         cart = CartSession(request.session)
         if product_id := request.POST.get('product_id'):
             cart.add_prod(product_id)
         return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})
+
+class DelProdView(View):
+    def post(self, request, *args, **kwargs):
+        cart = CartSession(request.session)
+        if product_id := request.POST.get('product_id'):
+            cart.del_prod(product_id)
+        return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})    
     
+class ChangeProdQuantityView(View):
+    def post(self, request, *args, **kwargs):
+        cart = CartSession(request.session)
+        product_id = request.POST.get('product_id')
+        quantity = request.POST.get('quantity')
+        if product_id and quantity:
+            cart.change_prod_quantity(product_id,quantity)
+        return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})    
+
 class CartView(TemplateView):
     template_name = 'cart/cart.html'
     
@@ -22,3 +38,8 @@ class CartView(TemplateView):
         
         return context
     
+class ClearView(View):
+    def post(self, request, *args, **kwargs):
+        cart = CartSession(request.session)
+        cart.clear()
+        return JsonResponse({'cart':cart.get_cart()})   

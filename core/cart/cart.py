@@ -24,6 +24,15 @@ class CartSession:
             self.cart['items'].append(new_prod)
         self.save()
 
+    def del_prod(self, product_id):
+        for item in self.cart['items']:
+            if product_id == item['product_id']:
+                self.cart['items'].remove(item)
+                break
+        else:
+            return
+        self.save()
+
     def get_cart(self):
         return self.cart
     
@@ -41,19 +50,29 @@ class CartSession:
         items = self.get_cart_items()
         for item in items:
             if not item.get('prod_obj').discount_percent:
-                self.cart['total_price'] += item.get('prod_obj').price
+                self.cart['total_price'] += item.get('prod_obj').price * item.get('quantity')
             else:
-                self.cart['total_price'] += item.get('prod_obj').offer()
+                self.cart['total_price'] += item.get('prod_obj').offer() * item.get('quantity')
         tax = self.cart['total_price'] * Decimal('0.09')
         
         return int(self.cart['total_price'] + tax)
+    
+    def change_prod_quantity(self, product_id, quantity):
+        for item in self.cart['items']:
+            if product_id == item['product_id']:
+                item['quantity'] = int(quantity)
+                break
+        else:
+            return
+        self.save()
 
     def clear(self):
-        self.cart = self.session['cart'] = {
-            'items':[],
-            'total_price':0,
-            'total_items':0,
-        }
+        self.cart.update({
+            'items': [],
+            'total_price': 0,
+            'total_items': 0,
+        })
+        
         self.save()
 
     def save(self):

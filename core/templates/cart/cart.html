@@ -51,29 +51,27 @@
                       <div class="row">
                         <div class="col-auto">
                           <!-- Select -->
-                          <select class="form-select form-select-sm mb-3">
-                            <option value="quantity1">1</option>
-                            <option value="quantity2">2</option>
-                            <option value="quantity3">3</option>
-                            <option value="quantity4">4</option>
-                            <option value="quantity5">5</option>
-                            <option value="quantity6">6</option>
-                            <option value="quantity7">7</option>
-                            <option value="quantity8">8</option>
-                            <option value="quantity9">9</option>
-                            <option value="quantity10">10</option>
+                          <select class="form-select form-select-sm mb-3"
+                          onchange="changeprodquantity(`{{ prod.product_id }}`,this.value)">
+                            {% with ''|center:prod.prod_obj.stock as range %}
+                            {% for _ in range %}
+                            <option value="{{ forloop.counter }}"
+                            {% if forloop.counter == prod.quantity %} selected {% endif %}>
+                              {{ forloop.counter }}</option>
+                            {% endfor %}
+                            {% endwith %}
                           </select>
                           <!-- End Select -->
                         </div>
                         
                         <div class="col-auto">
                           <div class="d-grid gap-2">
-                            <a
+                            <button
                             class="link-sm link-secondary small"
-                            href="javascript:;"
+                            onclick="delprod(`{{ prod.product_id }}`)"
                             >
                             <i class="bi-trash me-1"></i> حذف
-                          </a>
+                          </button>
                           
                           <a
                           class="link-sm link-secondary small"
@@ -96,6 +94,7 @@
                     <span class="text-body ms-1"><del>{{prod.prod_obj.price|intcomma}}</del></span>
                     {% endif %}
                     <span class="h5 d-block mb-1">{{prod.prod_obj.offer|intcomma}}</span>
+                    <p>تومان</p>
                     </div>
                     <!-- End Col -->
                   </div>
@@ -143,11 +142,13 @@
                   <!-- End Row -->
                 </div>
                 
-                <div class="d-grid">
-                  <a class="btn btn-primary btn-lg" href="/checkout.html"
-                  >ثبت سفارش</a
-                  >
+                <div class="d-grid" style="margin-bottom: 10px;">
+                  <button class="btn btn-primary btn-lg" onclick="window.location.href='/checkout.html'">ثبت سفارش</button>
                 </div>
+                <div class="d-grid">
+                  <button class="btn btn-danger btn-lg" onclick="clearProducts()">خالی کردن سبد خرید</button>
+                </div>
+                
               </form>
             </div>
             <!-- End Card -->
@@ -233,5 +234,60 @@
     // =======================================================
     new HSGoTo(".js-go-to");
   })();
+</script>
+
+<script>
+  function delprod(product_id) {
+    $.ajax({
+    type: "POST",
+    url: "{% url 'cart:del-prod' %}",
+    data: {
+      'product_id': product_id,
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      console.log(response)
+      window.location.reload();
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
+
+  function changeprodquantity(product_id,quantity) {
+    $.ajax({
+    type: "POST",
+    url: "{% url 'cart:change-prod-quantity' %}",
+    data: {
+      'product_id': product_id,
+      'quantity': quantity,
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      console.log(response)
+      window.location.reload();
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
+  function clearProducts() {
+    $.ajax({
+    type: "POST",
+    url: "{% url 'cart:clear' %}",
+    data: {
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      console.log(response)
+      window.location.reload();
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
 </script>
 {% endblock extera-js %}
