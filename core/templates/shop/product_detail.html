@@ -17,6 +17,11 @@
                   <div class="swiper-slide">
                     <div class="card card-bordered shadow-none">
                       <img class="card-img" src="{{object.image.url}}" alt="Image Description">
+                      {% if not object.stock %}
+                      <div class="card-pinned-top-start">
+                      <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
+                      </div>
+                      {% endif %}
                     </div>
                   </div>
                   <!-- End Slide -->
@@ -114,12 +119,13 @@
           </div>
           <!-- End Price -->
 
+          {% if object.stock %}
           <!-- Quantity -->
           <div class="quantity-counter mb-3">
             <div class="js-quantity-counter row align-items-center">
               <div class="col">
                 <span class="d-block small">تعداد را انتخاب کنید</span>
-                <input class="js-result form-control form-control-quantity-counter" type="text" value="1">
+                <input class="js-result form-control form-control-quantity-counter" type="text" value="3">
               </div>
               <!-- End Col -->
 
@@ -140,6 +146,7 @@
             <!-- End Row -->
           </div>
           <!-- End Quantity -->
+          {% endif %}
 
           <!-- Accordion -->
           <div class="accordion mb-5" id="shopCartAccordion">
@@ -200,7 +207,11 @@
           <!-- End Accordion -->
 
           <div class="d-grid mb-4">
-            <button type="button" class="btn btn-primary btntransition">افزودن به سبد خرید</button>
+            {% if object.stock %}
+            <button type="button" class="btn btn-primary btntransition" onclick="addProd(`{{object.id}}`,getValue())">افزودن به سبد خرید</button>
+            {% else %}
+            <button type="button" class="btn btn-primary btntransition">موجود شد بهم اطلاع بده</button>
+            {% endif %}
           </div>
 
           <!-- Media -->
@@ -672,3 +683,32 @@
     </div>
     <!-- End Subscribe -->
 {% endblock content %}
+
+{% block extera-js %}
+<script>
+
+  function getValue() {
+      return document.querySelector('.js-result').value;
+  }
+
+  function addProd(product_id,quantity) {
+    console.log(product_id,quantity);
+    $.ajax({
+    type: "POST",
+    url: "{% url 'shop:add-prod-detail' %}",
+    data: {
+      'product_id': product_id,
+      'quantity': quantity,
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      $('#cart-item-count').html(response.total_quantity)
+      console.log(response)
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
+</script>
+{% endblock extera-js %}

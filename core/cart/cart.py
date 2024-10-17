@@ -11,10 +11,13 @@ class CartSession:
             'total_items':0,
         })
 
-    def add_prod(self, product_id):
+    def add_prod(self, product_id, quantity = None):
         for item in self.cart['items']:
             if product_id == item['product_id']:
-                item['quantity'] += 1
+                if quantity is None:
+                    item['quantity'] += 1
+                else:
+                    item['quantity'] += int(quantity)
                 break
         else:
             new_prod = {

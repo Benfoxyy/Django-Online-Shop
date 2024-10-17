@@ -1,6 +1,8 @@
 from django.views import generic
 from .models import ProductModel,ProductStatus,CategoryModel
 from django.core.exceptions import FieldError
+from cart.cart import CartSession
+from django.http import JsonResponse
 
 class ShopProductGridListView(generic.ListView):
     template_name = 'shop/products-grid.html'
@@ -47,3 +49,13 @@ class ShopProductListView(generic.ListView):
 class ShopProductDetailView(generic.DeleteView):
     template_name = 'shop/product_detail.html'
     queryset = ProductModel.objects.filter(status=ProductStatus.active.value)
+
+
+class AddProdDetailView(generic.View):
+    def post(self, request, *args, **kwargs):
+        cart = CartSession(request.session)
+        product_id = request.POST.get('product_id')
+        quantity = request.POST.get('quantity')
+        if product_id and quantity:
+            cart.add_prod(product_id,quantity)
+        return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})   

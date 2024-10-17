@@ -7,4 +7,5 @@ urlpatterns = [
     path('product/list/grid/', views.ShopProductGridListView.as_view(), name='list_grid'),
     path('product/list/', views.ShopProductListView.as_view(), name='list'),
     re_path(r'product/(?P<slug>[-\w]+)/detail/', views.ShopProductDetailView.as_view(), name='detail'),
+    path('product/detail/add_prid/', views.AddProdDetailView.as_view(), name='add-prod-detail'),
 ]

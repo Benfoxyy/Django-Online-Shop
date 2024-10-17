@@ -64,7 +64,11 @@
             </a>
             <!-- End Rating -->
 
-            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>
+            {% if not latest_product.stock %}
+            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">موجود شد بهم اطلاع بده</button>
+            {% else %}
+            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
+            {% endif %}
           </div>
         </div>
         <!-- End Card -->
