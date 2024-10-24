@@ -30,14 +30,19 @@
 
                 </div>
 
-                <div class="input-group input-group-merge">
-                    <input type="password" class=" form-control form-control-lg text-center" name="password"
-                        id="signupSimpleLoginPassword" placeholder="8+ characters required"
-                        aria-label="8+ characters required" required>
+                <div class="input-group input-group-merge" data-hs-validation-validate-class>
+                    <input type="password" class="js-toggle-password form-control form-control-lg text-center" name="password"
+                      id="signupSimpleLoginPassword" placeholder="8+ characters required" aria-label="8+ characters required"
+                      required minlength="8" data-hs-toggle-password-options='{
+                      "target": "#changePassTarget",
+                      "defaultClass": "bi-eye-slash",
+                      "showClass": "bi-eye",
+                      "classChangeTarget": "#changePassIcon"
+                    }'>
                     <a id="changePassTarget" class="input-group-append input-group-text" href="javascript:;">
-                        <i id="changePassIcon" class="bi-eye"></i>
+                      <i id="changePassIcon" class="bi-eye"></i>
                     </a>
-                </div>
+                  </div>
 
                 <span class="invalid-feedback">لطفا یک گذر واژه معتبر وارد کنید.</span>
             </div>
@@ -60,10 +65,10 @@
 {% endblock content %}
 
 
-{% block extra_js %}
+{% block extera-js %}
 <script>
     // INITIALIZATION OF TOGGLE PASSWORD
     // =======================================================
     new HSTogglePassword('.js-toggle-password')
 </script>
-{% endblock extra_js %}
+{% endblock extera-js %}

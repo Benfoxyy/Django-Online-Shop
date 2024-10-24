@@ -4,5 +4,5 @@ from . import views
 app_name = 'customer'  # Define app name here. This will be used in the URL configuration.  # noqa: E501
 
 urlpatterns = [
-    path('customer/',views.CustomerDashboard.as_view(),name='home'),
+    path('home/',views.CustomerDashboard.as_view(),name='home'),
 ]

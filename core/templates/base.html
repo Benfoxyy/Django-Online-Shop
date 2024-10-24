@@ -237,6 +237,37 @@
           </ul>
           <!-- End Socials -->
         </div>
+        <!-- Offcanvas Search -->
+        <div class="offcanvas offcanvas-top offcanvas-navbar-search bg-light" tabindex="-1" id="offcanvasNavbarSearch">
+          <div class="offcanvas-body">
+            <div class="container">
+              <div class="w-lg-75 mx-lg-auto">
+                <div class="d-flex justify-content-end mb-3">
+                  <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+
+                <div class="mb-7">
+                  <!-- Form -->
+                  <form action="{% url 'shop:list_grid' %}">
+                    <!-- Input Card -->
+                    <div class="input-card">
+                      <div class="input-card-form">
+                        <input type="text" class="form-control form-control-lg" placeholder="جستجو محصولات"
+                          aria-label="جستجو محصولات" name="q">
+                      </div>
+                      <button type="submit" class="btn btn-primary btn-lg">جستجو کردن</button>
+                    </div>
+                    <!-- End Input Card -->
+                  </form>
+                  <!-- End Form -->
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
         <div class="col-sm-auto">
           <!-- List -->
@@ -257,6 +288,61 @@
     </div>
   </footer>
   <!-- ========== END FOOTER ========== -->
+   <!-- ========== SECONDARY CONTENTS ========== -->
+    <!-- Sign Up -->
+
+    <!-- Go To -->
+    <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden;" data-hs-go-to-options='{
+      "offsetTop": 700,
+      "position": {
+        "init": {
+          "right": "2rem"
+        },
+        "show": {
+          "bottom": "2rem"
+        },
+        "hide": {
+          "bottom": "-2rem"
+        }
+      }
+    }'>
+       <i class="bi-chevron-up"></i>
+   </a>
+
+   <!-- Offcanvas Search -->
+   <div class="offcanvas offcanvas-top offcanvas-navbar-search bg-light" tabindex="-1" id="offcanvasNavbarSearch">
+       <div class="offcanvas-body">
+           <div class="container">
+               <div class="w-lg-75 mx-lg-auto">
+                   <div class="d-flex justify-content-end mb-3">
+                       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                           aria-label="Close"></button>
+                   </div>
+
+                   <div class="mb-7">
+                       <!-- Form -->
+                       <form action="{% url 'shop:list_grid' %}">
+                           <!-- Input Card -->
+                           <div class="input-card">
+                               <div class="input-card-form">
+                                   <input type="text" class="form-control form-control-lg" placeholder="جستجو محصولات"
+                                       name="q" aria-label="جستجو محصولات">
+                               </div>
+                               <button type="submit" class="btn btn-primary btn-lg">جستجو کردن</button>
+                           </div>
+                           <!-- End Input Card -->
+                       </form>
+                       <!-- End Form -->
+                   </div>
+
+
+               </div>
+           </div>
+       </div>
+   </div>
+
+
+   <!-- ========== END SECONDARY CONTENTS ========== -->
  <!-- connect jquery to our project -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
