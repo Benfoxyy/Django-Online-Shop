@@ -79,6 +79,11 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.email
     
+    def get_fullname(self):
+        if self.first_name or self.last_name:
+            return self.first_name + ' ' + self.last_name
+        return 'کاربر جدید'
+    
 @receiver(post_save,sender=User)
 def create_profile(sender,instance,created,**kwargs):
     if created:
