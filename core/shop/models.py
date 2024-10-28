@@ -33,6 +33,9 @@ class ProductModel(models.Model):
 
     def offer(self):
         return self.price-(self.price*self.discount_percent)/100
+    
+    def is_published(self):
+        return self.status == ProductStatus.active.value
 
     def __str__(self):
         return self.title
