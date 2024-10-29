@@ -5,7 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from ..permissions import AdminPermissions
-from .form import ChangePassForm,ProfileForm
+from .form import ChangePassForm,ProfileForm,AdminEditProductForm
 from accounts.models import Profile
 from shop.models import ProductModel,ProductStatus,CategoryModel
 from django.core.exceptions import FieldError
@@ -73,3 +73,12 @@ class AdminShowProducts(AdminPermissions,ListView):
         context['total_prod']= self.get_queryset().count()
         context['categories']= CategoryModel.objects.all()
         return context
+
+
+class AdminEditProducts(AdminPermissions,UpdateView,SuccessMessageMixin):
+    queryset = ProductModel.objects.all()
+    template_name = 'dashboard/admin/products/edit-products.html'
+    form_class = AdminEditProductForm
+    
+    def get_success_url(self):
+        return reverse_lazy("dashboard:admin:edit-prod",kwargs={'pk':self.get_object().pk})

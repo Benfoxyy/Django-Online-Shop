@@ -73,7 +73,7 @@
                     <td>{% if object.is_published %}<span class="badge bg-success">نشر شده</span>{% else %}<span class="badge bg-danger">زخیره شده</span>{% endif %}</td>
                     <td>{{object.discount_percent}}%</td>
                     <td>
-                      <a class="btn btn-sm btn-icon btn-ghost-secondary" href="./admin-account-products-single.html"><i class="bi-pencil-square"></i></a>
+                      <a class="btn btn-sm btn-icon btn-ghost-secondary" href="{% url 'dashboard:admin:edit-prod' pk=object.id %}"><i class="bi-pencil-square"></i></a>
                       {% if object.is_published %}<a class="btn btn-sm btn-icon btn-ghost-primary" href="{% url 'shop:detail' slug=object.slug %}"><i class="bi-eye"></i></a>{% endif %}
                     </td>
                   </tr>

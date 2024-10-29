@@ -9,4 +9,5 @@ urlpatterns = [
     path('profile/',views.ProfileView.as_view(),name='profile'),
     path('profile/edit/',views.ProfileEditView.as_view(),name='profile-edit'),
     path('products/show/',views.AdminShowProducts.as_view(),name='show-prod'),
+    path('products/<int:pk>/edit/',views.AdminEditProducts.as_view(),name='edit-prod'),
 ]

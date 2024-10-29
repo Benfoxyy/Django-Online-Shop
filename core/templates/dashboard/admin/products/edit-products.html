@@ -1,0 +1,79 @@
+{% extends "dashboard/admin/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+    <!-- Header -->
+    <div class="card-header border-bottom">
+      <h5 class="card-header-title">ویرایش/ساخت محصول</h5>
+    </div>
+    <!-- End Header -->
+
+    <!-- Body -->
+    <div class="card-body">
+      <form action="." method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row d-flex ">
+          <div class="col-md-6 mb-3">
+            <label >نام محصول</label>
+            {{form.title}}
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>اسلاگ محصول</label>
+            {{form.slug}}
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>تعداد</label>
+            {{form.stock}}
+          </div>
+
+          <div class="col-md-6 mb-3">
+            <label>وضعیت</label>
+            {{form.status}}
+            <span class="valid-feedback">Valid feedback</span>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label>دسته بندی</label>
+            {{form.category}}
+            <span class="valid-feedback">Valid feedback</span>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label>قیمت</label>
+            {{form.price}}
+          </div>
+          <div class="col-md-2 mb-3">
+            <label>درصد تخفیف</label>
+            {{form.discount_percent}}
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <label>توضیحات</label>
+            {{form.description}}
+            <!-- <div class="quill-custom">
+                <div class="js-quill" style="height: 15rem;" data-hs-quill-options='{
+                     "placeholder": "Type your message...",
+                      "modules": {
+                        "toolbar": [
+                          ["bold", "italic", "underline", "strike", "link", "image", "blockquote", "code", {"list": "bullet"}]
+                        ]
+                      }
+                     }'>ذهن خلاق در Htmlstream
+                </div>
+            </div> -->
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <label>تصویر محصول</label>
+            {{form.image}}
+          </div>
+
+          <div class=" d-flex pt-5 justify-content-end">
+            <a class="btn btn-danger ms-3">حذف</a>
+            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:show-prod' %}">بازگشت</a>
+            <button type="submit" class="btn btn-primary ms-3">ثبت تغییرات</button>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="card-footer">
+{% endblock content %}
