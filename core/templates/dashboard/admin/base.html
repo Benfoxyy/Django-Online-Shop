@@ -24,6 +24,10 @@
     <link rel="stylesheet" href="{% static 'css/theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'vendor/toastify/toastify.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- VirtualSelect -->
+    <link rel="stylesheet" href="{% static 'css/virtual-select.min.css' %}">
+
     {% block extra_css %} {% endblock extra_css %}
 
     {% block extra_css_no_compress %} {% endblock extra_css_no_compress %}
@@ -409,6 +413,9 @@
 </div>
  <!-- connect jquery to our project -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+ <!-- VirtualSelect -->
+ <script src="{% static 'js/virtual-select.min.js' %}"></script>
 
   <!-- JS Implementing Plugins -->
   <script src="{% static 'js/vendor.min.js' %}"></script>

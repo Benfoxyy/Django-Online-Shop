@@ -30,13 +30,12 @@
           <div class="col-md-6 mb-3">
             <label>وضعیت</label>
             {{form.status}}
-            <span class="valid-feedback">Valid feedback</span>
           </div>
           <div class="col-md-6 mb-3">
-            <label>دسته بندی</label>
+            <label for="cat-id">دسته بندی</label>
+            <br>
             {{form.category}}
-            <span class="valid-feedback">Valid feedback</span>
-          </div>
+        </div>
           <div class="col-md-4 mb-3">
             <label>قیمت</label>
             {{form.price}}
@@ -77,3 +76,37 @@
   </div>
   <div class="card-footer">
 {% endblock content %}
+
+{% block extera-js %}
+<script>
+  function slugify(titleStr) {
+      titleStr = titleStr.replace(/^\s+|\s+$/g, '');
+      titleStr = titleStr.toLowerCase();
+      //persian support
+      titleStr = titleStr.replace(/[^a-z0-9_\s-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]#u/, '')
+          // Collapse whitespace and replace by -
+          .replace(/\s+/g, '-')
+          // Collapse dashes
+          .replace(/-+/g, '-');
+      slugStr = titleStr;
+      return slugStr;
+  }
+      $(document).ready(function(){
+          $('#titleInput').on('input', function(){
+              var inputText = $(this).val();
+              // Perform an action with the text
+              var slugifyText = slugify(inputText);
+              $('#slugInput').val(slugifyText);
+              // Add your custom action here
+          });
+      });
+  </script>
+
+<script>
+  $(document).ready(function() {
+      VirtualSelect.init({
+          ele: '#cat-id'
+      });
+  });
+</script>
+{% endblock extera-js %}
