@@ -1,0 +1,24 @@
+{% extends "dashboard/admin/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+    <!-- Header -->
+    <div class="card-header border-bottom">
+        <h5 class="card-header-title">حذف محصول</h5>
+    </div>
+    <!-- End Header -->
+
+    <form action="." method="post">{% csrf_token %}
+        <div class="card-body">
+            <p>آیا مطمئن هستید که می‌خواهید این محصول را حذف کنید؟ این عمل قابل بازگشت نیست.</p>
+        </div>
+        <div class="card-footer d-flex justify-content-end">
+            <a class="btn btn-secondary me-3" href="{% url 'dashboard:admin:edit-prod' pk=object.pk %}">بازگشت</a>
+            <span class="mx-2"></span> <!-- Added this for spacing -->
+            <button class="btn btn-danger">حذف</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView,UpdateView,ListView
+from django.views.generic import TemplateView,UpdateView,ListView, DeleteView, CreateView
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
@@ -82,3 +82,22 @@ class AdminEditProducts(AdminPermissions,UpdateView,SuccessMessageMixin):
     
     def get_success_url(self):
         return reverse_lazy("dashboard:admin:edit-prod",kwargs={'pk':self.get_object().pk})
+    
+
+class AdminDeleteProducts(AdminPermissions,DeleteView,SuccessMessageMixin):
+    queryset = ProductModel.objects.all()
+    template_name = 'dashboard/admin/products/delete-prod.html'
+    success_url = reverse_lazy('dashboard:admin:show-prod')
+    success_message = 'Product successfuly deleted'
+
+
+class AdminCreateProducts(AdminPermissions,CreateView,SuccessMessageMixin):
+    queryset = ProductModel.objects.all()
+    template_name = 'dashboard/admin/products/create-product.html'
+    form_class = AdminEditProductForm
+    success_url = reverse_lazy("dashboard:admin:show-prod")
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+        
