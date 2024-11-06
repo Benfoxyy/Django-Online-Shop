@@ -48,17 +48,6 @@
           <div class="col-md-12 mb-3">
             <label>توضیحات</label>
             {{form.description}}
-            <!-- <div class="quill-custom">
-                <div class="js-quill" style="height: 15rem;" data-hs-quill-options='{
-                     "placeholder": "Type your message...",
-                      "modules": {
-                        "toolbar": [
-                          ["bold", "italic", "underline", "strike", "link", "image", "blockquote", "code", {"list": "bullet"}]
-                        ]
-                      }
-                     }'>ذهن خلاق در Htmlstream
-                </div>
-            </div> -->
           </div>
 
           <div class="col-md-12 mb-3">
@@ -108,4 +97,6 @@
       });
   });
 </script>
+
+<script>CKEDITOR.replace('ckeditor');</script>
 {% endblock extera-js %}

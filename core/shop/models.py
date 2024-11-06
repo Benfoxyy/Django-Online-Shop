@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from ckeditor.fields import RichTextField
 
 class ProductStatus(models.IntegerChoices):
     active = 1, 'فعال'
@@ -20,7 +21,7 @@ class ProductModel(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(allow_unicode=True,unique=True)
     image = models.ImageField(default='default/proddef.png',upload_to='products/img')
-    description = models.TextField()
+    description = RichTextField()
     stock = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=ProductStatus.choices,default=ProductStatus.active.value)
     price = models.DecimalField(decimal_places=0,max_digits=10)
