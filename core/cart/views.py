@@ -7,6 +7,8 @@ class AddProdView(View):
         cart = CartSession(request.session)
         if product_id := request.POST.get('product_id'):
             cart.add_prod(product_id)
+        if request.user.is_authenticated:
+            cart.cart_merge(request.user)
         return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})
 
 class DelProdView(View):
@@ -14,6 +16,8 @@ class DelProdView(View):
         cart = CartSession(request.session)
         if product_id := request.POST.get('product_id'):
             cart.del_prod(product_id)
+        if request.user.is_authenticated:
+            cart.cart_merge(request.user)
         return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})    
     
 class ChangeProdQuantityView(View):
@@ -23,6 +27,8 @@ class ChangeProdQuantityView(View):
         quantity = request.POST.get('quantity')
         if product_id and quantity:
             cart.change_prod_quantity(product_id,quantity)
+        if request.user.is_authenticated:
+            cart.cart_merge(request.user)
         return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})    
 
 class CartView(TemplateView):
@@ -42,4 +48,6 @@ class ClearView(View):
     def post(self, request, *args, **kwargs):
         cart = CartSession(request.session)
         cart.clear()
+        if request.user.is_authenticated:
+            cart.cart_merge(request.user)
         return JsonResponse({'cart':cart.get_cart()})   

@@ -65,10 +65,10 @@
             <!-- End Rating -->
 
             {% if not latest_product.stock %}
-            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">موجود شد بهم اطلاع بده</button>
-            {% else %}
-            <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
-            {% endif %}
+                   <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">موجود شد بهم اطلاع بده</button>
+                   {% else %}
+                   <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{latest_product.id}}`)">افزودن به سبد خرید</button>
+                   {% endif %}
           </div>
         </div>
         <!-- End Card -->

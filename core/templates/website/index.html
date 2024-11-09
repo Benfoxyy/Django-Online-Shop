@@ -613,3 +613,25 @@
 </div>
 <!-- End Clients -->
 {% endblock content %}
+
+{% block extera-js %}
+<script>
+  function addProd(product_id) {
+    $.ajax({
+    type: "POST",
+    url: "{% url 'cart:add-prod' %}",
+    data: {
+      'product_id': product_id,
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      $('#cart-item-count').html(response.total_quantity)
+      console.log(response)
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
+  </script>
+{% endblock extera-js %}
