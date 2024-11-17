@@ -8,4 +8,5 @@ urlpatterns = [
 
     path('admin/',include('dashboard.admin.urls')),
     path('customer/',include('dashboard.customer.urls')),
+    path('profile/edit/',views.ProfileEditView.as_view(),name='profile-edit'),
 ]

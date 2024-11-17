@@ -1,13 +1,12 @@
 from django.views.generic import TemplateView,UpdateView,ListView, DeleteView, CreateView
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from ..permissions import AdminPermissions
 from .form import ChangePassForm,ProfileForm,AdminEditProductForm
 from accounts.models import Profile
-from shop.models import ProductModel,ProductStatus,CategoryModel
+from shop.models import ProductModel,CategoryModel
 from django.core.exceptions import FieldError
 
 class AdminDashboard(AdminPermissions,TemplateView):
@@ -27,21 +26,6 @@ class ProfileView(AdminPermissions,UpdateView,SuccessMessageMixin):
 
     def get_object(self, queryset = None):
         return Profile.objects.get(user = self.request.user)
-    
-class ProfileEditView(AdminPermissions,UpdateView,SuccessMessageMixin):
-    http_method_names = ['post']
-    model = Profile
-    fields = ['avatar']
-    success_url = reverse_lazy("dashboard:admin:home")
-    success_message = 'Profile picture changed successfully'
-
-    def get_object(self, queryset = None):
-        return Profile.objects.get(user = self.request.user)
-    
-    def form_invalid(self, form):
-        messages.error(self.request,'وایییی')
-        return redirect(self.success_url)
-    
 
 class AdminShowProducts(AdminPermissions,ListView):
     template_name = 'dashboard/admin/products/show-products.html'

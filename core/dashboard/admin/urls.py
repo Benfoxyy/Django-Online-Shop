@@ -7,7 +7,6 @@ urlpatterns = [
     path('home/',views.AdminDashboard.as_view(),name='home'),
     path('change-pass/',views.ChangePassView.as_view(),name='change-pass'),
     path('profile/',views.ProfileView.as_view(),name='profile'),
-    path('profile/edit/',views.ProfileEditView.as_view(),name='profile-edit'),
     path('products/show/',views.AdminShowProducts.as_view(),name='show-prod'),
     path('products/<int:pk>/edit/',views.AdminEditProducts.as_view(),name='edit-prod'),
     path('products/<int:pk>/delete/',views.AdminDeleteProducts.as_view(),name='delete-prod'),

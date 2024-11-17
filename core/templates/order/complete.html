@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+      <!-- Content -->
+      <div class="container content-space-2 content-space-lg-3">
+        <div class="w-md-75 w-lg-50 text-center mx-md-auto">
+          <div class="mb-5">
+            <img class="img-fluid" src="{% static 'svg/illustrations/oc-hi-five.svg' %}" alt="Image Description" style="width: 15rem;">
+          </div>
+  
+          <div class="mb-5">
+            <h1 class="h2">سفارش شما تکمیل شد!</h1>
+            <p>از سفارش شما متشکریم! سفارش شما در حال پردازش است و ظرف 3 تا 6 ساعت تکمیل خواهد شد. پس از تکمیل سفارش شما یک ایمیل تاییدیه دریافت خواهید کرد.</p>
+          </div>
+  
+          <a class="btn btn-primary btn-transition rounded-pill px-6" href="{% url 'shop:list_grid' %}">به خرید ادامه دهید</a>
+        </div>
+      </div>
+      <!-- End Content -->
+{% endblock content %}
