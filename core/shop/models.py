@@ -33,7 +33,9 @@ class ProductModel(models.Model):
         ordering = ('-created_date',)
 
     def offer(self):
-        return self.price-(self.price*self.discount_percent)/100
+        if self.discount_percent:
+            return self.price-(self.price*self.discount_percent)/100
+        return self.price
     
     def is_published(self):
         return self.status == ProductStatus.active.value
