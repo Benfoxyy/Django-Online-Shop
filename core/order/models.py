@@ -27,6 +27,7 @@ class OrderModel(models.Model):
     address = models.OneToOneField(AddressModel,on_delete=models.PROTECT)
     coupon = models.OneToOneField(CouponModel,on_delete=models.PROTECT,blank=True,null=True)
     status = models.IntegerField(choices=OrderStatusModel.choices,default=OrderStatusModel.pending.value)
+    final_price = models.DecimalField(default=0,max_digits=10,decimal_places=0)
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)

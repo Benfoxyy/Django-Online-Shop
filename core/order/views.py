@@ -1,9 +1,9 @@
-from django.views.generic import TemplateView,FormView
+from django.views.generic import TemplateView,FormView,View
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.http import JsonResponse
 from .models import AddressModel,OrderModel,CouponModel,OrderItemsModel
-from cart.models import CartItemModel,CartModel
-from cart.cart import CartSession
+from cart.models import CartModel
 from .forms import CheckOutForm
 
 class CheckOutView(SuccessMessageMixin,FormView):
@@ -42,9 +42,10 @@ class CheckOutView(SuccessMessageMixin,FormView):
             )
         
     def update_coupon(self,user,coupon):
-        coupon.max_limit_usage -= 1
-        coupon.used_by.add(user)
-        coupon.save()
+        if coupon:
+            coupon.max_limit_usage -= 1
+            coupon.used_by.add(user)
+            coupon.save()
 
     
 
@@ -52,9 +53,36 @@ class CheckOutView(SuccessMessageMixin,FormView):
         context = super().get_context_data(**kwargs)
         cart = CartModel.objects.get(user=self.request.user)
         total_price = cart.calculate_total_price()
+        tax_price = total_price/100 * 9
         context["addresses"] = AddressModel.objects.filter(user = self.request.user)
-        context["final_price"] = total_price
+        context["total_price"] = total_price
+        context["tax_price"] = tax_price
+        # context["final_price"] = ''
         return context
+    
+class CheckView(View):
+    def post(self, request, *args, **kwargs):
+        coupon_code = request.POST.get('coupon_code')
+        message = 'کد تخفیف با موفقیت ثبت شد'
+        try:
+            coupon = CouponModel.objects.get(code=coupon_code)
+        except CouponModel.DoesNotExist:
+            return JsonResponse({'message':'کد تخفیف یافت نشد'})
+        
+        else:
+            if self.request.user in coupon.used_by.all():
+                is_valid,message = False,'این کد توسط شما یک بار استفاده شده است'
+            if coupon.max_limit_usage == 0 :
+                is_valid,message = False,'کد دیگر فاقد ارزش است'
+            else:
+                cart = CartModel.objects.get(user=self.request.user)
+                
+                total_price = cart.calculate_total_price()
+                discounted_price = total_price/100 * coupon.discount_percent
+
+
+        return JsonResponse({'discounted_price':discounted_price,'message':message})   
+
 
 class OrderCompleteView(TemplateView):
     template_name = 'order/complete.html'

@@ -56,30 +56,29 @@
                   </div>
                     <div class="input-group border-bottom pb-4 mb-3 ">
                       <input form="checkout" type="text" class="form-control text-center" name="coupon_code" placeholder="کد تخفیف"
-                      aria-label="کد تخفیف">
-                      <a class="btn btn-primary"> بررسی</a>
+                      aria-label="کد تخفیف" id="coupon-check">
+                      <button class="btn btn-primary" type="button" onclick="validateCoupon()"> بررسی</button>
                     </div>
   
                     <div class="border-bottom pb-4 mb-4">
-                      <div class="d-grid gap-3">
-  
-                        <!-- End Row -->
-  
-                        <dl class="row">
-                          <dt class="col-sm-6">هزینه ارسال</dt>
-                          <dd class="col-sm-12 text-sm-end mb-0">برای تهران و حومه 35000 تومان</dd>
-                          <dd class="col-sm-12 text-sm-end mb-0">برای شهرستان ها 50000 تومان</dd>
-                        </dl>
-                        <!-- End Row -->
-                      </div>
-                    </div>
+                    
   
                     <div class="d-grid gap-3 mb-4">
                       <!-- End Row -->
   
                       <dl class="row">
+                        <dt class="col-sm-6">محاسبه قیمت</dt>
+                        <dd class="col-sm-10 text-sm-end mb-0" id="priceDetails">
+                          <span>قیمت کل : {{total_price|intcomma}} تومان</span>
+                          <span>9% مالیات : {{tax_price|intcomma}} تومان</span>
+                        </dd>
+                      </dl>
+                      <!-- End Row -->
+                      <dl class="row">
                         <dt class="col-sm-6">جمع کل</dt>
-                        <dd class="col-sm-6 text-sm-end mb-0">{{final_price|intcomma}} تومان با 9% مالیات</dd>
+                        <dd class="col-sm-10 text-sm-end mb-0">
+                          {{final_price|intcomma}} تومان
+                        </dd>
                       </dl>
                       <!-- End Row -->
                     </div>
@@ -120,3 +119,43 @@
       </div>
       <!-- End Content -->
 {% endblock content %}
+
+{% block extera-js %}
+<script>
+  function discountPrice(discounted_price){
+      // Create a new <span> element with jQuery
+      var discountSpan = $('<span>').text('تخفیف : ' + discounted_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' تومان');
+
+      // Find the target <dd> element
+      var priceDetails = $('#priceDetails');
+
+      // Append the new <span> element to the <dd> element
+      priceDetails.append(discountSpan);
+    }
+
+  function validateCoupon() {
+    $.ajax({
+    type: "POST",
+    url: "{% url 'order:check' %}",
+    data: {
+      'coupon_code': $('#coupon-check').val(),
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      console.log(response);
+      Toastify({
+                text:response.message,
+                className: `info`,
+                style: {
+                  background: "light-blue",
+                }
+              }).showToast();
+      discountPrice(response.discounted_price)
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
+</script>
+{% endblock extera-js %}

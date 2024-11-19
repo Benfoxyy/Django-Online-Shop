@@ -20,8 +20,8 @@ class CheckOutForm(forms.Form):
     
     def clean_coupon_code(self):
         coupon_code = self.cleaned_data.get('coupon_code')
+        coupon = None
         if coupon_code == '':
-            coupon = None
             return coupon
         
         try:
