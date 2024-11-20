@@ -22,15 +22,22 @@ class CheckOutView(SuccessMessageMixin,FormView):
         cart = CartModel.objects.get(user=user)
         address = form.cleaned_data['address_id']
         coupon = form.cleaned_data['coupon_code']
-        order = self.create_order(user,address,coupon)
+        total_price = cart.calculate_total_price()
+        tax_price = total_price/100 * 9
+        final_price = total_price + tax_price
+        order = self.create_order(user,address,coupon,final_price)
         self.merge_items(cart,order)
+
         order.save()
+
         return super().form_valid(form)
     
-    def create_order(self,user,address,coupon):
+    def create_order(self,user,address,coupon,final_price):
         if coupon:
             self.update_coupon(user,coupon)
-        return OrderModel.objects.create(user=user,address=address,coupon=coupon)
+            discounted_price = final_price/100 * coupon.discount_percent
+            final_price -= discounted_price
+        return OrderModel.objects.create(user=user,address=address,coupon=coupon,final_price=final_price)
 
     def merge_items(self,cart,order):
         for prod in cart.cart_items.all():
@@ -54,10 +61,12 @@ class CheckOutView(SuccessMessageMixin,FormView):
         cart = CartModel.objects.get(user=self.request.user)
         total_price = cart.calculate_total_price()
         tax_price = total_price/100 * 9
+        final_price = total_price + tax_price
         context["addresses"] = AddressModel.objects.filter(user = self.request.user)
         context["total_price"] = total_price
         context["tax_price"] = tax_price
-        # context["final_price"] = ''
+        context["final_price"] = final_price
+
         return context
     
 class CheckView(View):
@@ -71,13 +80,14 @@ class CheckView(View):
         
         else:
             if self.request.user in coupon.used_by.all():
-                is_valid,message = False,'این کد توسط شما یک بار استفاده شده است'
+                message = 'این کد توسط شما یک بار استفاده شده است'
             if coupon.max_limit_usage == 0 :
-                is_valid,message = False,'کد دیگر فاقد ارزش است'
+                message = 'کد دیگر فاقد ارزش است'
             else:
                 cart = CartModel.objects.get(user=self.request.user)
                 
                 total_price = cart.calculate_total_price()
+                
                 discounted_price = total_price/100 * coupon.discount_percent
 
 

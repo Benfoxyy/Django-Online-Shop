@@ -57,9 +57,9 @@ class CartSession:
                 self.cart['total_price'] += item.get('prod_obj').price * int(item.get('quantity'))
             else:
                 self.cart['total_price'] += item.get('prod_obj').offer() * int(item.get('quantity'))
-        tax = self.cart['total_price'] * Decimal('0.09')
+        # tax = self.cart['total_price'] * Decimal('0.09')
         
-        return int(self.cart['total_price'] + tax)
+        return self.cart['total_price']
     
     def change_prod_quantity(self, product_id, quantity):
         for item in self.cart['items']:

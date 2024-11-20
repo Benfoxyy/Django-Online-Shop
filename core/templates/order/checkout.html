@@ -70,14 +70,16 @@
                         <dt class="col-sm-6">محاسبه قیمت</dt>
                         <dd class="col-sm-10 text-sm-end mb-0" id="priceDetails">
                           <span>قیمت کل : {{total_price|intcomma}} تومان</span>
+                          <br>
                           <span>9% مالیات : {{tax_price|intcomma}} تومان</span>
+                          <br>
                         </dd>
                       </dl>
                       <!-- End Row -->
                       <dl class="row">
                         <dt class="col-sm-6">جمع کل</dt>
                         <dd class="col-sm-10 text-sm-end mb-0">
-                          {{final_price|intcomma}} تومان
+                          <span id="final-price">{{final_price|intcomma}}</span> تومان
                         </dd>
                       </dl>
                       <!-- End Row -->
@@ -124,13 +126,18 @@
 <script>
   function discountPrice(discounted_price){
       // Create a new <span> element with jQuery
-      var discountSpan = $('<span>').text('تخفیف : ' + discounted_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' تومان');
+      var discountSpan = $('<span>').text('مقدار تخفیف : ' + discounted_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + ' تومان');
 
       // Find the target <dd> element
       var priceDetails = $('#priceDetails');
 
       // Append the new <span> element to the <dd> element
       priceDetails.append(discountSpan);
+      // $('#final-price').val() -= discounted_price;
+      var newPrice = parseInt($('#final-price').text().replace(/,/g, "")) - discounted_price;
+      $('#final-price').text(newPrice.toLocaleString())
+
+
     }
 
   function validateCoupon() {
@@ -142,7 +149,6 @@
       csrfmiddlewaretoken: '{{ csrf_token }}',
     },
     success: function(response){
-      console.log(response);
       Toastify({
                 text:response.message,
                 className: `info`,
