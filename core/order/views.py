@@ -1,10 +1,14 @@
 from django.views.generic import TemplateView,FormView,View
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.http import JsonResponse
 from .models import AddressModel,OrderModel,CouponModel,OrderItemsModel
 from cart.models import CartModel
 from .forms import CheckOutForm
+from cart.cart import CartSession
+from payment.zarinpal_client import ZarinPalSandbox
+from payment.models import PaymentModel
 
 class CheckOutView(SuccessMessageMixin,FormView):
     template_name = 'order/checkout.html'
@@ -26,11 +30,12 @@ class CheckOutView(SuccessMessageMixin,FormView):
         tax_price = total_price/100 * 9
         final_price = total_price + tax_price
         order = self.create_order(user,address,coupon,final_price)
+
         self.merge_items(cart,order)
-
         order.save()
+        self.clear_cart(cart)
 
-        return super().form_valid(form)
+        return redirect(self.payment_method_url(order))
     
     def create_order(self,user,address,coupon,final_price):
         if coupon:
@@ -54,7 +59,20 @@ class CheckOutView(SuccessMessageMixin,FormView):
             coupon.used_by.add(user)
             coupon.save()
 
-    
+    def payment_method_url(self,order):
+        zarinpal = ZarinPalSandbox()
+        response = zarinpal.payment_request(order.final_price)
+        payment_obj = PaymentModel.objects.create(
+            authority = response['data']['authority'],
+            amount = order.final_price,
+            order = order
+        )
+        return zarinpal.generate_payment_url(response['data']['authority'])
+
+    def clear_cart(self,cart):
+        CartSession(self.request.session).clear()
+        cart.delete()
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

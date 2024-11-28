@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'cart',
     'dashboard',
     'order',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+
+MERCHANT_ID = "4ced0a1e-4ad8-4309-9668-3ea3ae8e7897"
