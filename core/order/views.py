@@ -114,3 +114,6 @@ class CheckView(View):
 
 class OrderCompleteView(TemplateView):
     template_name = 'order/complete.html'
+
+class OrderFaildView(TemplateView):
+    template_name = 'order/faild.html'
