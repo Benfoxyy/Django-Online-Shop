@@ -1,0 +1,59 @@
+{% extends "dashboard/customer/base.html" %}
+{% load static %}
+{% block content %}
+          <!-- Card -->
+          <div class="card">
+            <div class="card-header border-bottom">
+              <h4 class="card-header-title">اطلاعات پایه</h4>
+            </div>
+
+            <!-- Body -->
+            <div class="card-body">
+              <form action="{% url 'dashboard:customer:profile' %}" method="post">
+                {% csrf_token %}
+
+                <!-- Form -->
+                <div class="row mb-4">
+                  <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">نام و نام خانوادگی </label>
+
+                  <div class="col-sm-9">
+                    <div class="input-group">
+                      {{form.first_name}}
+                      {{form.last_name}}
+                    </div>
+                  </div>
+                </div>
+                <!-- End Form -->
+
+                <!-- Form -->
+                <div class="js-add-field row mb-4" data-hs-add-field-options='{
+                        "template": "#addPhoneFieldTemplate",
+                        "container": "#addPhoneFieldContainer",
+                        "defaultCreated": 0
+                      }'>
+                  <label for="phoneLabel" class="col-sm-3 col-form-label form-label">تلفن <span
+                      class="form-label-secondary">(اختیاری)</span></label>
+
+                  <div class="col-sm-9">
+                    <div class="input-group">
+                        {{form.phone_number}}
+                    </div>
+                    
+                    <!-- Container For Input Field -->
+                    
+                </div>
+            </div>
+            <!-- End Form -->
+            <!-- Footer -->
+              <div class="d-flex justify-content-end gap-3">
+                <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+              </div>
+            <!-- End Footer -->
+              </form>
+            </div>
+            <!-- End Body -->
+
+          </div>
+          <!-- End Card -->
+
+{% endblock content %}

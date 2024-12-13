@@ -20,13 +20,9 @@ class ProfileEditView(UpdateView,SuccessMessageMixin):
     http_method_names = ['post']
     model = Profile
     fields = ['avatar']
-    success_url = reverse_lazy("dashboard:admin:home")
-    success_message = 'Profile picture changed successfully'
+    success_url = reverse_lazy("dashboard:check")
+    success_message = 'عکس پروفایل شما با موفقیت تغییر کرد'
 
     def get_object(self, queryset = None):
         return Profile.objects.get(user = self.request.user)
-    
-    def form_invalid(self, form):
-        messages.error(self.request,'وایییی')
-        return redirect(self.success_url)
     

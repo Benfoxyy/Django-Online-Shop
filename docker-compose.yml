@@ -27,7 +27,7 @@ services:
       - '8000:8000'
     environment:
       - SECRET_KEY=test
-      - DEBUG=True
+      - DEBUG=Flase
     restart: always
     depends_on:
       - db

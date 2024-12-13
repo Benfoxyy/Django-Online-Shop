@@ -34,6 +34,11 @@ class ChangeProdQuantityView(View):
 class CartView(TemplateView):
     template_name = 'cart/cart.html'
     
+    def get_template_names(self):
+        cart = CartSession(self.request.session)
+        if not cart.get_cart_items():
+            return ["cart/empty-cart.html"]
+        return super().get_template_names()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

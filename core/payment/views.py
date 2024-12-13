@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect,get_object_or_404
 from .zarinpal_client import ZarinPalSandbox
 from .models import PaymentModel,PaymentStatus
-from order.models import OrderModel
+from order.models import OrderModel,OrderStatusModel
 
 class VerificationView(View):
 
@@ -15,10 +15,14 @@ class VerificationView(View):
         try:
             if response['data']['code'] == 100 or response['data']['code'] == 101:
                 payment_obj.status = PaymentStatus.success.value
+                order.status = OrderStatusModel.success.value
                 payment_obj.save()
+                order.save()
                 return redirect(reverse_lazy('order:complete'))
         except KeyError:
             payment_obj.status = PaymentStatus.faild.value
+            order.status = OrderStatusModel.faild.value
             payment_obj.save()
+            order.save()
             return redirect(reverse_lazy('order:faild'))
         

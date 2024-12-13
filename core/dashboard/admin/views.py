@@ -2,6 +2,7 @@ from django.views.generic import TemplateView,UpdateView,ListView, DeleteView, C
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from ..permissions import AdminPermissions
 from .form import ChangePassForm,ProfileForm,AdminEditProductForm
@@ -9,16 +10,16 @@ from accounts.models import Profile
 from shop.models import ProductModel,CategoryModel
 from django.core.exceptions import FieldError
 
-class AdminDashboard(AdminPermissions,TemplateView):
+class AdminDashboard(LoginRequiredMixin,AdminPermissions,TemplateView):
     template_name = 'dashboard/admin/home.html'
 
-class ChangePassView(AdminPermissions,SuccessMessageMixin,PasswordChangeView):
+class ChangePassView(LoginRequiredMixin,AdminPermissions,SuccessMessageMixin,PasswordChangeView):
     template_name = 'dashboard/admin/profile/change-pass.html'
     form_class = ChangePassForm
     success_url = reverse_lazy("dashboard:admin:change-pass")
     success_message = 'Password changed successfully'
 
-class ProfileView(AdminPermissions,UpdateView,SuccessMessageMixin):
+class ProfileView(LoginRequiredMixin,AdminPermissions,UpdateView,SuccessMessageMixin):
     template_name = 'dashboard/admin/profile/profile.html'
     form_class = ProfileForm
     success_url = reverse_lazy("dashboard:admin:profile")
@@ -27,7 +28,7 @@ class ProfileView(AdminPermissions,UpdateView,SuccessMessageMixin):
     def get_object(self, queryset = None):
         return Profile.objects.get(user = self.request.user)
 
-class AdminShowProducts(AdminPermissions,ListView):
+class AdminShowProducts(LoginRequiredMixin,AdminPermissions,ListView):
     template_name = 'dashboard/admin/products/show-products.html'
     paginate_by = 2
     
@@ -59,7 +60,7 @@ class AdminShowProducts(AdminPermissions,ListView):
         return context
 
 
-class AdminEditProducts(AdminPermissions,UpdateView,SuccessMessageMixin):
+class AdminEditProducts(LoginRequiredMixin,AdminPermissions,UpdateView,SuccessMessageMixin):
     queryset = ProductModel.objects.all()
     template_name = 'dashboard/admin/products/edit-products.html'
     form_class = AdminEditProductForm
@@ -68,14 +69,14 @@ class AdminEditProducts(AdminPermissions,UpdateView,SuccessMessageMixin):
         return reverse_lazy("dashboard:admin:edit-prod",kwargs={'pk':self.get_object().pk})
     
 
-class AdminDeleteProducts(AdminPermissions,DeleteView,SuccessMessageMixin):
+class AdminDeleteProducts(LoginRequiredMixin,AdminPermissions,DeleteView,SuccessMessageMixin):
     queryset = ProductModel.objects.all()
     template_name = 'dashboard/admin/products/delete-prod.html'
     success_url = reverse_lazy('dashboard:admin:show-prod')
     success_message = 'Product successfuly deleted'
 
 
-class AdminCreateProducts(AdminPermissions,CreateView,SuccessMessageMixin):
+class AdminCreateProducts(LoginRequiredMixin,AdminPermissions,CreateView,SuccessMessageMixin):
     queryset = ProductModel.objects.all()
     template_name = 'dashboard/admin/products/create-product.html'
     form_class = AdminEditProductForm
