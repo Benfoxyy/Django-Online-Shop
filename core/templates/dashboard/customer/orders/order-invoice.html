@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- Title -->
-  <title>Invoice | Front - Multipurpose Responsive Template</title>
+  <title>فاکتور</title>
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="./favicon.ico">
@@ -41,7 +41,7 @@
               <div class="col-sm-auto  text-right mb-3">
                 <div class="mb-3">
                   <h2> فاکتور شماره</h2>
-                  <span class="d-block">3682303</span>
+                  <span class="d-block">{{order.id}}</span>
                 </div>
 
               </div>
@@ -63,14 +63,12 @@
               <div class="col-md">
                 <dl class="row">
                   <dt class="col-sm-8">نام سفارش دهنده:</dt>
-                  <dd class="col-sm-4">مریم فرجیان</dd>
+                  <dd class="col-sm-4">{{order.user.user_profile.get_fullname}}</dd>
                 </dl>
                 <dl>
                   <dt class="col-sm-8">آدرس:</dt>
                   <address>
-                    280 Suzanne Throughway,
-                    Breannabury, OR 45801,
-                    United States
+                    {{order.get_fulladdress}}
                   </address>
                   
                 </dl>
@@ -80,9 +78,9 @@
               <div class="col-md text-md-end">
                 <dl class="row">
                   <dt class="col-sm-8">زمان سفارش:</dt>
-                  <dd class="col-sm-4">03/10/2018</dd>
-                  <dt class="col-sm-8"> نوع سفارش:</dt>
-                  <dd class="col-sm-4"> پیشتاز</dd>
+                  <dd class="col-sm-4">{{order.created_date|date:'Y-m-d'}}</dd>
+                  <dt class="col-sm-8">وضعیت سفارش:</dt>
+                  <dd class="col-sm-4">{{order.get_status.label}}</dd>
                 </dl>
               </div>
               <!-- End Col -->
@@ -101,19 +99,14 @@
                 </thead>
 
                 <tbody>
+                  {% for product in order.order_items.all %}
                   <tr>
-                    <th>کیف ملی</th>
-                    <td>1</td>
+                    <th>{{product.product.title}}</th>
+                    <td>{{product.quantity}}</td>
 
-                    <td class="table-text-end">150000 تومان</td>
+                    <td class="table-text-end">{{product.product.offer}} تومان</td>
                   </tr>
-
-                  <tr>
-                    <th>تیشرت مشکی</th>
-                    <td>1</td>
-
-                    <td class="table-text-end">100000 تومان</td>
-                  </tr>
+                  {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -124,15 +117,8 @@
             <div class="row mb-3">
 
               <div class="row mb-3">
-                <dt class="col-md-3">هزینه ارسال:</dt>
-                <dl class="col-md-3">35000 تومان</dl>
-                <dt class="col-md-3">مالیات :</dt>
-                <dl class="col-md-3">9% مبلغ نهایی</dl>
-              </div>
-              <div class="row mb-3">
-                <dt class="col-md-3">مبلغ نهایی:</dt>
-                <dl class="col-md-3">440000 تومان</dl>
-
+                <dt class="col-md-3">قیمت نهایی:</dt>
+                <dl class="col-md-3">{{order.get_totalprice|intcomma}} تومان</dl>
               </div>
               <!-- End Row -->
 
@@ -146,10 +132,6 @@
 
         <!-- Footer -->
         <div class="d-flex justify-content-end d-print-none gap-3">
-          <a class="btn btn-white" href="#">
-            <i class="bi-file-earmark-arrow-down me-1"></i> PDF
-          </a>
-
           <a class="btn btn-primary" href="javascript:;" onclick="window.print(); return false;">
             <i class="bi-printer me-1"></i> Print details
           </a>

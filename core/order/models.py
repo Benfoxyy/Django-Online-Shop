@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from decimal import Decimal
 
 class OrderStatusModel(models.IntegerChoices):
     pending = 1 , 'در انتظار پرداخت'
@@ -45,7 +46,21 @@ class OrderModel(models.Model):
         ordering = ('-created_date',)
 
     def get_fulladdress(self):
-        return f'({self.address.state} - {self.address.city}) {self.address.address} - {self.address.zip_code}'
+        return f'({self.address.state} - {self.address.city}) {self.address.address}'
+    
+    def get_status(self):
+        return {
+            "id":self.status,
+            "title":OrderStatusModel(self.status).name,
+            "label":OrderStatusModel(self.status).label,
+        }
+
+    def get_totalprice(self):
+        if self.coupon:
+            discount_rate = Decimal(self.coupon.discount_percent) / Decimal(100)
+            return self.final_price / (Decimal(1) - discount_rate)
+        return self.final_price
+
 
 class OrderItemsModel(models.Model):
     order = models.ForeignKey(OrderModel, on_delete=models.CASCADE,related_name='order_items')
