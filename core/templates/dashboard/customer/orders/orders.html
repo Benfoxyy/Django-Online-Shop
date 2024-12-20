@@ -37,7 +37,7 @@
 
                   <div class="col-6 col-md mb-3 mb-md-0">
                     <small class="card-subtitle mb-0">وضعیت </small>
-                    <small class="text-dark fw-semibold">{{order.status}}</small>
+                    <small class="text-dark fw-semibold">{{order.get_status.label}}</small>
                   </div>
                   <!-- End Col -->
 
@@ -71,9 +71,11 @@
 
                   <div class="col-md-4">
                     <div class="d-grid gap-2">
+                      {% if order.get_status.id == 2 %}
                       <a class="btn btn-white btn-sm" href="{% url 'dashboard:customer:order-invoice' pk=order.id %}">
                         <i class="bi-receipt small me-2"></i> مشاهده فاکتور
                       </a>
+                      {% endif %}
                       <a class="btn btn-primary btn-sm" href="{% url 'dashboard:customer:order-detail' pk=order.id %}">دیدن سفارش</a>
                     </div>
                   </div>
@@ -143,3 +145,14 @@
   </div>
 
 {% endblock content %}
+
+{% block extera-js %}
+<script>
+function changePage(page_num){
+  let urlParameters = new URLSearchParams(window.location.search)
+  urlParameters.set('page',page_num)
+  let new_url = window.location.pathname + '?' + urlParameters
+  window.location.href = new_url
+};
+</script>
+{% endblock extera-js %}

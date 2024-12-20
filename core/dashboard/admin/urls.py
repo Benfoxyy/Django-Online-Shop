@@ -11,4 +11,6 @@ urlpatterns = [
     path('products/<int:pk>/edit/',views.AdminEditProducts.as_view(),name='edit-prod'),
     path('products/<int:pk>/delete/',views.AdminDeleteProducts.as_view(),name='delete-prod'),
     path('products/create/',views.AdminCreateProducts.as_view(),name='create-prod'),
+    path('orders/list/',views.OrdersList.as_view(),name='orders-list'), 
+    path('order/<int:pk>/',views.OrderSingle.as_view(),name='order-single'), 
 ]

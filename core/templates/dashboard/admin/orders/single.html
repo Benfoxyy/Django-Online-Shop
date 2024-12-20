@@ -10,9 +10,7 @@
     <div class="card-header border-bottom">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="">شماره سفارش : {{order.id}}</h5>
-        {% if order.get_status.id == 2 %}
         <a class="btn btn-primary" href="{% url 'dashboard:customer:order-invoice' pk=order.id %}" target="_blank">مشاهده فاکتور</a>
-        {% endif %}
       </div>
     </div>
     <!-- End Header -->
@@ -85,7 +83,7 @@
           <dl class="col-md-3">{{order.final_price|intcomma}} تومان</dl>
         </div>
         <div class=" d-flex pt-5 justify-content-end">
-          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:customer:orders' %}">بازگشت</a>
+          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:orders-list' %}">بازگشت</a>
         </div>
       </form>
     </div>
