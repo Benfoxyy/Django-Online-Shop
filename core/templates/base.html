@@ -455,6 +455,41 @@
     })()
   </script>
 
+<script>
+  function changePage(page_num){
+    let urlParameters = new URLSearchParams(window.location.search)
+    urlParameters.set('page',page_num)
+    let new_url = window.location.pathname + '?' + urlParameters
+    window.location.href = new_url
+  };
+  </script>
+
+
+<script>
+  function modify_wish(element,product_id) {
+    $.ajax({
+    type: "POST",
+    url: "{% url 'shop:modify-wish' %}",
+    data: {
+      'product_id': product_id,
+      csrfmiddlewaretoken: '{{ csrf_token }}',
+    },
+    success: function(response){
+      Toastify({
+            text: response.message,
+            className: "success",
+            style: {
+              background: "#4CAF50",
+            }
+        }).showToast();
+      $(element).toggleClass('active');
+    },
+    error: function(jqXHR,textStatus,errorThrown) {
+      console.log(response)
+    }
+  });
+  }
+  </script>
   {% block extera-js %} {% endblock extera-js %}
 
   {% include "messages.html" %}

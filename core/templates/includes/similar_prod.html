@@ -22,11 +22,14 @@
                   </div>
                   {% endif %}
 
+                  {% if request.user.is_authenticated %}
                   <div class="card-pinned-top-end">
-                    <button type="button" class="btn btn-outline-secondary btn-xs btn-icon rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق">
+                    <button type="button" class="btn btn-outline-danger btn-xs btn-icon rounded-circle {% if similar_prod.id in is_wished %}active{% endif %}" 
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق" onclick="modify_wish(this,`{{similar_prod.id}}`)">
                       <i class="bi-heart"></i>
                     </button>
                   </div>
+                  {% endif %}
                 </div>
 
                 <div class="card-body">

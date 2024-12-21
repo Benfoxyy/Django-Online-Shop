@@ -180,11 +180,14 @@
                   </div>
                   {% endif %}
 
+                  {% if request.user.is_authenticated %}
                   <div class="card-pinned-top-end">
-                    <button type="button" class="btn btn-outline-secondary btn-xs btn-icon rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق">
+                    <button type="button" class="btn btn-outline-danger btn-xs btn-icon rounded-circle {% if object.id in is_wished %}active{% endif %}" 
+                    data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق" onclick="modify_wish(this,`{{object.id}}`)">
                       <i class="bi-heart"></i>
                     </button>
                   </div>
+                  {% endif %}
                 </div>
 
                 <div class="card-body">
@@ -371,14 +374,6 @@ $('#page-size-filter').change(function(){
   let new_url = window.location.pathname + '?' + urlParameters
   window.location.href = new_url
 });
-</script>
-<script>
-function changePage(page_num){
-  let urlParameters = new URLSearchParams(window.location.search)
-  urlParameters.set('page',page_num)
-  let new_url = window.location.pathname + '?' + urlParameters
-  window.location.href = new_url
-};
 </script>
 <script>
 function addProd(product_id) {

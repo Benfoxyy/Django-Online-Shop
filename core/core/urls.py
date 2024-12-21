@@ -30,8 +30,8 @@ urlpatterns = [
     path('payment/', include('payment.urls')),
 ]
 
-handler404 = "core.error_views.error_404"  # page_not_found
+handler404 = "core.error_views.error_404" 
 
-# if settings.DEBUG:
-urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

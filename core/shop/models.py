@@ -48,3 +48,9 @@ class ProductImage(models.Model):
     file = models.ImageField(upload_to='products/img/extera')
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
+
+
+class WishListModel(models.Model):
+    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT)
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
+    

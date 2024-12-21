@@ -1,5 +1,6 @@
+from email import message
 from django.views import generic
-from .models import ProductModel,ProductStatus,CategoryModel
+from .models import ProductModel,ProductStatus,CategoryModel,WishListModel
 from django.core.exceptions import FieldError
 from cart.cart import CartSession
 from django.http import JsonResponse
@@ -32,6 +33,7 @@ class ShopProductGridListView(generic.ListView):
     def get_context_data(self, **kwargs):
         context= super().get_context_data(**kwargs)
         context['total_prod']= self.get_queryset().count()
+        context['is_wished']= WishListModel.objects.filter(user=self.request.user).values_list('product_id',flat=True) if self.request.user.is_authenticated else []
         context['categories']= CategoryModel.objects.all()
         return context
 
@@ -59,3 +61,14 @@ class AddProdDetailView(generic.View):
         if product_id and quantity:
             cart.add_prod(product_id,quantity)
         return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})   
+    
+class AddOrRemoveWish(generic.View):
+    def post(self, request, *args, **kwargs):
+        product_id = request.POST.get('product_id')
+        if product_id:
+            wish_obj, created = WishListModel.objects.get_or_create(user=request.user,product_id=product_id)
+            message = 'محصول به لیست علایق اضافه شد'
+            if not created:
+                wish_obj.delete()
+                message = 'محصول از لیست علایق حذف شد'
+        return JsonResponse({'message':message})

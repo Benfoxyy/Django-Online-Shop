@@ -22,12 +22,14 @@
               <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
             </div>
             {% endif %}
-
+            {% if request.user.is_authenticated %}
             <div class="card-pinned-top-end">
-              <button type="button" class="btn btn-outline-secondary btn-xs btn-icon rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق">
+              <button type="button" class="btn btn-outline-danger btn-xs btn-icon rounded-circle {% if latest_product.id in is_wished %}active{% endif %}" 
+              data-bs-toggle="tooltip" data-bs-placement="top" title="افزودن به علایق" onclick="modify_wish(this,`{{latest_product.id}}`)">
                 <i class="bi-heart"></i>
               </button>
             </div>
+            {% endif %}
           </div>
 
           <div class="card-body">

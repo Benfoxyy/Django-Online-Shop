@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView,ListView,CreateView,UpdateView,DetailView
+from django.views.generic import TemplateView,ListView,CreateView,UpdateView,DetailView,DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_list_or_404
@@ -6,7 +6,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from ..permissions import CustomerPermissions
 from .forms import *
-from .forms import AddAddressesForm
+from shop.models import WishListModel
 from order.models import AddressModel,OrderModel
 
 class CustomerDashboard(LoginRequiredMixin,CustomerPermissions,TemplateView):
@@ -87,3 +87,30 @@ class OrderInvoiceView(DetailView):
     model = OrderModel
     template_name = 'dashboard/customer/orders/order-invoice.html'
     context_object_name = 'order'
+
+
+class WishListView(LoginRequiredMixin,ListView):
+    template_name = 'dashboard/customer/wishlist/wishlist.html'
+    context_object_name = 'wishes'
+
+    paginate_by = 1
+
+    
+
+    def get_queryset(self):
+        return WishListModel.objects.filter(user=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["wish_number"] = len(self.get_queryset()) 
+        return context
+    
+
+
+class DeleteWishView(LoginRequiredMixin,SuccessMessageMixin,DeleteView):
+    http_method_names = ['post']
+    success_url = reverse_lazy('dashboard:customer:wishlist')
+    success_message = 'محصول از لیست علایق حذف شد'
+
+    def get_queryset(self):
+        return WishListModel.objects.filter(user=self.request.user)

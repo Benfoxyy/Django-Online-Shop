@@ -528,6 +528,15 @@
     })()
   </script>
 
+<script>
+    function changePage(page_num){
+      let urlParameters = new URLSearchParams(window.location.search)
+      urlParameters.set('page',page_num)
+      let new_url = window.location.pathname + '?' + urlParameters
+      window.location.href = new_url
+    };
+    </script>
+
   {% block extera-js %} {% endblock extera-js %}
 
   {% include "messages.html" %}

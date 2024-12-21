@@ -64,23 +64,18 @@
                           <!-- End Select -->
                         </div>
                         
-                        <div class="col-auto">
-                          <div class="d-grid gap-2">
-                            <button
-                            class="link-sm link-secondary small"
-                            onclick="delprod(`{{ prod.product_id }}`)"
-                            >
-                            <i class="bi-trash me-1"></i> حذف
-                          </button>
-                          
-                          <a
-                          class="link-sm link-secondary small"
-                          href="javascript:;"
-                            >
-                              <i class="bi-heart-fill ms-1"></i>جزو علایق
-                            </a>
+                        <div class="col-auto ">
+                          <div class="d-grid gap-2 d-flex justify-content-between">
+                              <button class=" btn btn-sm btn-icon text-danger border-0 mx-1" onclick="delprod(`{{ prod.product_id }}`)">
+                                  <i class="bi-trash ms-1"></i> حذف
+                              </button>
+                              {% if request.user.is_authenticated %}
+                              <button class=" btn btn-sm btn-icon text-secondary border-0 mx-1" >
+                                  <i class="bi-heart-fill ms-1 "></i> علایق
+                              </button>
+                              {% endif %}
                           </div>
-                        </div>
+                      </div>
                         <!-- End Col -->
                       </div>
                       <!-- End Row -->
