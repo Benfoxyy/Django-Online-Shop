@@ -28,6 +28,7 @@ urlpatterns = [
     path('dashboard/', include('dashboard.urls')),
     path('order/', include('order.urls')),
     path('payment/', include('payment.urls')),
+    path('review/', include('review.urls')),
 ]
 
 handler404 = "core.error_views.error_404" 

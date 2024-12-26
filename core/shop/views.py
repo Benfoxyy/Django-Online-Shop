@@ -1,5 +1,8 @@
 from email import message
+from itertools import product
 from django.views import generic
+
+from review.models import ReviewModel
 from .models import ProductModel,ProductStatus,CategoryModel,WishListModel
 from django.core.exceptions import FieldError
 from cart.cart import CartSession
@@ -51,6 +54,12 @@ class ShopProductListView(generic.ListView):
 class ShopProductDetailView(generic.DeleteView):
     template_name = 'shop/product_detail.html'
     queryset = ProductModel.objects.filter(status=ProductStatus.active.value)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["reviews"] = ReviewModel.objects.filter(product=self.get_object())
+        return context
+    
 
 
 class AddProdDetailView(generic.View):
