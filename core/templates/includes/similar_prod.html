@@ -54,16 +54,17 @@
 
                 <div class="card-footer pt-0">
                   <!-- Rating -->
-                  <a class="d-inline-flex align-items-center mb-3" href="#">
-                    <div class="d-flex gap-1 ms-2">
-                      <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                      <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                      <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                      <img src="{% static '/svg/illustrations/star.svg' %}" alt="Review rating" width="16">
-                      <img src="{% static '/svg/illustrations/star-muted.svg' %}" alt="Review rating" width="16">
+                  <div class="d-inline-flex align-items-center mb-3" href="#">
+                    <div class="d-flex gap-1 mb-3">
+                      {% for rate in '12345' %}
+                      {% if similar_prod.avg_rate >= rate|add:0 %}
+                      <i class="bi bi-star-fill text-warning"></i>
+                      {% else %}
+                      <i class="bi bi-star text-warning"></i>
+                      {% endif %}
+                      {% endfor %}
                     </div>
-                    <span class="small">40</span>
-                  </a>
+                  </div>
                   <!-- End Rating -->
 
                   <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">افزودن به سبد خرید</button>

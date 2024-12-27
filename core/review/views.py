@@ -3,6 +3,7 @@ from django.views.generic import CreateView
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from shop.models import ProductModel
 from .models import ReviewModel
 from .forms import ReviewForm
 

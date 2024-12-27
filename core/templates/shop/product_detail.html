@@ -141,7 +141,7 @@
           alt="Review rating"
           width="16"
         />
-        <span class="ms-1">287 نظر</span>
+        <span class="ms-1">{{object.avg_rate}}/5</span>
       </a>
       <!-- End Rating -->
 
@@ -484,37 +484,19 @@
             <div class="d-flex justify-content-center">
               <div class="d-flex align-items-center">
                 <div class="flex-shrink-0">
-                  <span class="display-4 text-white">4.7</span>
+                  <span class="display-4 text-white">{{object.avg_rate}}</span>
                 </div>
 
                 <div class="flex-grow-1 ms-3">
                   <!-- Rating -->
-                  <div class="d-flex gap-1 small">
-                    <img
-                      src="{% static '/svg/illustrations/star.svg' %}"
-                      alt="Review rating"
-                      width="16"
-                    />
-                    <img
-                      src="{% static '/svg/illustrations/star.svg' %}"
-                      alt="Review rating"
-                      width="16"
-                    />
-                    <img
-                      src="{% static '/svg/illustrations/star.svg' %}"
-                      alt="Review rating"
-                      width="16"
-                    />
-                    <img
-                      src="{% static '/svg/illustrations/star.svg' %}"
-                      alt="Review rating"
-                      width="16"
-                    />
-                    <img
-                      src="{% static '/svg/illustrations/star.svg' %}"
-                      alt="Review rating"
-                      width="16"
-                    />
+                  <div class="d-flex gap-1 mb-3">
+                    {% for rate in '12345' %}
+                    {% if object.avg_rate >= rate|add:0 %}
+                    <i class="bi bi-star-fill text-warning"></i>
+                    {% else %}
+                    <i class="bi bi-star text-warning"></i>
+                    {% endif %}
+                    {% endfor %}
                   </div>
                   <!-- End Rating -->
                   <span class="text-white">{{reviews.count}} نظر</span>
@@ -703,7 +685,7 @@
               {% if review.rate >= rate|add:0 %}
               <i class="bi bi-star-fill text-warning"></i>
               {% else %}
-              <i class="bi bi-star"></i>
+              <i class="bi bi-star text-warning"></i>
               {% endif %}
               {% endfor %}
             </div>
