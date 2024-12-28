@@ -1,0 +1,56 @@
+{% extends "dashboard/admin/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+    <!-- Header -->
+    <div class="card-header border-bottom">
+      <h5 class="card-header-title">ساخت کد تخفیف</h5>
+    </div>
+    <!-- End Header -->
+
+    <!-- Body -->
+    <div class="card-body">
+      <form action="." method="post">
+        {% csrf_token %}
+        <div class="row d-flex ">
+
+            <!-- Form -->
+            <div class="row mb-4">
+                <label for="firstNameLabel" class="col-sm-3 col-form-label form-label">مقادیر تخفیف</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group">
+                    {{form.discount_percent}}
+                    {{form.max_limit_usage}}
+                  </div>
+                </div>
+              </div>
+              <!-- End Form -->
+
+              <!-- Form -->
+                <label for="phoneLabel" class="col-sm-3 col-form-label form-label">کد تخفیف</label>
+
+                <div class="col-sm-9">
+                  <div class="input-group ">
+                      {{form.code}}
+                  </div>
+                  
+                  <!-- Container For Input Field -->
+                  
+              </div>
+          </div>
+          <!-- End Form -->
+
+          <div class=" d-flex pt-5 justify-content-end">
+            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:coupon-list' %}">بازگشت</a>
+            <button type="submit" class="btn btn-primary ms-3">ثبت کد</button>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="card-footer">
+{% endblock content %}
+
+{% block extera-js %}
+{% endblock extera-js %}

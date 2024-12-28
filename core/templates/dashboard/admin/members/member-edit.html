@@ -1,0 +1,37 @@
+{% extends "dashboard/admin/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+    <!-- Header -->
+    <div class="card-header border-bottom">
+      <h5 class="card-header-title">ساخت کد تخفیف</h5>
+    </div>
+    <!-- End Header -->
+
+    <!-- Body -->
+    <div class="card-body">
+      <form action="." method="post">
+        {% csrf_token %}
+        <div class="form-check form-switch">
+            {{form.is_active}}
+            <label class="form-check-label" for="flexSwitchCheckDefault">دسترسی کاربر به سایت ( با غیر فعال کردن این گزینه ، کاربر دیگر قادر به ورود به اکانت خود نیست )</label>
+          </div>
+          <br>
+        <div class="form-check form-switch">
+            {{form.is_verified}}
+            <label class="form-check-label" for="flexSwitchCheckDefault">صحت ایمیل کاربر ( در حال ساخت )</label>
+          </div>
+
+          <div class=" d-flex pt-5 justify-content-end">
+            <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:member-list' %}">بازگشت</a>
+            <button type="submit" class="btn btn-primary ms-3">ویرایش</button>
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="card-footer">
+{% endblock content %}
+
+{% block extera-js %}
+{% endblock extera-js %}

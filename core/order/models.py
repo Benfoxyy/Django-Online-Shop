@@ -22,12 +22,19 @@ class AddressModel(models.Model):
 
 class CouponModel(models.Model):
     code = models.CharField(max_length=100)
-    discount_percent = models.IntegerField(default=0,validators=[MinValueValidator(0), MaxValueValidator(100)])
-    max_limit_usage = models.IntegerField(default=10)
+    discount_percent = models.IntegerField(validators=[MinValueValidator(0), MaxValueValidator(100)])
+    max_limit_usage = models.IntegerField()
     used_by = models.ManyToManyField('accounts.User', blank=True)
+
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.code
+
+    class Meta:
+        ordering = ('-created_date',)    
+        
 
 class OrderModel(models.Model):
     user = models.ForeignKey('accounts.User',on_delete=models.PROTECT)

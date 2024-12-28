@@ -56,4 +56,3 @@ class ProductImage(models.Model):
 class WishListModel(models.Model):
     user = models.ForeignKey('accounts.User', on_delete=models.PROTECT)
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
-    

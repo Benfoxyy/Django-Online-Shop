@@ -529,6 +529,22 @@
   </script>
 
 <script>
+    $(document).ready(function(){
+      let urlParameters = new URLSearchParams(window.location.search)
+      $('#page-size-filter').val(urlParameters.get('page_size') || '')
+      $('#order-by-filter').val(urlParameters.get('order_by') || '-created_date')
+      $('#search-query-filter').val(urlParameters.get('q') || '')
+      $('#category-id-filter').val(urlParameters.get('category_id') || '')
+    });
+    
+    // $('#order-by-filter').change(function(){
+    //   let urlParameters = new URLSearchParams(window.location.search)
+    //   var selectedOption = $(this).val();
+    //   urlParameters.set('order_by',selectedOption)
+    //   let new_url = window.location.pathname + '?' + urlParameters
+    //   window.location.href = new_url
+    // });
+
     function changePage(page_num){
       let urlParameters = new URLSearchParams(window.location.search)
       urlParameters.set('page',page_num)

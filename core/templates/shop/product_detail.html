@@ -115,34 +115,16 @@
 
     <div class="col-md-5">
       <!-- Rating -->
-      <a class="d-flex gap-1 mb-4" href="#reviewSection">
-        <img
-          src="{% static '/svg/illustrations/star.svg' %}"
-          alt="Review rating"
-          width="16"
-        />
-        <img
-          src="{% static '/svg/illustrations/star.svg' %}"
-          alt="Review rating"
-          width="16"
-        />
-        <img
-          src="{% static '/svg/illustrations/star.svg' %}"
-          alt="Review rating"
-          width="16"
-        />
-        <img
-          src="{% static '/svg/illustrations/star.svg' %}"
-          alt="Review rating"
-          width="16"
-        />
-        <img
-          src="{% static '/svg/illustrations/star.svg' %}"
-          alt="Review rating"
-          width="16"
-        />
-        <span class="ms-1">{{object.avg_rate}}/5</span>
-      </a>
+      <div class="d-flex gap-1 mb-3">
+        {% for rate in '12345' %}
+        {% if object.avg_rate >= rate|add:0 %}
+        <i class="bi bi-star-fill text-warning"></i>
+        {% else %}
+        <i class="bi bi-star text-warning"></i>
+        {% endif %}
+        {% endfor %}
+        <span class="ms-1 text-primary">{{object.avg_rate}}/5</span>
+      </div>
       <!-- End Rating -->
 
       <!-- Heading -->

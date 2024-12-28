@@ -13,4 +13,8 @@ urlpatterns = [
     path('products/create/',views.AdminCreateProducts.as_view(),name='create-prod'),
     path('orders/list/',views.OrdersList.as_view(),name='orders-list'), 
     path('order/<int:pk>/',views.OrderSingle.as_view(),name='order-single'), 
+    path('coupon/list/',views.AdminCouponView.as_view(),name='coupon-list'), 
+    path('coupon/create/',views.AdminCouponCreateView.as_view(),name='coupon-create'), 
+    path('member/list/',views.AdminMemberListView.as_view(),name='member-list'), 
+    path('member/<int:pk>/',views.AdminMemberEditView.as_view(),name='member-edit'), 
 ]

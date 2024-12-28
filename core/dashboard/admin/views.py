@@ -3,12 +3,11 @@ from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
 from ..permissions import AdminPermissions
-from .form import ChangePassForm,ProfileForm,AdminEditProductForm
-from accounts.models import Profile
+from .form import ChangePassForm,ProfileForm,AdminEditProductForm,AdminCouponForm,AdminMemberEditForm
+from accounts.models import User,Profile,UserType
 from shop.models import ProductModel,CategoryModel
-from order.models import OrderModel
+from order.models import OrderModel,CouponModel
 from django.core.exceptions import FieldError
 
 class AdminDashboard(LoginRequiredMixin,AdminPermissions,TemplateView):
@@ -40,10 +39,6 @@ class AdminShowProducts(LoginRequiredMixin,AdminPermissions,ListView):
         queryset = ProductModel.objects.all()
         if search_q := self.request.GET.get("q"):
             queryset = queryset.filter(title__icontains=search_q)
-        if minprice_q := self.request.GET.get("min_price"):
-            queryset = queryset.filter(price__gte=minprice_q)
-        if maxprice_q := self.request.GET.get("max_price"):
-            queryset = queryset.filter(price__lte=maxprice_q)
         if category_id := self.request.GET.get("category_id"):
             queryset = queryset.filter(category__id=category_id)
         if order_by := self.request.GET.get("order_by"):
@@ -104,4 +99,64 @@ class OrderSingle(LoginRequiredMixin,AdminPermissions,DetailView):
     template_name = 'dashboard/admin/orders/single.html'
     context_object_name = 'order'
 
-        
+
+class AdminCouponView(LoginRequiredMixin,AdminPermissions,ListView):
+    template_name = 'dashboard/admin/coupons/coupon-list.html'
+    context_object_name = 'coupons' 
+
+    paginate_by = 10
+    
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get('page_size', self.paginate_by)
+    
+    def get_queryset(self):
+        queryset = CouponModel.objects.all()
+        if search_q := self.request.GET.get("q"):
+            queryset = queryset.filter(code__icontains=search_q)
+        if order_by := self.request.GET.get("order_by"):
+            try:
+                queryset = queryset.order_by(order_by)
+            except FieldError:
+                pass
+        return queryset
+    
+
+class AdminCouponCreateView(LoginRequiredMixin,AdminPermissions,CreateView,SuccessMessageMixin):
+    queryset = CouponModel.objects.all()
+    template_name = 'dashboard/admin/coupons/coupon-create.html'
+    form_class = AdminCouponForm
+    success_url = reverse_lazy("dashboard:admin:coupon-list")
+    success_message = 'کد تخفیف با موفقیت ایجاد شد'
+
+
+class AdminMemberListView(LoginRequiredMixin,AdminPermissions,ListView):
+    template_name = 'dashboard/admin/members/member-list.html'
+    context_object_name = 'members'
+
+    paginate_by = 10
+    
+    def get_paginate_by(self, queryset):
+        return self.request.GET.get('page_size', self.paginate_by)
+    
+    def get_queryset(self):
+        queryset = User.objects.all().exclude(email=self.request.user.email).exclude(user_type = UserType.superuser.value)
+        if search_q := self.request.GET.get("q"):
+            queryset = queryset.filter(email__icontains=search_q)
+        if order_by := self.request.GET.get("order_by"):
+            try:
+                queryset = queryset.order_by(order_by)
+            except FieldError:
+                pass
+        return queryset
+    
+
+class AdminMemberEditView(LoginRequiredMixin,AdminPermissions,UpdateView,SuccessMessageMixin):
+    template_name = 'dashboard/admin/members/member-edit.html'
+    form_class = AdminMemberEditForm
+    success_message = 'کاربر با موفقیت ویرایش شد'
+
+    def get_queryset(self):
+        return User.objects.all().exclude(email=self.request.user.email).exclude(user_type = UserType.superuser.value)
+
+    def get_success_url(self):
+        return reverse_lazy("dashboard:admin:member-edit",kwargs={'pk':self.get_object().pk})

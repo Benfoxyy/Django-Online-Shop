@@ -1,6 +1,5 @@
 {% extends "dashboard/admin/base.html" %}
 {% load static %}
-{% load humanize %}
 
 {% block content %}
     <!-- Card -->
@@ -8,8 +7,7 @@
         <!-- Header -->
         <div class="card-header border-bottom">
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="">لیست محصولات</h5>
-            <a class="btn btn-primary" href="{% url 'dashboard:admin:create-prod' %}">اضافه کردن</a>
+            <h5 class="">لیست کاربران</h5>
           </div>
         </div>
         <!-- End Header -->
@@ -31,14 +29,6 @@
                   <option value="created_date">قدیمی ترین</option>
                 </select>
               </div>
-              <div class="col-md-3 py-1">
-                <select class="form-select" name="category_id" id="category-id-filter">
-                    <option value="" selected>انتخاب دسته بندی</option>
-                    {% for category in categories %}
-                    <option value="{{category.id}}">{{category.title}}</option>
-                    {% endfor %}
-                </select>
-              </div>
               <div class="col-md-1 py-1">
                 <button type="submit" class="btn btn-primary btn-search"><i class="bi-search"></i></button>
               </div>
@@ -53,29 +43,25 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">نام محصول</th>
-                    <th scope="col">دسته بندی</th>
-                    <th scope="col">قیمت</th>
-                    <th scope="col">تعداد</th>
-                    <th scope="col">وضعیت</th>
-                    <th scope="col">تخفیف</th>
-                    <th scope="col">عملیات</th>
+                    <th scope="col">ایمیل</th>
+                    <th scope="col">دسترسی</th>
+                    <th scope="col">فعال</th>
+                    <th scope="col">نوع کاربر</th>
+                    <th scope="col">ویرایش</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {% for object in object_list %}
+                    {% for member in members %}
                   <tr>
-                    <th scope="row">{{object.id}}</th>
-                    <td>{{object.title}}</td>
-                    <td>{% for cat in object.category.all %}{{cat.title}}{% if not forloop.last %},{% endif %}{% endfor %}</td>
-                    <td>{{object.price|intcomma}}</td>
-                    <td>{{object.stock}}</td>
-                    <td>{% if object.is_published %}<span class="badge bg-success">نشر شده</span>{% else %}<span class="badge bg-danger">زخیره شده</span>{% endif %}</td>
-                    <td>{{object.discount_percent}}%</td>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{member.email}}</td>
+                    <td>{% if member.is_active == True %}<span class="badge bg-success">فعال</span>{% else %}<span class="badge bg-danger">غیر فعال</span>{% endif %}</td>
+                    <td>{% if member.is_verified == True %}<span class="badge bg-success">فعال</span>{% else %}<span class="badge bg-danger">غیر فعال</span>{% endif %}</td>
+                    <td>{% if member.user_type == 2 %}<span class="badge bg-success">ادمین</span>{% else %}<span class="badge bg-danger">عادی</span>{% endif %}</td>
                     <td>
-                      <a class="btn btn-sm btn-icon btn-ghost-secondary" href="{% url 'dashboard:admin:edit-prod' pk=object.id %}"><i class="bi-pencil-square"></i></a>
-                      {% if object.is_published %}<a class="btn btn-sm btn-icon btn-ghost-primary" href="{% url 'shop:detail' slug=object.slug %}"><i class="bi-eye"></i></a>{% endif %}
+                        <a class="btn btn-sm btn-icon btn-ghost-secondary" href="{% url 'dashboard:admin:member-edit' pk=member.id %}"><i class="bi-pencil-square"></i></a>
                     </td>
+                   
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -133,4 +119,5 @@
 {% endblock content %}
 
 {% block extera-js %}
+
 {% endblock extera-js %}
