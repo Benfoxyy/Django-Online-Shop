@@ -1,0 +1,56 @@
+{% extends "dashboard/admin/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="card">
+    <!-- Header -->
+    <div class="card-header border-bottom">
+      <h5 class="card-header-title"> تیکت شماره 12345</h5>
+    </div>
+    <!-- End Header -->
+
+    <!-- Body -->
+      <div class="card-body">
+
+        <div class="row d-flex align-items-center">
+          <div class="col-md-6 mb-3">
+            <dt>ایمیل: </dt>
+            <dl>{{ticket.email}}</dl>
+          </div>
+          <div class="col-md-6 mb-3">
+            <dt>نام و نام خانوادگی: </dt>
+            <dl>{{ticket.name}} {{ticket.last_name}}</dl>
+          </div>
+          <div class="col-md-6 mb-3">
+            <dt>شماره تماس: </dt>
+            <dl>{{ticket.phone_number}}</dl>
+          </div>
+          <div class="col-md-12 mb-3">
+            <dt>متن:</dt>
+            <dl>
+              <p>
+                {{ticket.description}}
+              </p>
+            </dl>
+          </div>
+        </div>
+        <!-- End Row -->
+
+      </div>
+      <div class="card-footer row pt-5 mt-5">
+
+        <div class=" d-flex pt-5 justify-content-end">
+          <a class="btn btn-secondary ms-3" href="{% url 'dashboard:admin:ticket-list' %}">بازگشت</a>
+          <a class="btn btn-primary ms-3" href="{% url 'dashboard:admin:ticket-delete' pk=ticket.id %}">پایان رسیدگی</a>
+        </div>
+
+      </div>
+    <!-- End Body -->
+
+  </div>
+
+  {% endblock content %}
+
+  {% block extera-js %}
+  
+  {% endblock extera-js %}

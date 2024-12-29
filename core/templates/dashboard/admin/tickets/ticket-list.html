@@ -7,8 +7,7 @@
         <!-- Header -->
         <div class="card-header border-bottom">
           <div class="d-flex justify-content-between align-items-center">
-            <h5 class="">لیست تخفیف ها</h5>
-            <a class="btn btn-primary" href="{% url 'dashboard:admin:coupon-create' %}">اضافه کردن</a>
+            <h5 class="">لیست کاربران</h5>
           </div>
         </div>
         <!-- End Header -->
@@ -30,13 +29,6 @@
                   <option value="created_date">قدیمی ترین</option>
                 </select>
               </div>
-              <div class="col-md-3 py-1">
-                <select class="form-select" name="category_id" id="category-id-filter">
-                    <option value="" selected>انتخاب دسته بندی</option>
-                    <option value="1">فعال</option>
-                    <option value="2">غیر فعال</option>
-                </select>
-              </div>
               <div class="col-md-1 py-1">
                 <button type="submit" class="btn btn-primary btn-search"><i class="bi-search"></i></button>
               </div>
@@ -51,23 +43,26 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">کد تخفیف</th>
-                    <th scope="col">درصد تخفیف</th>
-                    <th scope="col">محدودیت استفاده</th>
-                    <th scope="col">استفاده شده</th>
-                    <th scope="col">وضعیت</th>
+                    <th scope="col">نام</th>
+                    <th scope="col">نام خانوادگی</th>
+                    <th scope="col">ایمیل</th>
+                    <th scope="col">شماره تلفن</th>
+                    <th scope="col">موضوع</th>
+                    <th scope="col">ویرایش</th>
                   </tr>
                 </thead>
                 <tbody>
-                    {% for coupon in coupons %}
+                    {% for ticket in tickets %}
                   <tr>
                     <th scope="row">{{forloop.counter}}</th>
-                    <td>{{coupon.code}}</td>
-                    <td>{{coupon.discount_percent}}%</td>
-                    <td>{{coupon.max_limit_usage}} نفر</td>
-                    <td>{{coupon.used_by.count}} نفر</td>
-                    <td>{% if coupon.max_limit_usage != coupon.used_by.count %}<span class="badge bg-success">فعال</span>{% else %}<span class="badge bg-danger">غیر فعال</span>{% endif %}</td>
-                    
+                    <td>{{ticket.name}}</td>
+                    <td>{{ticket.last_name}}</td>
+                    <td>{{ticket.email}}</td>
+                    <td>{{ticket.phone_number}}</td>
+                    <td>{{ticket.snippet}}</td>
+                    <td>
+                      <a class="btn btn-sm btn-icon btn-ghost-secondary" href="{% url 'dashboard:admin:ticket-detail' pk=ticket.id %}"><i class="bi-pencil-square"></i></a>
+                    </td>
                    
                   </tr>
                   {% endfor %}
