@@ -239,41 +239,42 @@
           <!-- End Row -->
 
           <!-- Pagination -->
-          <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-              {% if page_obj.has_previous %}
-              <li class="page-item">
-                <button class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous" onclick="changePage(`{{page_obj.previous_page_number}}`)">
-                  <span aria-hidden="true">
-                    <i class="bi-chevron-double-right small"></i>
-                  </span>
-                </button>
-              </li>
-              <li class="page-item"><button class="page-link" href="?page=1" onclick="changePage(1)">1</button></li>
-              {% if not page_obj.previous_page_number == 1 %}
-              <li class="page-item"><button class="page-link" href="?page={{page_obj.previous_page_number}}" onclick="changePage(`{{page_obj.previous_page_number}}`)">{{page_obj.previous_page_number}}</button></li>
-              {% endif %}
-              {% endif %}
-              <li class="page-item active"><button class="page-link" href="?page={{ page_obj.number }}" onclick="changePage(`{{page_obj.number}}`)">{{page_obj.number}}</button></li>
-              {% if page_obj.has_next %}
-              {% if not page_obj.next_page_number == page_obj.paginator.num_pages %}
-              <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
-              {% endif %}
-              {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
-              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
-              {% endif %}
-              <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
-              <li class="page-item">
-                <button class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" onclick="changePage(`{{page_obj.next_page_number}}`)">
-                  <span aria-hidden="true">
-                    <i class="bi-chevron-double-left small"></i>
-                  </span>
-                </button>
-              </li>
-              {% endif %}
-            </ul>
-          </nav>
-          <!-- End Pagination -->
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <button class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous" onclick="changePage(`{{page_obj.previous_page_number}}`)">
+            <span aria-hidden="true">
+              <i class="bi-chevron-double-right small"></i>
+            </span>
+          </button>
+        </li>
+        <li class="page-item"><button class="page-link" href="?page=1" onclick="changePage(1)">1</button></li>
+        {% if not page_obj.previous_page_number == 1 %}
+        <li class="page-item"><button class="page-link" href="?page={{page_obj.previous_page_number}}" onclick="changePage(`{{page_obj.previous_page_number}}`)">{{page_obj.previous_page_number}}</button></li>
+        {% endif %}
+        {% endif %}
+        <li class="page-item active"><button class="page-link" href="?page={{ page_obj.number }}" onclick="changePage(`{{page_obj.number}}`)">{{page_obj.number}}</button></li>
+        {% if page_obj.has_next %}
+        {% if not page_obj.next_page_number == page_obj.paginator.num_pages %}
+        <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
+        {% endif %}
+        {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
+        <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+        {% endif %}
+        <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
+        <li class="page-item">
+          <button class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" onclick="changePage(`{{page_obj.next_page_number}}`)">
+            <span aria-hidden="true">
+              <i class="bi-chevron-double-left small"></i>
+            </span>
+          </button>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <!-- End Pagination -->
+
         </div>
         <!-- End Col -->
       </div>
@@ -350,49 +351,5 @@
     <!-- End Clients -->
 {% endblock content %}
 {% block extera-js %}
-<script>
-$(document).ready(function(){
-  let urlParameters = new URLSearchParams(window.location.search)
-  $('#page-size-filter').val(urlParameters.get('page_size') || '')
-  $('#order-by-filter').val(urlParameters.get('order_by') || '-created_date')
-  $('#search-query-filter').val(urlParameters.get('q') || '')
-  $('#min-price-filter').val(urlParameters.get('min_price') || '')
-  $('#max-price-filter').val(urlParameters.get('max_price') || '')
-  $('#category-id-filter').val(urlParameters.get('category_id') || '')
-});
 
-$('#order-by-filter').change(function(){
-  let urlParameters = new URLSearchParams(window.location.search)
-  var selectedOption = $(this).val();
-  urlParameters.set('order_by',selectedOption)
-  let new_url = window.location.pathname + '?' + urlParameters
-  window.location.href = new_url
-});
-$('#page-size-filter').change(function(){
-  let urlParameters = new URLSearchParams(window.location.search)
-  var selectedOption = $(this).val();
-  urlParameters.set('page_size',selectedOption)
-  let new_url = window.location.pathname + '?' + urlParameters
-  window.location.href = new_url
-});
-</script>
-<script>
-function addProd(product_id) {
-  $.ajax({
-  type: "POST",
-  url: "{% url 'cart:add-prod' %}",
-  data: {
-    'product_id': product_id,
-    csrfmiddlewaretoken: '{{ csrf_token }}',
-  },
-  success: function(response){
-    $('#cart-item-count').html(response.total_quantity)
-    console.log(response)
-  },
-  error: function(jqXHR,textStatus,errorThrown) {
-    console.log(response)
-  }
-});
-}
-</script>
 {% endblock extera-js %}

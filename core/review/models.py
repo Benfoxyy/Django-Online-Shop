@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.db.models import Avg
 from shop.models import ProductModel
 
 class ReviewModel(models.Model):
@@ -25,6 +26,6 @@ class ReviewModel(models.Model):
 def create_profile(sender,instance,created,**kwargs):
     if created:
         product = instance.product
-        rates = ReviewModel.objects.filter(product=product).values_list('rate',flat=True)
-        product.avg_rate = "{:.1f}".format(sum(rates)/len(rates))
+        rates = ReviewModel.objects.filter(product=product).aggregate(Avg('rate'))['rate__avg']
+        product.avg_rate = round(rates,1)
         product.save()

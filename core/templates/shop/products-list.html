@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <!-- Breadcrumb -->
+    <div class="bg-light">
+      <div class="container py-4">
+        <div class="row">
+          <div class="col-sm">
+            <h4 class="mb-0">شبکه محصولات</h4>
+          </div>
+          <!-- End Col -->
+
+          <div class="col-sm-auto">
+            <!-- Breadcrumb -->
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb mb-0 ">
+                <li class="breadcrumb-item ps-2">
+                  <a href="/index.html">خرید کنید</a>
+                </li>
+                <li class="breadcrumb-item">
+                  <a href="/products-grid.html">محصولات</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">توری</li>
+              </ol>
+            </nav>
+            <!-- End Breadcrumb -->
+          </div>
+          <!-- End Col -->
+        </div>
+        <!-- End Row -->
+      </div>
+    </div>
+    <!-- End Breadcrumb -->
+
+    <!-- Card Grid -->
+    <div class="container content-space-t-1 content-space-t-md-2 content-space-b-2 content-space-b-lg-3">
+      <div class="row">
+        <div class="col-lg-3">
+          <!-- Navbar -->
+          <div class="navbar-expand-lg mb-5">
+            <!-- Navbar Toggle -->
+            <div class="d-grid">
+              <button type="button" class="navbar-toggler btn btn-white mb-3" data-bs-toggle="collapse" data-bs-target="#navbarVerticalNavMenu" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarVerticalNavMenu">
+                <span class="d-flex justify-content-between align-items-center">
+                  <span class="text-dark">فیلتر کنید</span>
+
+                  <span class="navbar-toggler-default">
+                    <i class="bi-list"></i>
+                  </span>
+
+                  <span class="navbar-toggler-toggled">
+                    <i class="bi-x"></i>
+                  </span>
+                </span>
+              </button>
+            </div>
+            <!-- End Navbar Toggle -->
+
+            <!-- Navbar Collapse -->
+            <div id="navbarVerticalNavMenu" class="collapse navbar-collapse">
+              <form action="." class="w-100">
+
+                  <div class="border-bottom pb-4 mb-4">
+                      <h5>جستو جوی کالا</h5>
+                      <div class="d-grid gap-2">
+                          <div class="form-group">
+                              <label class="form-label d-flex" for="search-query-filter">جستو جو</label>
+                              <input class="form-control" placeholder="واژه مورد نظر را وارد نمایید" type="text"
+                                  name="q" id="search-query-filter">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="border-bottom pb-4 mb-4">
+                      <h5>قیمت</h5>
+                      <div class="d-grid gap-2">
+
+                          <div class="form-group">
+                              <label class="form-label d-flex" for="min-price-filter">کمترین قیمت</label>
+                              <input class="form-control" type="number" name="min_price"
+                                  placeholder="کمترین قیمت مد نظر" id="min-price-filter">
+                          </div>
+                          <div class="form-group">
+                              <label class="form-label d-flex" for="max-price-filter">بیشترین قیمت</label>
+                              <input class="form-control" type="number" name="max_price"
+                                  placeholder="بیشترین قیمت مد نظر" id="max-price-filter">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="border-bottom pb-4 mb-4">
+                      <h5>دسته بندی</h5>
+                      <div class="d-grid gap-2">
+                          <div class="mb-2 mb-sm-0 me-sm-2">
+                              <select class="form-select form-select-sm" name="category_id"
+                                  id="category-id-filter">
+                                  <option value="" selected>انتخاب دسته بندی</option>
+                                  {% for category in categories %}
+                                  <option value="{{category.id}}">{{category.title}}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="d-grid">
+                      <button type="submit" class="btn btn-outline-primary btn-transition mb-3">اعمال
+                          فیلتر</button>
+                      <a href="{% url 'shop:list' %}"
+                          class="btn btn-outline-danger btn-transition mb-3">حذف فیلتر ها</a>
+                  </div>
+              </form>
+          </div>
+          <!-- End Navbar Collapse -->
+          </div>
+          <!-- End Navbar -->
+        </div>
+        <!-- End Col -->
+
+        <div class="col-lg-9">
+          <div class="row align-items-center mb-5">
+            <div class="col-sm mb-3 mb-sm-0">
+              <h6 class="mb-0">{{total_prod}} محصول</h6>
+            </div>
+
+            <div class="col-sm-auto">
+              <div class="d-sm-flex justify-content-sm-end align-items-center">
+                <!-- Select -->
+                <div class="mb-2 mb-sm-0 me-sm-2">
+                  <select class="form-select form-select-sm" id="order-by-filter">
+                    <option value="-created_date" selected>جدیدترین</option>
+                    <option value="created_date">قدیمی ترین</option>
+                  </select>
+                </div>
+                <!-- End Select -->
+
+                <!-- Select -->
+                <div class="mb-2 mb-sm-0 me-sm-2">
+                  <select class="form-select form-select-sm" id="page-size-filter">
+                    <option value="" selected>تعداد در صفحه</option>
+                    <option value="1">1</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="50">50</option>                    
+                  </select>
+                </div>
+                <!-- End Select -->
+
+                <!-- Nav -->
+                <ul class="nav nav-segment">
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'shop:list_grid' %}">
+                      <i class="bi-grid-fill"></i>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="{% url 'shop:list' %}">
+                      <i class="bi-list"></i>
+                    </a>
+                  </li>
+                </ul>
+                <!-- End Nav -->
+              </div>
+            </div>
+          </div>
+          <!-- End Row -->
+
+          <div class="d-grid gap-3 mb-10">
+            <!-- Card -->
+            {% for object in object_list %}  
+            <div class="card card-bordered card-stretched-vertical shadow-none">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="card-pinned">
+                    <img class="card-img-top" src="{{object.image.url}}" alt="Image Description">
+                    {% if object.stock == 0 %}
+                    <div class="card-pinned-top-start">
+                      <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>
+                <!-- End Col -->
+
+                <div class="col-sm-8">
+                  <div class="card-body">
+                    <div class="mb-2">
+                      {% for cat in object.category.all %}
+                      <a class="link-sm link-secondary" href="#">{{cat}}</a>
+                      {% if not forloop.last %}
+                        ،
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+
+                    <div class="mb-2">
+                      <h4 class="card-title">
+                        <a class="text-dark" href="/product-overview.html">{{object.title}}</a>
+                      </h4>
+                      {% if object.discount_percent %}
+                      <p class="card-text text-dark">{{object.offer|intcomma}} تومان<span class="text-body ms-1"><del>{{object.price|intcomma}} تومان</del></span></p>
+                      {% else %}
+                      <p class="card-text text-dark">{{object.price|intcomma}} تومان</p>
+                      {% endif %}
+                    </div>
+
+                    <!-- Rating -->
+                  <div class="d-inline-flex align-items-center mb-3" href="#">
+                    <div class="d-flex gap-1 mb-3">
+                      {% for rate in '12345' %}
+                      {% if object.avg_rate >= rate|add:0 %}
+                      <i class="bi bi-star-fill text-warning"></i>
+                      {% else %}
+                      <i class="bi bi-star text-warning"></i>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <!-- End Rating -->
+
+                    <div class="card-footer">
+                      <div class="d-flex gap-2">
+                        {% if not object.stock %}
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill">موجود شد بهم اطلاع بده</button>
+                        {% else %}
+                        <button type="button" class="btn btn-outline-primary btn-sm btn-transition rounded-pill" onclick="addProd(`{{object.id}}`)">افزودن به سبد خرید</button>
+                        {% endif %}
+                        {% if request.user.is_authenticated %}
+                        <button type="button" class="btn btn-soft-danger btn-sm btn-transition rounded-pill {% if object.id in is_wished %}active{% endif %}"
+                        onclick="modify_wish(this,`{{object.id}}`)">
+                          <i class="bi-heart ms-1"></i>افزودن به علایق</button>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- End Col -->
+              </div>
+              <!-- End Row -->
+            </div>
+            {% endfor %}
+            <!-- End Card -->
+          </div>
+
+          <!-- Pagination -->
+          <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+              {% if page_obj.has_previous %}
+              <li class="page-item">
+                <button class="page-link" href="?page={{page_obj.previous_page_number}}" aria-label="Previous" onclick="changePage(`{{page_obj.previous_page_number}}`)">
+                  <span aria-hidden="true">
+                    <i class="bi-chevron-double-right small"></i>
+                  </span>
+                </button>
+              </li>
+              <li class="page-item"><button class="page-link" href="?page=1" onclick="changePage(1)">1</button></li>
+              {% if not page_obj.previous_page_number == 1 %}
+              <li class="page-item"><button class="page-link" href="?page={{page_obj.previous_page_number}}" onclick="changePage(`{{page_obj.previous_page_number}}`)">{{page_obj.previous_page_number}}</button></li>
+              {% endif %}
+              {% endif %}
+              <li class="page-item active"><button class="page-link" href="?page={{ page_obj.number }}" onclick="changePage(`{{page_obj.number}}`)">{{page_obj.number}}</button></li>
+              {% if page_obj.has_next %}
+              {% if not page_obj.next_page_number == page_obj.paginator.num_pages %}
+              <li class="page-item"><button class="page-link" href="?page={{ page_obj.next_page_number }}" onclick="changePage(`{{page_obj.next_page_number}}`)">{{ page_obj.next_page_number }}</button></li>
+              {% endif %}
+              {% if page_obj.number|add:'2' < page_obj.paginator.num_pages %}
+              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              {% endif %}
+              <li class="page-item"><button class="page-link" href="?page={{page_obj.paginator.num_pages}}" onclick="changePage(`{{page_obj.paginator.num_pages}}`)">{{page_obj.paginator.num_pages}}</button></li>
+              <li class="page-item">
+                <button class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next" onclick="changePage(`{{page_obj.next_page_number}}`)">
+                  <span aria-hidden="true">
+                    <i class="bi-chevron-double-left small"></i>
+                  </span>
+                </button>
+              </li>
+              {% endif %}
+            </ul>
+          </nav>
+          <!-- End Pagination -->
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Card Grid -->
+
+    <!-- Subscribe -->
+    <div class="bg-light">
+      <div class="container content-space-2">
+        <div class="w-md-75 w-lg-50 text-center mx-md-auto">
+          <div class="row justify-content-lg-between">
+            <!-- Heading -->
+            <div class="mb-5">
+              <span class="text-cap">ثبت نام</span>
+              <h2>اخبار جدید را دریافت کنید</h2>
+            </div>
+            <!-- End Heading -->
+
+            <form>
+              <!-- Input Card -->
+              <div class="input-card input-card-pill input-card-sm border mb-3">
+                <div class="input-card-form">
+                  <label for="subscribeForm" class="form-label visually-hidden">ایمیل را وارد کنید</label>
+                  <input type="text" class="form-control form-control-lg" id="subscribeForm" placeholder="ایمیل خود را وارد کنید" aria-label="ایمیل خود را وارد کنید">
+                </div>
+                <button type="button" class="btn btn-primary btn-lg rounded-pill">ثبت نام</button>
+              </div>
+              <!-- End Input Card -->
+            </form>
+
+            <p class="small">می توانید در هر زمانی اشتراک خود را لغو کنید <a href="#">سیاست حفظ حریم خصوصی</a> ما را بخوانید</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Subscribe -->
+
+    <!-- Clients -->
+    <div class="container content-space-2">
+      <div class="row">
+        <div class="col text-center py-3">
+          <img class="avatar avatar-lg avatar-4x3" src="{% static '/svg/brands/hollister-dark.svg' %}" alt="Logo">
+        </div>
+        <!-- End Col -->
+
+        <div class="col text-center py-3">
+          <img class="avatar avatar-lg avatar-4x3" src="{% static '/svg/brands/levis-dark.svg' %}" alt="Logo">
+        </div>
+        <!-- End Col -->
+
+        <div class="col text-center py-3">
+          <img class="avatar avatar-lg avatar-4x3" src="{% static '/svg/brands/new-balance-dark.svg' %}" alt="Logo">
+        </div>
+        <!-- End Col -->
+
+        <div class="col text-center py-3">
+          <img class="avatar avatar-lg avatar-4x3" src="{% static '/svg/brands/puma-dark.svg' %}" alt="Logo">
+        </div>
+        <!-- End Col -->
+
+        <div class="col text-center py-3">
+          <img class="avatar avatar-lg avatar-4x3" src="{% static '/svg/brands/nike-dark.svg' %}" alt="Logo">
+        </div>
+        <!-- End Col -->
+
+        <div class="col text-center py-3">
+          <img class="avatar avatar-lg avatar-4x3" src="{% static '/svg/brands/tnf-dark.svg' %}" alt="Logo">
+        </div>
+        <!-- End Col -->
+      </div>
+      <!-- End Row -->
+    </div>
+    <!-- End Clients -->
+
+{% endblock content %}
