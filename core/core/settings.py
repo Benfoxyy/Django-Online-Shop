@@ -140,3 +140,11 @@ LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
 MERCHANT_ID = "4ced0a1e-4ad8-4309-9668-3ea3ae8e7897"
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # For testing
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'benxfoxy@gmail.com'
+EMAIL_HOST_PASSWORD = 'htgk tzdv dsqq mbna'

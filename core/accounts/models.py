@@ -52,7 +52,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     email = models.EmailField(_("email address"), unique=True)
     is_staff = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)
     user_type = models.IntegerField(choices=UserType.choices, default=UserType.customer.value)
     created_date = models.DateTimeField(auto_now_add=True)

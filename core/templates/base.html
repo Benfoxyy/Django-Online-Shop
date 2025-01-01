@@ -93,10 +93,10 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                 <a class="dropdown-item" href="{% url 'dashboard:check' %}">پروفایل</a>
-                <a class="dropdown-item" href="{% url 'accounts:logout' %}">خروج</a>
+                <a class="dropdown-item" href="{% url 'logout' %}">خروج</a>
                 </div>
                 {% else %}
-                <a class="btn btn-primary btn-transition" href="{% url 'accounts:login' %}">ورود</a>
+                <a class="btn btn-primary btn-transition" href="{% url 'login' %}">ورود</a>
                 {% endif %}
               </li>
             </ul>
@@ -368,16 +368,6 @@
       // INITIALIZATION OF SHOW ANIMATIONS
       // =======================================================
       new HSShowAnimation('.js-animation-link')
-
-
-      // INITIALIZATION OF BOOTSTRAP VALIDATION
-      // =======================================================
-      HSBsValidation.init('.js-validate', {
-        onSubmit: data => {
-          data.event.preventDefault()
-          alert('Submited')
-        }
-      })
 
 
       // INITIALIZATION OF BOOTSTRAP DROPDOWN
