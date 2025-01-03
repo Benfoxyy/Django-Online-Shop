@@ -20,7 +20,6 @@ class ProductModel(models.Model):
     category = models.ManyToManyField(CategoryModel)
     title = models.CharField(max_length=255)
     slug = models.SlugField(allow_unicode=True,unique=True)
-    image = models.ImageField(default='default/proddef.png',upload_to='products/img')
     description = RichTextField()
     stock = models.PositiveIntegerField(default=0)
     status = models.IntegerField(choices=ProductStatus.choices,default=ProductStatus.active.value)
@@ -46,9 +45,9 @@ class ProductModel(models.Model):
     def __str__(self):
         return self.title
     
-class ProductImage(models.Model):
-    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
-    file = models.ImageField(upload_to='products/img/extera')
+class ProductImageModel(models.Model):
+    product = models.ForeignKey(ProductModel, on_delete=models.CASCADE, related_name='product_image_related')
+    image = models.ImageField(default='default/proddef.png',upload_to='products/img')
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 

@@ -8,102 +8,36 @@
           <!-- Swiper Main Slider -->
           <div class="js-swiper-shop-product swiper">
             <div class="swiper-wrapper">
+              {% for image in object.product_image_related.all %}
               <!-- Slide -->
               <div class="swiper-slide">
                 <div class="card card-bordered shadow-none">
-                  <img
-                    class="card-img"
-                    src="{{object.image.url}}"
-                    alt="Image Description"
-                  />
-                  {% if not object.stock %}
-                  <div class="card-pinned-top-start">
-                    <span class="badge bg-danger rounded-pill"
-                      >اتمام موجودی</span
-                    >
-                  </div>
-                  {% endif %}
+                  <img class="card-img" src="{{ image.image.url }}" alt="Image Description">
                 </div>
               </div>
               <!-- End Slide -->
-
-              <!-- Slide -->
-              <div class="swiper-slide">
-                <div class="card card-bordered shadow-none">
-                  <img
-                    class="card-img"
-                    src="{{object.image.url}}"
-                    alt="Image Description"
-                  />
-                </div>
-              </div>
-              <!-- End Slide -->
-
-              <!-- Slide -->
-              <div class="swiper-slide">
-                <div class="card card-bordered shadow-none">
-                  <img
-                    class="card-img"
-                    src="{{object.image.url}}"
-                    alt="Image Description"
-                  />
-                </div>
-              </div>
-              <!-- End Slide -->
+              {% endfor %}
             </div>
 
             <!-- Arrows -->
-            <div
-              class="js-swiper-shop-product-button-next swiper-button-next"
-            ></div>
-            <div
-              class="js-swiper-shop-product-button-prev swiper-button-prev"
-            ></div>
+            <div class="js-swiper-shop-product-button-next swiper-button-next"></div>
+            <div class="js-swiper-shop-product-button-prev swiper-button-prev"></div>
           </div>
           <!-- End Swiper Main Slider -->
 
           <!-- Swiper Thumb Slider -->
           <div class="position-absolute bottom-0 end-0 start-0 zi-1 p-4">
-            <div
-              class="js-swiper-shop-product-thumb swiper"
-              style="max-width: 15rem"
-            >
+            <div class="js-swiper-shop-product-thumb swiper" style="max-width: 15rem;">
               <div class="swiper-wrapper">
+                {% for image in object.product_image_related.all %}
                 <!-- Slide -->
                 <div class="swiper-slide">
                   <a class="avatar avatar-circle" href="javascript:;">
-                    <img
-                      class="avatar-img"
-                      src="{{object.image.url}}"
-                      alt="Image Description"
-                    />
+                    <img class="avatar-img" src="{{ image.image.url }}" alt="Image Description">
                   </a>
                 </div>
                 <!-- End Slide -->
-
-                <!-- Slide -->
-                <div class="swiper-slide">
-                  <a class="avatar avatar-circle" href="javascript:;">
-                    <img
-                      class="avatar-img"
-                      src="{{object.image.url}}"
-                      alt="Image Description"
-                    />
-                  </a>
-                </div>
-                <!-- End Slide -->
-
-                <!-- Slide -->
-                <div class="swiper-slide">
-                  <a class="avatar avatar-circle" href="javascript:;">
-                    <img
-                      class="avatar-img"
-                      src="{{object.image.url}}"
-                      alt="Image Description"
-                    />
-                  </a>
-                </div>
-                <!-- End Slide -->
+                 {% endfor %}
               </div>
             </div>
           </div>
@@ -822,28 +756,6 @@
 
 {% endblock content %} {% block extera-js %}
 <script>
-  function getValue() {
-    return document.querySelector(".js-result").value;
-  }
-
-  function addProd(product_id, quantity) {
-    $.ajax({
-      type: "POST",
-      url: "{% url 'shop:add-prod-detail' %}",
-      data: {
-        product_id: product_id,
-        quantity: quantity,
-        csrfmiddlewaretoken: "{{ csrf_token }}",
-      },
-      success: function (response) {
-        $("#cart-item-count").html(response.total_quantity);
-        console.log(response);
-      },
-      error: function (jqXHR, textStatus, errorThrown) {
-        console.log(response);
-      },
-    });
-  }
 
   document.addEventListener("DOMContentLoaded", function () {
     var savedValue = localStorage.getItem("inputValue");

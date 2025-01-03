@@ -171,7 +171,7 @@
               <div class="row">
                 <div class="col-sm-4">
                   <div class="card-pinned">
-                    <img class="card-img-top" src="{{object.image.url}}" alt="Image Description">
+                    <img class="card-img-top" src="{{ object.product_image_related.all.first.image.url }}" alt="Image Description">
                     {% if object.stock == 0 %}
                     <div class="card-pinned-top-start">
                       <span class="badge bg-danger rounded-pill">اتمام موجودی</span>

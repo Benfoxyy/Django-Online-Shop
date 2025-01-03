@@ -65,7 +65,7 @@
                 <tbody>
                     {% for object in object_list %}
                   <tr>
-                    <th scope="row">{{object.id}}</th>
+                    <th scope="row">{{forloop.counter}}</th>
                     <td>{{object.title}}</td>
                     <td>{% for cat in object.category.all %}{{cat.title}}{% if not forloop.last %},{% endif %}{% endfor %}</td>
                     <td>{{object.price|intcomma}}</td>

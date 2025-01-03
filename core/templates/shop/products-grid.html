@@ -173,7 +173,7 @@
               <!-- Card -->
               <div class="card card-bordered shadow-none text-center h-100">
                 <div class="card-pinned">
-                  <img class="card-img-top" src="{{object.image.url}}" alt="Image Description">
+                  <img class="card-img-top" src="{{ object.product_image_related.all.first.image.url }}" alt="Image Description">
                   {% if not object.stock %}
                   <div class="card-pinned-top-start">
                     <span class="badge bg-danger rounded-pill">اتمام موجودی</span>
@@ -189,7 +189,6 @@
                   </div>
                   {% endif %}
                 </div>
-
                 <div class="card-body">
                   <div class="mb-2">
                     {% for cat in object.category.all %}

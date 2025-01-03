@@ -62,7 +62,7 @@
                     <div class="row gx-2">
                       {% for order_item in order.order_items.all %}
                       <div class="col">
-                        <img style="width: 130px;" class="img-fluid" src="{{ order_item.product.image.url }}" alt="Image Description">
+                        <img style="width: 130px;" class="img-fluid" src="{{ order_item.product.product_image_related.all.first.image.url }}" alt="Image Description">
                       </div>
                       {% endfor %}
                     </div>

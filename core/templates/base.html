@@ -520,6 +520,29 @@
     }
   });
   }
+
+
+      // INITIALIZATION OF SWIPER
+      // =======================================================
+      var swiper = new Swiper('.js-swiper-shop-product',{
+        effect: 'fade',
+        autoplay: true,
+        loop: true,
+        navigation: {
+          nextEl: '.js-swiper-shop-product-button-next',
+          prevEl: '.js-swiper-shop-product-button-prev',
+        },
+        thumbs: {
+          swiper: sliderThumbs
+        }
+      });
+
+      var sliderThumbs = new Swiper('.js-swiper-shop-product-thumb', {
+        slidesPerView: 3,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+        history: false,
+      });
   </script>
   {% block extera-js %} {% endblock extera-js %}
 

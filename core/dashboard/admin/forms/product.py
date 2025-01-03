@@ -13,7 +13,6 @@ class AdminEditProductForm(forms.ModelForm):
             'stock',
             'status',
             'description',
-            'image',
         ]
 
     def __init__(self, *args, **kwargs):
@@ -23,10 +22,18 @@ class AdminEditProductForm(forms.ModelForm):
         self.fields['slug'].widget.attrs['class'] = 'form-control'
         self.fields['slug'].widget.attrs['id'] = 'slugInput'
         self.fields['category'].widget.attrs['id'] = 'cat-id'
-        self.fields['image'].widget.attrs['class'] = 'form-control'
         self.fields['description'].widget.attrs['id'] = 'ckeditor'
         self.fields['stock'].widget.attrs['class'] = 'form-control'
         self.fields['stock'].widget.attrs['type'] = 'number'
         self.fields['status'].widget.attrs['class'] = 'form-select'
         self.fields['price'].widget.attrs['class'] = 'form-control'
         self.fields['discount_percent'].widget.attrs['class'] = 'form-control'
+
+
+class ProductImageForm(forms.Form):
+    images = forms.ImageField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['images'].widget.attrs['class'] = 'form-control'
+        self.fields['images'].widget.attrs['multiple'] = True

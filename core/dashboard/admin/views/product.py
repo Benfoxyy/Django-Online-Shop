@@ -1,16 +1,17 @@
 from django.views.generic import UpdateView,ListView,DeleteView,CreateView
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import FieldError
 from ...permissions import AdminPermissions
-from shop.models import ProductModel,CategoryModel
+from shop.models import ProductModel,CategoryModel,ProductImageModel
 from ..forms import *
 
 
 class AdminShowProducts(LoginRequiredMixin,AdminPermissions,ListView):
     template_name = 'dashboard/admin/products/show-products.html'
-    paginate_by = 2
+    paginate_by = 10
     
     def get_paginate_by(self, queryset):
         return self.request.GET.get('page_size', self.paginate_by)
@@ -56,8 +57,23 @@ class AdminCreateProducts(LoginRequiredMixin,AdminPermissions,CreateView,Success
     queryset = ProductModel.objects.all()
     template_name = 'dashboard/admin/products/create-product.html'
     form_class = AdminEditProductForm
-    success_url = reverse_lazy("dashboard:admin:show-prod")
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.POST:
+            context['image_form'] = ProductImageForm(self.request.POST, self.request.FILES)
+        else:
+            context['image_form'] = ProductImageForm()
+        return context
+
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        image_form = ProductImageForm(self.request.POST, self.request.FILES)
+        if image_form.is_valid():
+            product = form.save()
+            images = self.request.FILES.getlist('images')
+            for image in images:
+                ProductImageModel.objects.create(product=product, image=image)
+            return redirect(reverse_lazy("dashboard:admin:show-prod"))
+        else:
+            return self.form_invalid(form)

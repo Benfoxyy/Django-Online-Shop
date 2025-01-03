@@ -31,7 +31,7 @@
               {% for order in orders %}
               <tr>
                 <th scope="row">{{ forloop.counter }}</th>
-                <td><a href="{% url 'dashboard:admin:order-single' pk=order.id %}">#{{order.id}}</a></td>
+                <td><a href="{% url 'dashboard:admin:order-single' pk=order.id %}">#{{forloop.counter}}</a></td>
                 <td>{{order.user.user_profile.get_fullname}}</td>
                 <td>{{order.final_price|intcomma}}</td>
                 <td>{{order.created_date|date:'Y-m-d'}}</td>

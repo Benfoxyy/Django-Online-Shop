@@ -22,7 +22,7 @@
               <div class="flex-shrink-0">
                 <img
                 class="avatar avatar-xl avatar-4x3"
-                src="{{prod.prod_obj.image.url}}"
+                src="{{ prod.prod_obj.product_image_related.all.first.image.url }}"
                 alt="Image Description"
                 />
               </div>
@@ -30,7 +30,7 @@
                 <div class="row">
                   <div class="col-sm-7 mb-3 mb-sm-0">
                     <h5>
-                      <a class="text-dark" href="#">{{prod.prod_obj.title}}</a>
+                      <a class="text-dark" href="{% url 'shop:detail' slug=prod.prod_obj.slug %}">{{prod.prod_obj.title}}</a>
                     </h5>                      
                       <div class="d-grid gap-1">
                         <div class="text-body">

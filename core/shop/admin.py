@@ -9,7 +9,7 @@ class ProductAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title')
 
-@admin.register(ProductImage)
+@admin.register(ProductImageModel)
 class ImageAdmin(admin.ModelAdmin):
     list_display = ('id', 'product')
     

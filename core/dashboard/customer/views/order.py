@@ -31,7 +31,7 @@ class OrderDetailView(LoginRequiredMixin,CustomerPermissions,DetailView):
     context_object_name = 'order'
 
     
-class OrderInvoiceView(LoginRequiredMixin,CustomerPermissions,DetailView):
+class OrderInvoiceView(LoginRequiredMixin,DetailView):
     model = OrderModel
     template_name = 'dashboard/customer/orders/order-invoice.html'
     context_object_name = 'order'

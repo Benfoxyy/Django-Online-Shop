@@ -37,7 +37,7 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>
                   <span class="avatar ">
-                    <img class="avatar-img" src="{{product.product.image.url}}" alt="Image Description">
+                    <img class="avatar-img" src="{{ product.product.product_image_related.all.first.image.url }}" alt="Image Description">
                   </span>
                 </td>
                 <td>{{product.product.id}}</td>
