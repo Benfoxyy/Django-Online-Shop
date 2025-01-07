@@ -5,7 +5,6 @@ from django.contrib.messages.views import SuccessMessageMixin
 from accounts.models import Profile
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
-from django.contrib import messages
 
 class DashboardCheckView(LoginRequiredMixin,View):
     def dispatch(self, request, *args, **kwargs):

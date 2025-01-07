@@ -37,20 +37,21 @@ class CouponModel(models.Model):
         
 
 class OrderModel(models.Model):
-    user = models.ForeignKey('accounts.User',on_delete=models.PROTECT)
-    address = models.ForeignKey(AddressModel,on_delete=models.PROTECT)
-    coupon = models.OneToOneField(CouponModel,on_delete=models.PROTECT,blank=True,null=True)
-    status = models.IntegerField(choices=OrderStatusModel.choices,default=OrderStatusModel.pending.value)
-    final_price = models.DecimalField(default=0,max_digits=10,decimal_places=0)
+    user = models.ForeignKey('accounts.User', on_delete=models.PROTECT)
+    address = models.ForeignKey(AddressModel, on_delete=models.PROTECT)
+    coupon = models.ForeignKey(CouponModel, on_delete=models.PROTECT, blank=True, null=True)  # Changed to ForeignKey
+    status = models.IntegerField(choices=OrderStatusModel.choices, default=OrderStatusModel.pending.value)
+    final_price = models.DecimalField(default=0, max_digits=10, decimal_places=0)
 
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.user
+        return str(self.user)
 
     class Meta:
         ordering = ('-created_date',)
+
 
     def get_fulladdress(self):
         return f'({self.address.state} - {self.address.city}) {self.address.address}'

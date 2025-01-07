@@ -489,7 +489,13 @@
     },
     success: function(response){
       $('#cart-item-count').html(response.total_quantity)
-      console.log(response)
+      Toastify({
+            text: response.message,
+            className: "success",
+            style: {
+              background: "#4CAF50",
+            }
+        }).showToast();
     },
     error: function(jqXHR,textStatus,errorThrown) {
       console.log(response)

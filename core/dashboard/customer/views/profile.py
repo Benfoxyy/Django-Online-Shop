@@ -3,11 +3,19 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
 from django.urls import reverse_lazy
+from accounts.models import User
 from ...permissions import CustomerPermissions
 from ..forms import *
 
 class CustomerDashboard(LoginRequiredMixin,CustomerPermissions,TemplateView):
     template_name = 'dashboard/customer/home.html'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["user_info"] = User.objects.get(pk = self.request.user.id)
+        return context
+    
+    
 
 class ChangePassView(LoginRequiredMixin,CustomerPermissions,SuccessMessageMixin,PasswordChangeView):
     template_name = 'dashboard/customer/profile/change-pass.html'

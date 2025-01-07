@@ -151,9 +151,9 @@
     success: function(response){
       Toastify({
                 text:response.message,
-                className: `info`,
+                className: `{{ message.tags }}`,
                 style: {
-                  background: "light-blue",
+                  background: "#4CAF50",
                 }
               }).showToast();
       discountPrice(response.discounted_price)

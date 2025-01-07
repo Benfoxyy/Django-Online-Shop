@@ -38,6 +38,7 @@ class CheckOutView(SuccessMessageMixin,FormView):
         return redirect(self.payment_method_url(order))
     
     def create_order(self,user,address,coupon,final_price):
+        print(coupon)
         if coupon:
             self.update_coupon(user,coupon)
             discounted_price = final_price/100 * coupon.discount_percent
@@ -104,10 +105,10 @@ class CheckView(View):
             else:
                 cart = CartModel.objects.get(user=self.request.user)
                 
-                total_price = cart.calculate_total_price()
+                total_price = cart.calculate_total_price() + (cart.calculate_total_price()/100 * 9)
                 
                 discounted_price = total_price/100 * coupon.discount_percent
-
+                print(discounted_price)
 
         return JsonResponse({'discounted_price':discounted_price,'message':message})   
 

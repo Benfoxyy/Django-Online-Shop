@@ -9,7 +9,7 @@ class AddProdView(View):
             cart.add_prod(product_id)
         if request.user.is_authenticated:
             cart.cart_merge(request.user)
-        return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity()})
+        return JsonResponse({'cart':cart.get_cart(),'total_quantity':cart.get_cart_quantity(),'message':'محصول به سبد خرید اضافه شد'})
 
 class DelProdView(View):
     def post(self, request, *args, **kwargs):

@@ -1,16 +1,42 @@
 {% if messages %}
     {% for message in messages %}
-      <script>
-        Toastify({
-            text: `{{ message|safe }}`,
-            className: `{{ message.tags }}`,
-            style: {
-              background: "#4CAF50",
-            }
-        }).showToast();
-      </script>
+      {% if message.tags == 'success' %}
+        <script>
+          Toastify({
+              text: `{{ message }}`,
+              className: `{{ message.tags }}`,
+              style: {
+                background: "#4CAF50",
+              }
+          }).showToast();
+        </script>
+      {% endif %}
+      {% if message.tags == 'warning' %}
+        <script>
+          Toastify({
+              text: `{{ message }}`,
+              className: `{{ message.tags }}`,
+              style: {
+                background: "#FF9800",
+              }
+          }).showToast();
+        </script>
+      {% endif %}
+      {% if message.tags == 'error' %}
+        <script>
+          Toastify({
+              text: `{{ message }}`,
+              className: `{{ message.tags }}`,
+              style: {
+                background: "#F44336",
+              }
+          }).showToast();
+        </script>
+      {% endif %}
     {% endfor %}
 {% endif %}
+
+
 
 {% if form.errors %}
     <div class="alert alert-error">
@@ -21,7 +47,7 @@
               <script>
                 Toastify({
                     text: `{{ error|escape }}`,
-                    className: `error`,
+                    className: `{{ message.tags }}`,
                     style: {
                       background: "#FF9800",
                     }
@@ -35,7 +61,7 @@
         <script>
             Toastify({
                 text: `{{ form.non_field_errors.as_text }}`,
-                className: `error`,
+                className: `{{ message.tags }}`,
                 style: {
                   background: "#F44336",
                 }

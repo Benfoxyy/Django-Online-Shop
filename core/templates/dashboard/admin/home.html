@@ -17,19 +17,47 @@
 <div class="card">
     <!-- Header -->
     <div class="card-header border-bottom">
-        <h5 class="card-header-title">خلاصه داشبورد</h5>
+        <h5 class="card-header-title">اطلاعات من</h5>
     </div>
     <!-- End Header -->
 
-    <!-- Body -->
-    <div class="card-body">
+    <div class="container mt-5">
+        <!-- <h1 class="mb-4 text-center">اطلاعات من</h1> -->
         <div class="row">
-
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">ایمیل</h5>
+                        <p class="card-text">{{user_info.email}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">نام و نام خانوادگی</h5>
+                        <p class="card-text">{{user_info.user_profile.get_fullname}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">شماره تلفن</h5>
+                        <p class="card-text">{{user_info.user_profile.phone_number}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">نوع کاربر</h5>
+                        <p class="card-text">ادمین</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- End Row -->
-
     </div>
-    <!-- End Body -->
 </div>
 <!-- End Card -->
 {% endblock %}

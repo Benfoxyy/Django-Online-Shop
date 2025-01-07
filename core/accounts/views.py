@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.contrib.auth import login
 from django.views.generic import CreateView
-from .forms import AuthenticationForm,RegistrationForm
+from .forms import CustomAuthenticationForm,RegistrationForm
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -22,7 +22,7 @@ class SignUpView(SuccessMessageMixin,CreateView):
 
 class LoginView(SuccessMessageMixin,auth_views.LoginView):
     template_name = "accounts/login.html"
-    form_class = AuthenticationForm
+    form_class = CustomAuthenticationForm
     redirect_authenticated_user = True
     success_message = 'کاربر با موفقیت وارد شد'
     

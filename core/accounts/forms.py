@@ -12,13 +12,18 @@ class RegistrationForm(UserCreationForm):
         model = User
         fields = ['email', 'password1', 'password2']
 
+class CustomAuthenticationForm(AuthenticationForm):
+    error_messages = {
+        'invalid_login': "ایمیل یا پسوورد اشتباه میباشد",
+        # 'inactive': "This account is inactive. Contact support for assistance.",
+    }
 
-class AuthenticationForm(AuthenticationForm):
-    def confirm_login_allowed(self, user):
-        super(AuthenticationForm,self).confirm_login_allowed(user)
+    def confirm_login_allowed(self,user):
+        if not user.is_verified:
+            raise forms.ValidationError(
+                "اکانت شما هنوز تایید نشده است"
+            )
 
-        # if not user.is_verified:
-        #     raise ValidationError("user is not verified")
 
 
 class SetPasswordForm(forms.Form):
@@ -31,13 +36,11 @@ class SetPasswordForm(forms.Form):
         "password_mismatch": _("The two password fields didn’t match."),
     }
     new_password1 = forms.CharField(
-        # label=_("New password"),
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password","class":"form-control"}),
         strip=False,
-        # help_text=password_validation.password_validators_help_text_html(),
+        help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
-        # label=_("New password confirmation"),
         strip=False,
         widget=forms.PasswordInput(attrs={"autocomplete": "new-password","class":"form-control"}),
     )
