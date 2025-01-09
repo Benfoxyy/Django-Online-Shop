@@ -3,5 +3,7 @@ psycopg==3.2.1
 psycopg-binary==3.2.1
 python-decouple==3.8
 Pillow==10.4.0
+django-debug-toolbar
+django-redis
 django-ckeditor
 requests

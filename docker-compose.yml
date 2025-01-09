@@ -31,3 +31,9 @@ services:
     restart: always
     depends_on:
       - db
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
