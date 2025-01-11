@@ -2,6 +2,7 @@ Django==4.2.14
 psycopg==3.2.1
 psycopg-binary==3.2.1
 python-decouple==3.8
+django-recaptcha
 Pillow==10.4.0
 django-debug-toolbar
 django-redis

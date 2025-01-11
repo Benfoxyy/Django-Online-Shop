@@ -27,8 +27,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
-    "debug_toolbar",
+    'debug_toolbar',
     'ckeditor',
+    'django_recaptcha',
     'website',
     'accounts',
     'shop',
@@ -170,3 +171,7 @@ CACHES = {
         'KEY_PREFIX': 'core'
     }
 }
+
+
+RECAPTCHA_PUBLIC_KEY = '6LcYyLMqAAAAABSQonaG3l7xeOuMowVNQ8jShdG9'
+RECAPTCHA_PRIVATE_KEY = '6LcYyLMqAAAAADNZwf4Z3rQZkA_EJ5hJO8Rvb402'
