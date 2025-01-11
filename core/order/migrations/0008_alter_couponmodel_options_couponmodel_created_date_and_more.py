@@ -7,23 +7,25 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('order', '0007_alter_couponmodel_discount_percent_and_more'),
+        ("order", "0007_alter_couponmodel_discount_percent_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='couponmodel',
-            options={'ordering': ('-created_date',)},
+            name="couponmodel",
+            options={"ordering": ("-created_date",)},
         ),
         migrations.AddField(
-            model_name='couponmodel',
-            name='created_date',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="couponmodel",
+            name="created_date",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='couponmodel',
-            name='updated_date',
+            model_name="couponmodel",
+            name="updated_date",
             field=models.DateTimeField(auto_now=True),
         ),
     ]

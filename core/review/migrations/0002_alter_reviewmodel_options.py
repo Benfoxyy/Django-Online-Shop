@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('review', '0001_initial'),
+        ("review", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='reviewmodel',
-            options={'ordering': ['-created_date']},
+            name="reviewmodel",
+            options={"ordering": ["-created_date"]},
         ),
     ]

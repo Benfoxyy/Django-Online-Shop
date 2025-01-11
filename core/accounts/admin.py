@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
     """
 
     model = User
-    list_display = ("id","email", "is_superuser", "is_active", "is_verified")
+    list_display = ("id", "email", "is_superuser", "is_active", "is_verified")
     list_filter = ("email", "is_superuser", "is_active", "is_verified")
     searching_fields = ("email",)
     ordering = ("email",)
@@ -38,7 +38,7 @@ class CustomUserAdmin(UserAdmin):
         (
             "group permissions",
             {
-                "fields": ("groups", "user_permissions","user_type"),
+                "fields": ("groups", "user_permissions", "user_type"),
             },
         ),
         (
@@ -67,12 +67,17 @@ class CustomUserAdmin(UserAdmin):
         ),
     )
 
+
 admin.site.register(Profile)
 admin.site.register(User, CustomUserAdmin)
+
 
 class SessionAdmin(admin.ModelAdmin):
     def _session_data(self, obj):
         return obj.get_decoded()
-    list_display = ['session_key', '_session_data', 'expire_date']
-    readonly_fields = ['_session_data']
+
+    list_display = ["session_key", "_session_data", "expire_date"]
+    readonly_fields = ["_session_data"]
+
+
 admin.site.register(Session, SessionAdmin)

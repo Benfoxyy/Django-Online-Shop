@@ -7,13 +7,16 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('order', '0003_ordermodel_final_price'),
+        ("order", "0003_ordermodel_final_price"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='ordermodel',
-            name='address',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='order.addressmodel'),
+            model_name="ordermodel",
+            name="address",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT,
+                to="order.addressmodel",
+            ),
         ),
     ]

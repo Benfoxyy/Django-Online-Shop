@@ -7,20 +7,40 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='PaymentModel',
+            name="PaymentModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('authority', models.CharField(max_length=40)),
-                ('amount', models.DecimalField(decimal_places=0, max_digits=10)),
-                ('status_code', models.IntegerField()),
-                ('status', models.IntegerField(choices=[(1, 'در حال انتظار'), (2, 'موفق'), (3, 'نا موفق')], default=1)),
-                ('created_date', models.DateTimeField(auto_now_add=True)),
-                ('updated_date', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("authority", models.CharField(max_length=40)),
+                (
+                    "amount",
+                    models.DecimalField(decimal_places=0, max_digits=10),
+                ),
+                ("status_code", models.IntegerField()),
+                (
+                    "status",
+                    models.IntegerField(
+                        choices=[
+                            (1, "در حال انتظار"),
+                            (2, "موفق"),
+                            (3, "نا موفق"),
+                        ],
+                        default=1,
+                    ),
+                ),
+                ("created_date", models.DateTimeField(auto_now_add=True)),
+                ("updated_date", models.DateTimeField(auto_now=True)),
             ],
         ),
     ]

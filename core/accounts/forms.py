@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm,AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
 from django_recaptcha.fields import ReCaptchaField
@@ -14,22 +14,20 @@ class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2']
+        fields = ["email", "password1", "password2"]
+
 
 class CustomAuthenticationForm(AuthenticationForm):
     captcha = ReCaptchaField(widget=ReCaptchaV3)
 
     error_messages = {
-        'invalid_login': "ایمیل یا پسوورد اشتباه میباشد",
+        "invalid_login": "ایمیل یا پسوورد اشتباه میباشد",
         # 'inactive': "This account is inactive. Contact support for assistance.",
     }
 
-    def confirm_login_allowed(self,user):
+    def confirm_login_allowed(self, user):
         if not user.is_verified:
-            raise forms.ValidationError(
-                "اکانت شما هنوز تایید نشده است"
-            )
-
+            raise forms.ValidationError("اکانت شما هنوز تایید نشده است")
 
 
 class SetPasswordForm(forms.Form):
@@ -42,13 +40,17 @@ class SetPasswordForm(forms.Form):
         "password_mismatch": _("The two password fields didn’t match."),
     }
     new_password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password","class":"form-control"}),
+        widget=forms.PasswordInput(
+            attrs={"autocomplete": "new-password", "class": "form-control"}
+        ),
         strip=False,
         help_text=password_validation.password_validators_help_text_html(),
     )
     new_password2 = forms.CharField(
         strip=False,
-        widget=forms.PasswordInput(attrs={"autocomplete": "new-password","class":"form-control"}),
+        widget=forms.PasswordInput(
+            attrs={"autocomplete": "new-password", "class": "form-control"}
+        ),
     )
 
     def __init__(self, user, *args, **kwargs):

@@ -5,20 +5,24 @@ from django.conf.urls.static import static
 import debug_toolbar
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('website.urls')),
-    path('accounts/', include('accounts.urls')),
-    path('shop/', include('shop.urls')),
-    path('cart/', include('cart.urls')),
-    path('dashboard/', include('dashboard.urls')),
-    path('order/', include('order.urls')),
-    path('payment/', include('payment.urls')),
-    path('review/', include('review.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
+    path("admin/", admin.site.urls),
+    path("", include("website.urls")),
+    path("accounts/", include("accounts.urls")),
+    path("shop/", include("shop.urls")),
+    path("cart/", include("cart.urls")),
+    path("dashboard/", include("dashboard.urls")),
+    path("order/", include("order.urls")),
+    path("payment/", include("payment.urls")),
+    path("review/", include("review.urls")),
+    path("__debug__/", include(debug_toolbar.urls)),
 ]
 
-handler404 = "core.error_views.error_404" 
+handler404 = "core.error_views.error_404"
 
 if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(
+        settings.STATIC_URL, document_root=settings.STATIC_ROOT
+    )
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+    )

@@ -8,3 +8,5 @@ django-debug-toolbar
 django-redis
 django-ckeditor
 requests
+flake8-django
+black

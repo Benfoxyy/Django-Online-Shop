@@ -15,44 +15,94 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='CategoryModel',
+            name="CategoryModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('slug', models.SlugField(allow_unicode=True, unique=True)),
-                ('created_date', models.DateTimeField(auto_now_add=True)),
-                ('updated_date', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("slug", models.SlugField(allow_unicode=True, unique=True)),
+                ("created_date", models.DateTimeField(auto_now_add=True)),
+                ("updated_date", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='ProductModel',
+            name="ProductModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=255)),
-                ('slug', models.SlugField(allow_unicode=True, unique=True)),
-                ('image', models.ImageField(default='/default/prod-img/prod-def.png', upload_to='products/img')),
-                ('description', models.TextField()),
-                ('stock', models.PositiveIntegerField(default=0)),
-                ('status', models.IntegerField(choices=[(1, 'فعال'), (2, 'غیرفعال')], default=1)),
-                ('price', models.DecimalField(decimal_places=0, max_digits=10)),
-                ('discount_percent', models.PositiveIntegerField(default=0)),
-                ('created_date', models.DateTimeField(auto_now_add=True)),
-                ('updated_date', models.DateTimeField(auto_now=True)),
-                ('category', models.ManyToManyField(to='shop.categorymodel')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("slug", models.SlugField(allow_unicode=True, unique=True)),
+                (
+                    "image",
+                    models.ImageField(
+                        default="/default/prod-img/prod-def.png",
+                        upload_to="products/img",
+                    ),
+                ),
+                ("description", models.TextField()),
+                ("stock", models.PositiveIntegerField(default=0)),
+                (
+                    "status",
+                    models.IntegerField(
+                        choices=[(1, "فعال"), (2, "غیرفعال")], default=1
+                    ),
+                ),
+                (
+                    "price",
+                    models.DecimalField(decimal_places=0, max_digits=10),
+                ),
+                ("discount_percent", models.PositiveIntegerField(default=0)),
+                ("created_date", models.DateTimeField(auto_now_add=True)),
+                ("updated_date", models.DateTimeField(auto_now=True)),
+                ("category", models.ManyToManyField(to="shop.categorymodel")),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.PROTECT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-created_date',),
+                "ordering": ("-created_date",),
             },
         ),
         migrations.CreateModel(
-            name='ProductImage',
+            name="ProductImage",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.ImageField(upload_to='products/img/extera')),
-                ('created_date', models.DateTimeField(auto_now_add=True)),
-                ('updated_date', models.DateTimeField(auto_now=True)),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='shop.productmodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("file", models.ImageField(upload_to="products/img/extera")),
+                ("created_date", models.DateTimeField(auto_now_add=True)),
+                ("updated_date", models.DateTimeField(auto_now=True)),
+                (
+                    "product",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="shop.productmodel",
+                    ),
+                ),
             ],
         ),
     ]

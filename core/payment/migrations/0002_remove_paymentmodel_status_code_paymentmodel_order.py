@@ -7,18 +7,23 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('order', '0004_alter_ordermodel_address'),
-        ('payment', '0001_initial'),
+        ("order", "0004_alter_ordermodel_address"),
+        ("payment", "0001_initial"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='paymentmodel',
-            name='status_code',
+            model_name="paymentmodel",
+            name="status_code",
         ),
         migrations.AddField(
-            model_name='paymentmodel',
-            name='order',
-            field=models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='order.ordermodel'),
+            model_name="paymentmodel",
+            name="order",
+            field=models.OneToOneField(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="order.ordermodel",
+            ),
         ),
     ]

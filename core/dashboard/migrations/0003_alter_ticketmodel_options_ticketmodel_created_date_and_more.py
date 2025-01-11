@@ -7,23 +7,25 @@ import django.utils.timezone
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('dashboard', '0002_alter_ticketmodel_phone_number'),
+        ("dashboard", "0002_alter_ticketmodel_phone_number"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='ticketmodel',
-            options={'ordering': ['-created_date']},
+            name="ticketmodel",
+            options={"ordering": ["-created_date"]},
         ),
         migrations.AddField(
-            model_name='ticketmodel',
-            name='created_date',
-            field=models.DateTimeField(auto_now_add=True, default=django.utils.timezone.now),
+            model_name="ticketmodel",
+            name="created_date",
+            field=models.DateTimeField(
+                auto_now_add=True, default=django.utils.timezone.now
+            ),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='ticketmodel',
-            name='updated_date',
+            model_name="ticketmodel",
+            name="updated_date",
             field=models.DateTimeField(auto_now=True),
         ),
     ]

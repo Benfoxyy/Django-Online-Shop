@@ -8,19 +8,34 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='TicketModel',
+            name="TicketModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('last_name', models.CharField(max_length=100)),
-                ('email', models.EmailField(max_length=254)),
-                ('phone_number', models.CharField(max_length=12, validators=[accounts.validators.validate_iranian_cellphone_number])),
-                ('description', models.TextField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("last_name", models.CharField(max_length=100)),
+                ("email", models.EmailField(max_length=254)),
+                (
+                    "phone_number",
+                    models.CharField(
+                        max_length=12,
+                        validators=[
+                            accounts.validators.validate_iranian_cellphone_number
+                        ],
+                    ),
+                ),
+                ("description", models.TextField()),
             ],
         ),
     ]
