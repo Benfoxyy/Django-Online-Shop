@@ -1,4 +1,5 @@
 Django==4.2.14
+gunicorn
 psycopg==3.2.1
 psycopg-binary==3.2.1
 python-decouple==3.8
