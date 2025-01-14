@@ -19,13 +19,15 @@ services:
   backend:
     build:
       context: .
-      dockerfile: dockerfiles/dev/django/Dockerfile
+      dockerfile: dockerfiles/deployment/django/Dockerfile
     container_name: backend
     command: gunicorn core.wsgi --bind 0.0.0.0:8000 --workers 3
     volumes:
       - ./core:/app
-      - static_volume:/app/static
+      - static_volume:/app/statics
       - media_volume:/app/media
+    env_file:
+      - .env/.env.deployment
     expose:
       - '8000'
     restart: always
@@ -45,7 +47,7 @@ services:
     container_name: nginx
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
-      - static_volume:/home/app/static
+      - static_volume:/home/app/statics
       - media_volume:/home/app/media
     ports:
       - "80:80"

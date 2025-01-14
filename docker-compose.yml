@@ -19,11 +19,13 @@ services:
   backend:
     build:
       context: .
-      dockerfile: dockerfiles/dev/django/Dockerfile
+      dockerfile: dockerfiles/development/django/Dockerfile
     container_name: backend
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./core:/app
+    env_file:
+      - .env/.env.development
     ports:
       - '8000:8000'
     restart: always
@@ -37,16 +39,3 @@ services:
     ports:
       - "6379:6379"
     restart: always
-
-  # nginx:
-  #   image: nginx:latest
-  #   container_name: nginx
-  #   volumes:
-  #     - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-  #     - static_volume:/app/staticfiles
-  #     - media_volume:/app/media
-  #   ports:
-  #     - "80:80"
-  #   depends_on:
-  #     - backend
-  #   restart: always
