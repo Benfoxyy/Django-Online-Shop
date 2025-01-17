@@ -46,7 +46,7 @@ class OrderModel(models.Model):
     address = models.ForeignKey(AddressModel, on_delete=models.PROTECT)
     coupon = models.ForeignKey(
         CouponModel, on_delete=models.PROTECT, blank=True, null=True
-    )  # Changed to ForeignKey
+    )
     status = models.IntegerField(
         choices=OrderStatusModel.choices,
         default=OrderStatusModel.pending.value,

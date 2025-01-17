@@ -1,7 +1,6 @@
 {
-    "python.analysis.autoImportCompletions": true,
     "python.testing.pytestArgs": [
-        "core"
+        "shop"
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true

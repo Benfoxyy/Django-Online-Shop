@@ -1,4 +1,3 @@
-from django import conf
 import requests
 import json
 from django.conf import settings

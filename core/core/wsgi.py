@@ -12,6 +12,9 @@ from decouple import config
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", config("SETTING_PATH", default="core.setting.deployment"))
+os.environ.setdefault(
+    "DJANGO_SETTINGS_MODULE",
+    config("SETTING_PATH", default="core.setting.deployment"),
+)
 
 application = get_wsgi_application()

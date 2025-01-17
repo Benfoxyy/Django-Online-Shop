@@ -10,3 +10,5 @@ django-ckeditor
 requests
 flake8-django
 black
+pytest
+pytest-django
