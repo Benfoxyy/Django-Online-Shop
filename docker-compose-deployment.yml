@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
   db:
@@ -21,7 +21,12 @@ services:
       context: .
       dockerfile: dockerfiles/deployment/django/Dockerfile
     container_name: backend
-    command: gunicorn core.wsgi --bind 0.0.0.0:8000 --workers 3
+    command: >
+      sh -c "
+        python manage.py makemigrations &&
+        python manage.py migrate &&
+        gunicorn core.wsgi --bind 0.0.0.0:8000
+      "
     volumes:
       - ./core:/app
       - static_volume:/app/statics

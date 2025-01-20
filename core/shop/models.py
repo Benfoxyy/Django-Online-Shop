@@ -33,6 +33,8 @@ class ProductModel(models.Model):
         default=0, validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
 
+    sells = models.PositiveIntegerField(default=0)
+
     avg_rate = models.FloatField(default=0.0)
 
     created_date = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,42 @@
+{% load static %}
+{% load humanize %}
+
+<div class="col-sm-6 col-md-4 mb-4">
+    <!-- Card -->
+    <div class="card card-bordered shadow-none overflow-hidden">
+      <div class="card-body d-flex align-items-center border-bottom p-0">
+        <div class="w-65 border-end">
+          <img
+            class="img-fluid"
+            src="{{products.0.product_image_related.all.0.image.url}}"
+            alt="Image Description"
+          />
+        </div>
+        <div class="w-35">
+          <div class="border-bottom">
+            <img
+              class="img-fluid"
+              src="{{products.1.product_image_related.all.0.image.url}}"
+              alt="Image Description"
+            />
+          </div>
+          <img
+            class="img-fluid"
+            src="{{products.2.product_image_related.all.0.image.url}}"
+            alt="Image Description"
+          />
+        </div>
+      </div>
+
+      <div class="card-footer text-center">
+        <h3 class="card-title">{{category}}</h3>
+        <p class="card-text text-muted small">شروع از {{min_price|intcomma}} تومان</p>
+        <a
+          class="btn btn-outline-primary btn-sm btn-transition rounded-pill px-6"
+          href="/shop/product/list/grid/?q=&category_id={{products.0.category.first.id}}"
+          >مشاهده همه</a
+        >
+      </div>
+    </div>
+    <!-- End Card -->
+  </div>

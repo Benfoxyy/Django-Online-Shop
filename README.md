@@ -55,6 +55,14 @@ I used [Pytest](#pytest) for testing system and test various parts of site
 ### Documents
 I leave a full documention about how the website works in <a href='https://github.com/Benfoxyy/Django-Online-Shop/blob/main/Documents/'>Documents</a> folder
 
+### Various User
+This shop has 3 types of user :
+- customer
+- admin
+- superuser
+
+Each of them has a specific profile that has own properties
+
 # Setup
 
 ## First step
@@ -73,7 +81,7 @@ As i said i separet my site, so for run it on development or deployment mode, yo
 
 ## Development
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 By running this command everything creat and run automaticlly, after everything is over you can oppen <a href='127.0.0.1:8000'>127.0.0.1:8000</a> on your browser to see the resault
 
@@ -98,7 +106,7 @@ docker-comopose exec backend sh -c "black . -l 78 && flake8"
 
 ## Deployment
 ```bash
-docker-compose -f docker-compose-deployment.yml up --build
+docker-compose -f docker-compose-deployment.yml up --build -d
 ```
 By running this command everything creat and run automaticlly, after everything is over you can oppen <a href='127.0.0.1'>127.0.0.1</a> on your browser to see the resault
 

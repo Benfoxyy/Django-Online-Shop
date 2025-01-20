@@ -26,6 +26,12 @@ class VerificationView(View):
                 order.status = OrderStatusModel.success.value
                 payment_obj.save()
                 order.save()
+
+                for prod in order.order_items.all():
+                    prod.product.stock -= prod.quantity
+                    prod.product.sells += prod.quantity
+                    prod.product.save()
+
                 return redirect(reverse_lazy("order:complete"))
         except KeyError:
             payment_obj.status = PaymentStatus.faild.value
