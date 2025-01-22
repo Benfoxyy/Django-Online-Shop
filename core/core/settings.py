@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.humanize",
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     "ckeditor",
     "django_recaptcha",
     "website",
@@ -150,7 +152,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "benxfoxy@gmail.com"
 EMAIL_HOST_PASSWORD = "htgk tzdv dsqq mbna"
-
 
 CACHES = {
     "default": {

@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from ckeditor.fields import RichTextField
+from django.urls import reverse
 
 
 class ProductStatus(models.IntegerChoices):
@@ -53,6 +54,10 @@ class ProductModel(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("shop:detail", kwargs={"slug": self.slug})
+    
 
 
 class ProductImageModel(models.Model):
