@@ -1,5 +1,5 @@
 from django.contrib.sitemaps import Sitemap
-from .models import ProductModel,ProductStatus
+from .models import ProductModel, ProductStatus
 
 
 class ProductSitemap(Sitemap):

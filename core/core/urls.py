@@ -7,10 +7,7 @@ from django.contrib.sitemaps.views import sitemap
 from website.sitemaps import StaticViewSitemap
 from shop.sitemaps import ProductSitemap
 
-sitemaps = {
-    'static' : StaticViewSitemap,
-    'products' : ProductSitemap
-}
+sitemaps = {"static": StaticViewSitemap, "products": ProductSitemap}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -27,7 +24,7 @@ urlpatterns = [
         sitemap,
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",
-    )
+    ),
 ]
 
 handler404 = "core.error_views.error_404"

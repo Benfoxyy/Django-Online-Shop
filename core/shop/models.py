@@ -54,10 +54,9 @@ class ProductModel(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def get_absolute_url(self):
         return reverse("shop:detail", kwargs={"slug": self.slug})
-    
 
 
 class ProductImageModel(models.Model):

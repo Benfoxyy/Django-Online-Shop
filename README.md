@@ -17,6 +17,17 @@
 <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Pytest_logo.svg" alt="nginx" width="40" height="40"/> </a>
 </p>
 
+
+<hr>
+<img src='./Documents/categories.png'>
+<hr>
+<img src='./Documents/product-list-grid.png'>
+<hr>
+<img src='./Documents/product-list.png'>
+<hr>
+<img src='./Documents/cart.png'>
+<hr>
+
 # Guideline
 - [Goal](#goal)
 - [Extera features](#extera-features)
@@ -34,8 +45,10 @@
             
 
 
-# Goal
+## Goal
 I create this website for testing all skills that i've learned
+
+<hr>
 
 # Extera features
 I added a lot of useful tools to make this site better, These features include :
@@ -43,25 +56,59 @@ I added a lot of useful tools to make this site better, These features include :
 ### Development & Deployment
 I separate all codes and files for use it on [Development](#development) or [Deployment](#deployment)
 
+<hr>
+
 ### Caching system
 I used redis for caching system in my project
+
+<hr>
 
 ### Reformatted code
 I reformat all codes depends on PEP8 rule with [Flake8 and Black](#flake8-and-black)
 
+<hr>
+
 ### Testing system
 I used [Pytest](#pytest) for testing system and test various parts of site
+
+<hr>
 
 ### Documents
 I leave a full documention about how the website works in <a href='https://github.com/Benfoxyy/Django-Online-Shop/blob/main/Documents/'>Documents</a> folder
 
+<hr>
+
 ### Various User
 This shop has 3 types of user :
 - customer
+
+<img src='./Documents/customer-profile.png'>
+
+<hr>
+
 - admin
+
+<img src='./Documents/admin-profile.png'>
+
+<hr>
+
 - superuser
 
+Superuser can remove or add some stuff that admin couldn't
+
 Each of them has a specific profile that has own properties
+
+<hr>
+
+### Sitemap
+A sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them
+
+### Payment Method
+I used <a href='https://www.zarinpal.com/'>ZarinPal</a> for my Payment Method
+
+<img src='./Documents/payment-method.png'>
+
+<hr>
 
 # Setup
 
@@ -77,7 +124,7 @@ git clone https://github.com/Benfoxyy/Django-Online-Shop.git
 ## Docker
 Docker is a powerful tool for run, deploying and transferring project, so i decided to use it .
 
-As i said i separet my site, so for run it on development or deployment mode, you should follow one of these section :
+As i said i separet my site, so for running it on development or deployment mode, you should follow one of these section :
 
 ## Development
 ```bash
@@ -92,17 +139,23 @@ This version has some tools that it is not exist in [Deployment](#deployment) li
 ### Django Debug Toolbar
 <a href='https://pypi.org/project/django-debug-toolbar/'>django_debug_toolbar</a> is an useful library for django to get reports of every single page and manage it better
 
+<hr>
+
 ### Pytest
 <a href='https://docs.pytest.org/en/stable/'>pytest</a> is the most powerful testing system for python, for using it enter this command :
 ```bash
 docker-compose exec backend sh -c "pytest"
 ```
 
+<hr>
+
 ### Flake8 and Black
 As i said <a href='https://pypi.org/project/flake8-django/'>Flake8</a> and <a href='https://pypi.org/project/black/'>Black</a> are helping for reformat all codes by <a href='https://peps.python.org/pep-0008/'>PEP8</a> rule, for using enter this command :
 ```bash
 docker-comopose exec backend sh -c "black . -l 78 && flake8"
 ```
+
+<hr>
 
 ## Deployment
 ```bash

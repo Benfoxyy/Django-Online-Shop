@@ -53,17 +53,18 @@ def show_similar_products(context, product):
     )
     return context
 
-@register.inclusion_tag('includes/popular_product.html', takes_context=True)
+
+@register.inclusion_tag("includes/popular_product.html", takes_context=True)
 def popular_product(context, category):
-    request = context['request']
+    request = context["request"]
     products = ProductModel.objects.filter(
         status=ProductStatus.active.value,
         category__title=category,
-    ).order_by('-sells')[:3]
-    min_price = products.aggregate(Min('price'))['price__min']
+    ).order_by("-sells")[:3]
+    min_price = products.aggregate(Min("price"))["price__min"]
     return {
-        'products': products,
-        'min_price': min_price,
-        'category': category,
-        'request': request
+        "products": products,
+        "min_price": min_price,
+        "category": category,
+        "request": request,
     }
