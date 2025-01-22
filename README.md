@@ -103,6 +103,8 @@ Each of them has a specific profile that has own properties
 ### Sitemap
 A sitemap is a file where you provide information about the pages, videos, and other files on your site, and the relationships between them
 
+<hr>
+
 ### Payment Method
 I used <a href='https://www.zarinpal.com/'>ZarinPal</a> for my Payment Method
 
