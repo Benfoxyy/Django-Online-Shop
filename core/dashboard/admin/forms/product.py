@@ -1,5 +1,6 @@
 from django import forms
 from shop.models import ProductModel
+from django_ckeditor_5.widgets import CKEditor5Widget
 
 
 class AdminEditProductForm(forms.ModelForm):
@@ -15,6 +16,11 @@ class AdminEditProductForm(forms.ModelForm):
             "status",
             "description",
         ]
+        widgets = {
+              "description": CKEditor5Widget(
+                  attrs={"class": "django_ckeditor_5"}
+              )
+          }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -23,7 +29,6 @@ class AdminEditProductForm(forms.ModelForm):
         self.fields["slug"].widget.attrs["class"] = "form-control"
         self.fields["slug"].widget.attrs["id"] = "slugInput"
         self.fields["category"].widget.attrs["id"] = "cat-id"
-        self.fields["description"].widget.attrs["id"] = "ckeditor"
         self.fields["stock"].widget.attrs["class"] = "form-control"
         self.fields["stock"].widget.attrs["type"] = "number"
         self.fields["status"].widget.attrs["class"] = "form-select"

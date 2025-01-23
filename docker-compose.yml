@@ -21,7 +21,13 @@ services:
       context: .
       dockerfile: dockerfiles/development/django/Dockerfile
     container_name: backend
-    command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "
+        python manage.py makemigrations &&
+        python manage.py migrate &&
+        python manage.py collectstatic --noinput &&
+        python manage.py runserver 0.0.0.0:8000
+      "
     volumes:
       - ./core:/app
     env_file:

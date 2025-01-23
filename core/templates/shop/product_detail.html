@@ -65,8 +65,7 @@
       <div class="mb-5">
         <h1 class="h2">{{object.title}}</h1>
         <p>
-          برچسب آمریکایی New Era از دهه 1930 کلاه بیسبال را برای تیم ها تولید می
-          کند.
+          {{object.description}}
         </p>
       </div>
       <!-- End Heading -->
@@ -85,62 +84,7 @@
       </div>
       <!-- End Price -->
 
-      {% if object.stock %}
-      <!-- Quantity -->
-      <div class="quantity-counter mb-3">
-        <div class="js-quantity-counter row align-items-center">
-          <div class="col">
-            <span class="d-block small">تعداد را انتخاب کنید</span>
-            <input
-              class="js-result form-control form-control-quantity-counter"
-              type="text"
-              value="0"
-            />
-          </div>
-          <!-- End Col -->
 
-          <div class="col-auto">
-            <button
-              class="js-minus btn btn-outline-secondary btn-xs btn-icon rounded-circle"
-              onclick="minus()"
-            >
-              <svg
-                width="8"
-                height="2"
-                viewBox="0 0 8 2"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0 1C0 0.723858 0.223858 0.5 0.5 0.5H7.5C7.77614 0.5 8 0.723858 8 1C8 1.27614 7.77614 1.5 7.5 1.5H0.5C0.223858 1.5 0 1.27614 0 1Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-            <button
-              class="js-plus btn btn-outline-secondary btn-xs btn-icon rounded-circle"
-              onclick="plus()"
-            >
-              <svg
-                width="8"
-                height="8"
-                viewBox="0 0 8 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4 0C4.27614 0 4.5 0.223858 4.5 0.5V3.5H7.5C7.77614 3.5 8 3.72386 8 4C8 4.27614 7.77614 4.5 7.5 4.5H4.5V7.5C4.5 7.77614 4.27614 8 4 8C3.72386 8 3.5 7.77614 3.5 7.5V4.5H0.5C0.223858 4.5 0 4.27614 0 4C0 3.72386 0.223858 3.5 0.5 3.5H3.5V0.5C3.5 0.223858 3.72386 0 4 0Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-          </div>
-          <!-- End Col -->
-        </div>
-        <!-- End Row -->
-      </div>
-      <!-- End Quantity -->
-      {% endif %}
 
       <!-- Accordion -->
       <div class="accordion mb-5" id="shopCartAccordion">
@@ -261,7 +205,7 @@
         <button
           type="button"
           class="btn btn-primary btntransition"
-          onclick="addProd(`{{object.id}}`,getValue())"
+          onclick="addProd(`{{object.id}}`)"
         >
           افزودن به سبد خرید
         </button>
@@ -311,77 +255,6 @@
   <!-- End Row -->
 </div>
 <!-- End Hero -->
-
-<!-- Content -->
-<div class="container content-space-t-2 content-space-md-3">
-  <div class="row">
-    <div class="col-md-6 mb-5 mb-md-0">
-      <div class="pe-lg-4">
-        <h3>جزئیات</h3>
-        <p>{{object.description}}</p>
-      </div>
-    </div>
-    <!-- End Col -->
-
-    <div class="col-md-6 mb-5 mb-md-0">
-      <h3>مواد و مراقبت</h3>
-
-      <div class="row">
-        <div class="col-sm-6">
-          <ul class="list-py-2 mb-0">
-            <li>اصلی: 100٪ پنبه</li>
-            <li>جناغی نرم</li>
-            <li>آجدار، الگوی مورب</li>
-            <li>کمی ساختار یافته است</li>
-          </ul>
-        </div>
-        <!-- End Col -->
-
-        <div class="col-sm-6">
-          <ul class="list-py-2 mb-0">
-            <li>تک سایز</li>
-            <li>وارداتی</li>
-            <li>رنگ محصول: مایل به سبز تیره</li>
-            <li>کد محصول: #1465791</li>
-          </ul>
-        </div>
-        <!-- End Col -->
-      </div>
-      <!-- End Row -->
-    </div>
-    <!-- End Col -->
-  </div>
-  <!-- End Row -->
-</div>
-<!-- End Content -->
-
-<!-- Content -->
-<!-- <div class="container">
-      <div class="row justify-content-lg-between align-items-md-center">
-        <div class="col-md-6 col-lg-5 content-space-1 content-space-md-2">
-          <h2 class="mb-4">کلاه گاه به گاه با سبک اصلی جلو</h2>
-          <p>این کلاه مردانه دارای سبک ترفویل کم رنگ با لوگوی گلدوزی شده در جلو است.</p>
-          <p>کلاه ساخته شده از بوم شسته شده، دارای طراحی قابل خرد کردن، بسته بندی و بند پشتی قابل تنظیم است تا بتوانید تناسب را شخصی سازی کنید.</p>
-        </div>
-
-        <div class="col-md-6">
-          <div class="bg-img-center h-100 rounded-2" style="background-image: url({% static '/img/750x750/img3.jpg' %}); min-height: 30rem;"></div>
-        </div>
-      </div>
-
-      <div class="row justify-content-lg-between align-items-md-center content-space-t-1 content-space-t-lg-3">
-        <div class="col-md-6 col-lg-5 order-md-2 content-space-1 content-space-md-2">
-          <h2 class="mb-4">کلاه گاه به گاه با سبک اصلی جلو</h2>
-          <p>این کلاه مردانه دارای سبک ترفویل کم رنگ با لوگوی گلدوزی شده در جلو است.</p>
-          <p>کلاه ساخته شده از بوم شسته شده، دارای طراحی قابل خرد کردن، بسته بندی و بند پشتی قابل تنظیم است تا بتوانید تناسب را شخصی سازی کنید.</p>
-        </div>
-
-        <div class="col-md-6 order-md-1">
-          <div class="bg-img-center h-100 rounded-2" style="background-image: url({% static '/img/750x750/img4.jpg' %}); min-height: 30rem;"></div>
-        </div>
-      </div>
-    </div> -->
-<!-- End Content -->
 
 {% show_similar_products object %}
 

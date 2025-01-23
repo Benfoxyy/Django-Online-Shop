@@ -47,8 +47,10 @@
 
           <div class="col-md-12 mb-3">
             <label>توضیحات</label>
+            {{ form.media }}
             {{form.description}}
           </div>
+
 
           <div class="col-md-12 mb-3">
             <label>تصویر محصول</label>
@@ -97,6 +99,4 @@
       });
   });
 </script>
-
-<script>CKEDITOR.replace('ckeditor');</script>
 {% endblock extera-js %}

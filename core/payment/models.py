@@ -10,7 +10,7 @@ class PaymentStatus(models.IntegerChoices):
 class PaymentModel(models.Model):
     authority = models.CharField(max_length=40)
     amount = models.DecimalField(decimal_places=0, max_digits=10)
-    order = models.OneToOneField(
+    order = models.ForeignKey(
         "order.OrderModel",
         on_delete=models.SET_NULL,
         null=True,

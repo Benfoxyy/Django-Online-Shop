@@ -1,6 +1,6 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-from ckeditor.fields import RichTextField
+from django_ckeditor_5.fields import CKEditor5Field
 from django.urls import reverse
 
 
@@ -24,7 +24,7 @@ class ProductModel(models.Model):
     category = models.ManyToManyField(CategoryModel)
     title = models.CharField(max_length=255)
     slug = models.SlugField(allow_unicode=True, unique=True)
-    description = RichTextField()
+    description = CKEditor5Field('Text', config_name='extends')
     stock = models.PositiveIntegerField(default=0)
     status = models.IntegerField(
         choices=ProductStatus.choices, default=ProductStatus.active.value

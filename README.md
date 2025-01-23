@@ -73,6 +73,17 @@ I used [Pytest](#pytest) for testing system and test various parts of site
 
 <hr>
 
+### reCAPTCHA V3
+I used reCAPTCHA for prevent from robots to enter the site . 
+
+Then why version 3 ?
+
+reCAPTCHA v3 returns a score for each request without user friction. The score is based on interactions with your site and enables you to take an appropriate action for your site. Register reCAPTCHA v3 keys on the reCAPTCHA Admin console.
+
+<img src='./Documents/reCAPTCHA.png'>
+
+<hr>
+
 ### Documents
 I leave a full documention about how the website works in <a href='https://github.com/Benfoxyy/Django-Online-Shop/blob/main/Documents/'>Documents</a> folder
 
@@ -80,19 +91,19 @@ I leave a full documention about how the website works in <a href='https://githu
 
 ### Various User
 This shop has 3 types of user :
-- customer
+- <h1>customer</h1>
 
 <img src='./Documents/customer-profile.png'>
 
 <hr>
 
-- admin
+- <h1>admin</h1>
 
 <img src='./Documents/admin-profile.png'>
 
 <hr>
 
-- superuser
+- <h1>superuser</h1>
 
 Superuser can remove or add some stuff that admin couldn't
 

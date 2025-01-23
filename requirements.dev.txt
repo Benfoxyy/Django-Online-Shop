@@ -6,7 +6,7 @@ django-recaptcha
 Pillow==10.4.0
 django-debug-toolbar
 django-redis
-django-ckeditor
+django-ckeditor-5
 requests
 flake8-django
 black

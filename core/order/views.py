@@ -1,5 +1,6 @@
 from django.views.generic import TemplateView, FormView, View
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.http import JsonResponse
@@ -11,7 +12,7 @@ from payment.zarinpal_client import ZarinPalSandbox
 from payment.models import PaymentModel
 
 
-class CheckOutView(SuccessMessageMixin, FormView):
+class CheckOutView(LoginRequiredMixin,SuccessMessageMixin, FormView):
     template_name = "order/checkout.html"
     form_class = CheckOutForm
     success_url = reverse_lazy("order:complete")
@@ -39,7 +40,6 @@ class CheckOutView(SuccessMessageMixin, FormView):
         return redirect(self.payment_method_url(order))
 
     def create_order(self, user, address, coupon, final_price):
-        print(coupon)
         if coupon:
             self.update_coupon(user, coupon)
             discounted_price = final_price / 100 * coupon.discount_percent
@@ -69,7 +69,7 @@ class CheckOutView(SuccessMessageMixin, FormView):
         PaymentModel.objects.create(
             authority=response["data"]["authority"],
             amount=order.final_price,
-            order=order,
+            order=order
         )
         return zarinpal.generate_payment_url(response["data"]["authority"])
 

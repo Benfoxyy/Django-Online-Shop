@@ -6,7 +6,7 @@ python-decouple==3.8
 django-recaptcha
 Pillow==10.4.0
 django-redis
-django-ckeditor
+django-ckeditor-5
 requests
 flake8-django
 black
