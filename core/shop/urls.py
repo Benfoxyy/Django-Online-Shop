@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import include, path, re_path
 from . import views
 
 app_name = "shop"
@@ -16,13 +16,11 @@ urlpatterns = [
         name="detail",
     ),
     path(
-        "product/detail/add_prid/",
-        views.AddProdDetailView.as_view(),
-        name="add-prod-detail",
-    ),
-    path(
         "product/add-or-remove-wish/",
         views.AddOrRemoveWish.as_view(),
         name="modify-wish",
     ),
+    
+    # Shop API section
+    path('api/v1/',include('shop.api.urls'))
 ]

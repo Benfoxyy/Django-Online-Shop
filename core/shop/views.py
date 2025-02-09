@@ -115,21 +115,6 @@ class ShopProductDetailView(generic.DeleteView):
         return context
 
 
-class AddProdDetailView(generic.View):
-    def post(self, request, *args, **kwargs):
-        cart = CartSession(request.session)
-        product_id = request.POST.get("product_id")
-        quantity = request.POST.get("quantity")
-        if product_id and quantity:
-            cart.add_prod(product_id, quantity)
-        return JsonResponse(
-            {
-                "cart": cart.get_cart(),
-                "total_quantity": cart.get_cart_quantity(),
-            }
-        )
-
-
 class AddOrRemoveWish(generic.View):
     def post(self, request, *args, **kwargs):
         product_id = request.POST.get("product_id")

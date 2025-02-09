@@ -14,7 +14,7 @@ class AddProdView(View):
             {
                 "cart": cart.get_cart(),
                 "total_quantity": cart.get_cart_quantity(),
-                "message": "محصول به سبد خرید اضافه شد",
+                "message": "!!محصول به سبد خرید اضافه شد",
             }
         )
 

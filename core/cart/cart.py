@@ -1,3 +1,4 @@
+import re
 from shop.models import ProductModel, ProductStatus
 from .models import CartModel, CartItemModel
 
@@ -18,9 +19,19 @@ class CartSession:
         for item in self.cart["items"]:
             if product_id == item["product_id"]:
                 if quantity is None:
-                    item["quantity"] += 1
+                    if ProductModel.objects.get(
+                        id=product_id, status=ProductStatus.active.value
+                    ).stock > item["quantity"]: 
+                        item["quantity"] += 1
+                    else:
+                        return False
                 else:
-                    item["quantity"] += int(quantity)
+                    if ProductModel.objects.get(
+                        id=product_id, status=ProductStatus.active.value
+                    ).stock > item["quantity"] + int(quantity):
+                        item["quantity"] += int(quantity)
+                    else:
+                        return False
                 break
         else:
             new_prod = {
