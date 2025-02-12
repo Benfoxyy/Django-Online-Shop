@@ -2,7 +2,7 @@ from django.db import router
 from rest_framework.routers import DefaultRouter
 from . import views
 
-app_name = "shop"
+app_name = "shop-api-v1"
 
 urlpatterns = []
 
