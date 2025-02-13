@@ -19,9 +19,12 @@ class CartSession:
         for item in self.cart["items"]:
             if product_id == item["product_id"]:
                 if quantity is None:
-                    if ProductModel.objects.get(
-                        id=product_id, status=ProductStatus.active.value
-                    ).stock > item["quantity"]: 
+                    if (
+                        ProductModel.objects.get(
+                            id=product_id, status=ProductStatus.active.value
+                        ).stock
+                        > item["quantity"]
+                    ):
                         item["quantity"] += 1
                     else:
                         return False

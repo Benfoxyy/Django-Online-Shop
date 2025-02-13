@@ -70,7 +70,9 @@ class Migration(migrations.Migration):
                 ("updated_date", models.DateTimeField(auto_now=True)),
                 (
                     "used_by",
-                    models.ManyToManyField(blank=True, to=settings.AUTH_USER_MODEL),
+                    models.ManyToManyField(
+                        blank=True, to=settings.AUTH_USER_MODEL
+                    ),
                 ),
             ],
             options={
@@ -102,7 +104,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "final_price",
-                    models.DecimalField(decimal_places=0, default=0, max_digits=10),
+                    models.DecimalField(
+                        decimal_places=0, default=0, max_digits=10
+                    ),
                 ),
                 ("created_date", models.DateTimeField(auto_now_add=True)),
                 ("updated_date", models.DateTimeField(auto_now=True)),
@@ -149,7 +153,9 @@ class Migration(migrations.Migration):
                 ("quantity", models.IntegerField(default=0)),
                 (
                     "price",
-                    models.DecimalField(decimal_places=0, default=0, max_digits=10),
+                    models.DecimalField(
+                        decimal_places=0, default=0, max_digits=10
+                    ),
                 ),
                 ("created_date", models.DateTimeField(auto_now_add=True)),
                 ("updated_date", models.DateTimeField(auto_now=True)),

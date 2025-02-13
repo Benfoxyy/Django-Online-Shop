@@ -20,7 +20,6 @@ urlpatterns = [
         views.AddOrRemoveWish.as_view(),
         name="modify-wish",
     ),
-    
     # Shop API section
-    path('api/v1/',include('shop.api.urls'))
+    path("api/v1/", include("shop.api.urls")),
 ]

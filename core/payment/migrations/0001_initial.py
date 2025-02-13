@@ -26,11 +26,18 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("authority", models.CharField(max_length=40)),
-                ("amount", models.DecimalField(decimal_places=0, max_digits=10)),
+                (
+                    "amount",
+                    models.DecimalField(decimal_places=0, max_digits=10),
+                ),
                 (
                     "status",
                     models.IntegerField(
-                        choices=[(1, "در حال انتظار"), (2, "موفق"), (3, "نا موفق")],
+                        choices=[
+                            (1, "در حال انتظار"),
+                            (2, "موفق"),
+                            (3, "نا موفق"),
+                        ],
                         default=1,
                     ),
                 ),

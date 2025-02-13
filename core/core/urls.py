@@ -11,7 +11,7 @@ sitemaps = {"static": StaticViewSitemap, "products": ProductSitemap}
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
+    path("api-auth/", include("rest_framework.urls")),
     path("", include("website.urls")),
     path("accounts/", include("accounts.urls")),
     path("shop/", include("shop.urls")),
@@ -20,7 +20,7 @@ urlpatterns = [
     path("order/", include("order.urls")),
     path("payment/", include("payment.urls")),
     path("review/", include("review.urls")),
-    path("ckeditor5/", include('django_ckeditor_5.urls')),
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
     path(
         "sitemap.xml",
         sitemap,
@@ -38,23 +38,30 @@ if settings.DEBUG:
     from drf_yasg import openapi
 
     schema_view = get_schema_view(
-    openapi.Info(
-        title="Django Online Shop API",
-        default_version='v1',
-        description="you can use it by any front end framework like (React, Vue, Angular, ...)",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="benxfoxy@gmail.com"),
-        license=openapi.License(name="MIT License"),
-    ),
-    public=True,
-    permission_classes=(permissions.AllowAny,),
+        openapi.Info(
+            title="Django Online Shop API",
+            default_version="v1",
+            description="you can use it by any front end framework like (React, Vue, Angular, ...)",
+            terms_of_service="https://www.google.com/policies/terms/",
+            contact=openapi.Contact(email="benxfoxy@gmail.com"),
+            license=openapi.License(name="MIT License"),
+        ),
+        public=True,
+        permission_classes=(permissions.AllowAny,),
     )
-
 
     urlpatterns += [
         path("__debug__/", include(debug_toolbar.urls)),
-        path('swagger<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-        path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui')
+        path(
+            "swagger<format>/",
+            schema_view.without_ui(cache_timeout=0),
+            name="schema-json",
+        ),
+        path(
+            "swagger/",
+            schema_view.with_ui("swagger", cache_timeout=0),
+            name="schema-swagger-ui",
+        ),
     ]
 
     urlpatterns += static(

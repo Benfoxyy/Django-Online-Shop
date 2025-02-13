@@ -17,10 +17,10 @@ class AdminEditProductForm(forms.ModelForm):
             "description",
         ]
         widgets = {
-              "description": CKEditor5Widget(
-                  attrs={"class": "django_ckeditor_5"}
-              )
-          }
+            "description": CKEditor5Widget(
+                attrs={"class": "django_ckeditor_5"}
+            )
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

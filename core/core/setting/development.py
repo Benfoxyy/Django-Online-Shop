@@ -4,7 +4,7 @@ import socket
 # Additional Installed Apps
 INSTALLED_APPS += [
     "debug_toolbar",
-    'drf_yasg',
+    "drf_yasg",
 ]
 
 # Additional Middleware

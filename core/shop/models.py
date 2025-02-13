@@ -24,7 +24,7 @@ class ProductModel(models.Model):
     category = models.ManyToManyField(CategoryModel)
     title = models.CharField(max_length=255)
     slug = models.SlugField(allow_unicode=True, unique=True)
-    description = CKEditor5Field('Text', config_name='extends')
+    description = CKEditor5Field("Text", config_name="extends")
     stock = models.PositiveIntegerField(default=0)
     status = models.IntegerField(
         choices=ProductStatus.choices, default=ProductStatus.active.value

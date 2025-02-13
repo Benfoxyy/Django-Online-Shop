@@ -12,7 +12,7 @@ from payment.zarinpal_client import ZarinPalSandbox
 from payment.models import PaymentModel
 
 
-class CheckOutView(LoginRequiredMixin,SuccessMessageMixin, FormView):
+class CheckOutView(LoginRequiredMixin, SuccessMessageMixin, FormView):
     template_name = "order/checkout.html"
     form_class = CheckOutForm
     success_url = reverse_lazy("order:complete")
@@ -69,7 +69,7 @@ class CheckOutView(LoginRequiredMixin,SuccessMessageMixin, FormView):
         PaymentModel.objects.create(
             authority=response["data"]["authority"],
             amount=order.final_price,
-            order=order
+            order=order,
         )
         return zarinpal.generate_payment_url(response["data"]["authority"])
 

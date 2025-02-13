@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 from django.contrib.auth import views as auth_views
 from .forms import SetPasswordForm
@@ -36,4 +36,5 @@ urlpatterns = [
         ),
         name="password_reset_complete",
     ),
+    path("api/v1/", include("accounts.api.v1.urls")),
 ]

@@ -1,4 +1,3 @@
-from django.db import router
 from rest_framework.routers import DefaultRouter
 from . import views
 

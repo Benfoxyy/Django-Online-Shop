@@ -50,7 +50,9 @@ class Migration(migrations.Migration):
                 ("slug", models.SlugField(allow_unicode=True, unique=True)),
                 (
                     "description",
-                    django_ckeditor_5.fields.CKEditor5Field(verbose_name="Text"),
+                    django_ckeditor_5.fields.CKEditor5Field(
+                        verbose_name="Text"
+                    ),
                 ),
                 ("stock", models.PositiveIntegerField(default=0)),
                 (
@@ -59,7 +61,10 @@ class Migration(migrations.Migration):
                         choices=[(1, "فعال"), (2, "غیرفعال")], default=1
                     ),
                 ),
-                ("price", models.DecimalField(decimal_places=0, max_digits=10)),
+                (
+                    "price",
+                    models.DecimalField(decimal_places=0, max_digits=10),
+                ),
                 (
                     "discount_percent",
                     models.PositiveIntegerField(
@@ -130,7 +135,8 @@ class Migration(migrations.Migration):
                 (
                     "image",
                     models.ImageField(
-                        default="default/proddef.png", upload_to="products/img"
+                        default="default/proddef.png",
+                        upload_to="products/img",
                     ),
                 ),
                 ("created_date", models.DateTimeField(auto_now_add=True)),
