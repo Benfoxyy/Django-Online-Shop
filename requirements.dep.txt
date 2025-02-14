@@ -2,6 +2,9 @@ Django==4.2.14
 djangorestframework
 markdown
 django-filter
+djangorestframework-simplejwt
+drf-yasg
+django-cors-headers
 gunicorn
 psycopg==3.2.1
 psycopg-binary==3.2.1

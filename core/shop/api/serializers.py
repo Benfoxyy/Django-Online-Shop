@@ -24,6 +24,7 @@ class ProductsApiSerializer(serializers.ModelSerializer):
         model = ProductModel
         fields = [
             "id",
+            'user',
             "category",
             "title",
             "slug",
@@ -64,3 +65,7 @@ class ProductsApiSerializer(serializers.ModelSerializer):
             instance.category.all(), many=True
         ).data
         return rep
+    
+    def create(self, validated_data):
+        validated_data['user'] = self.context['request'].user
+        return super().create(validated_data)
