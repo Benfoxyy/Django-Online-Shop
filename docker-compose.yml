@@ -16,6 +16,22 @@ services:
     expose:
       - 5432
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    expose:
+      - 9000
+      - 9001
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - './minio/data:/data'
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server --console-address ":9001" /data
+
   backend:
     build:
       context: .

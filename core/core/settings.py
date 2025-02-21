@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django_ckeditor_5",
+    "minio_storage",
     "django_recaptcha",
     "website",
     "accounts",
@@ -125,18 +126,12 @@ USE_I18N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]  # Your local static files
+
 STATIC_ROOT = (
     BASE_DIR / "staticfiles"
 )  # Where `collectstatic` will gather files (optional in dev)
-
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"  # Directory for user-uploaded files
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -327,3 +322,28 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5500",
 ]
+
+
+# -------------------------
+# ✅ MEDIA FILES (MinIO)
+# -------------------------
+
+# Use MinIO for media files
+DEFAULT_FILE_STORAGE = "minio_storage.storage.MinioMediaStorage"
+
+# MinIO Connection Details
+MINIO_STORAGE_ENDPOINT = config("MINIO_STORAGE_ENDPOINT", default="minio:9000")
+MINIO_EXTERNAL_STORAGE_ENDPOINT = config("MINIO_EXTERNAL_STORAGE_ENDPOINT", default="http://127.0.0.1:9000")
+
+# MinIO Authentication
+MINIO_STORAGE_ACCESS_KEY = config("MINIO_STORAGE_ACCESS_KEY", default="minioadmin")
+MINIO_STORAGE_SECRET_KEY = config("MINIO_STORAGE_SECRET_KEY", default="minioadmin")
+MINIO_STORAGE_USE_HTTPS = config("MINIO_STORAGE_USE_HTTPS", cast=bool, default=False)
+
+# MinIO Media Bucket Settings
+MINIO_STORAGE_MEDIA_BUCKET_NAME = config("MINIO_STORAGE_MEDIA_BUCKET_NAME", default="media")
+MINIO_STORAGE_MEDIA_USE_PRESIGNED = False  # True if you want signed URLs for private access
+MINIO_STORAGE_AUTO_CREATE_MEDIA_BUCKET = True  # Auto-create bucket if not exists
+
+# URL to access media files from MinIO
+MEDIA_URL = f"{MINIO_EXTERNAL_STORAGE_ENDPOINT}/{MINIO_STORAGE_MEDIA_BUCKET_NAME}/"

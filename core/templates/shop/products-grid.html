@@ -173,7 +173,8 @@
               <!-- Card -->
               <div class="card card-bordered shadow-none text-center h-100">
                 <div class="card-pinned">
-                  <img class="card-img-top" src="{{ object.product_image_related.all.first.image.url }}" alt="Image Description">
+                  <img class="card-img-top" src="http://127.0.0.1:9000/media/{{object.product_image_related.all.first.image}}" alt="Image Description">
+                  <h6>{{object.product_image_related.all.first.image}}</h6>
                   {% if not object.stock %}
                   <div class="card-pinned-top-start">
                     <span class="badge bg-danger rounded-pill">اتمام موجودی</span>

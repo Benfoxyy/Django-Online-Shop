@@ -7,6 +7,7 @@ drf-yasg
 django-cors-headers
 psycopg==3.2.1
 psycopg-binary==3.2.1
+django-minio-storage
 python-decouple==3.8
 django-recaptcha
 Pillow==10.4.0
