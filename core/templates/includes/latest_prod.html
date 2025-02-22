@@ -16,7 +16,7 @@
         <!-- Card -->
         <div class="card card-bordered shadow-none text-center h-100">
           <div class="card-pinned">
-            <img class="card-img-top" src="{{ latest_product.product_image_related.all.first.image.url }}" alt="Image Description">
+            <img class="card-img-top" src="http://127.0.0.1:9000/media/{{ latest_product.product_image_related.all.first.image }}" alt="Image Description">
             {% if latest_product.stock == 0 %}
             <div class="card-pinned-top-start">
               <span class="badge bg-danger rounded-pill">اتمام موجودی</span>

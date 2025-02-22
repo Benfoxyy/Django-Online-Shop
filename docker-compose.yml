@@ -25,6 +25,7 @@ services:
     ports:
       - "9000:9000"
       - "9001:9001"
+    restart: always
     volumes:
       - './minio/data:/data'
     environment:
@@ -53,6 +54,7 @@ services:
     restart: always
     depends_on:
       - db
+      - minio
       - redis
 
   redis:

@@ -15,6 +15,7 @@
 <a href="https://www.gunicorn.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/gunicorn/gunicorn-icon.svg" alt="gunicorn" width="40" height="40"/> </a>
 <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/nginx/nginx-icon.svg" alt="nginx" width="40" height="40"/> </a>
 <a href="https://www.nginx.com" target="_blank" rel="noreferrer"> <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Pytest_logo.svg" alt="nginx" width="40" height="40"/> </a>
+<a href="https://min.io/" target="_blank" rel="noreferrer"> <img src="https://dl.min.io/logo/Minio_logo_light/Minio_logo_light.svg" alt="Minio" width="50" height="50"/> </a>
 </p>
 
 
@@ -38,6 +39,7 @@
         - [Development](#development)
             - [Django Debug Toolbar](#pytest)
             - [Pytest](#django-debug-toolbar)
+            - [MinIO Address](#minio-address)
             - [Flake8 and Black](#flake8-and-black)
         - [Deployment](#deployment)
             - [Gunicorn and Nginx](#gunicorn-and-nginx)
@@ -123,6 +125,11 @@ I used <a href='https://www.zarinpal.com/'>ZarinPal</a> for my Payment Method
 
 <hr>
 
+### MinIO
+To me : It's an usful tools for store medias in a safe and accessible place . 
+
+<hr>
+
 # Setup
 
 ## First step
@@ -162,6 +169,16 @@ docker-compose exec backend sh -c "pytest"
 
 <hr>
 
+### MinIO Address
+For seeing all medias that is stored you can visit this url :
+```bash
+http://127.0.0.1:9001
+```
+- Username : minioadmin
+- Password : minioadmin
+
+<hr>
+
 ### Flake8 and Black
 As i said <a href='https://pypi.org/project/flake8-django/'>Flake8</a> and <a href='https://pypi.org/project/black/'>Black</a> are helping for reformat all codes by <a href='https://peps.python.org/pep-0008/'>PEP8</a> rule, for using enter this command :
 ```bash
@@ -182,6 +199,9 @@ This version has some tools that it is not exist in [Development](#development) 
 
 ### Gunicorn and Nginx
 To set your project to deployment mode, you have to change DEBUG mode to False . This thing is a good way to make your site more secure but there is a disadvantages, statics and medias doesn't serve moreover django can't transfer requests on website so it's the time that <a href='https://gunicorn.org/'>Gunicorn</a> and <a href='https://nginx.org/en/'>Nginx</a> come .
+
+<hr>
+
 
 # DB schema
 <img src='./Documents/DB-diagram.png'>
