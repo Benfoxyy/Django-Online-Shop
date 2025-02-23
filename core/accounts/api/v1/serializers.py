@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer,TokenRefreshSerializer
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from accounts.models import User
@@ -25,3 +26,18 @@ class SignUpApiSerializers(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data.pop("password_conf")
         return User.objects.create_user(**validated_data)
+
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        validated_data = super().validate(attrs)
+        validated_data["id"] = self.user.id
+        validated_data["email"] = self.user.email
+        return validated_data
+
+class CustomTokenRefreshSerializer(TokenRefreshSerializer):
+    def validate(self, attrs):
+        validated_data = super().validate(attrs)
+        validated_data["id"] = self.user.id
+        validated_data["email"] = self.user.email
+        return validated_data
