@@ -12,8 +12,8 @@ urlpatterns = [
     path('jwt/refresh/', views.CustomTokenRefreshView.as_view(), name='jwt_refresh'),
     path('jwt/verify/', TokenVerifyView.as_view(), name='jwt_verify'),
     # get user
-    path("get/me/", views.GetMeApi.as_view(), name="get-me"),
-    path("get/user/<int:pk>/", views.GetUserApi.as_view(), name="get-user"),
+    path("get/me/", views.GetMeApiView.as_view(), name="get-me"),
+    path("get/user/<int:pk>/", views.GetUserApiView.as_view(), name="get-user"),
     # change_pasword
     # reset_password
     # email_validation

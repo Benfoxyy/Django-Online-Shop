@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.generics import GenericAPIView
+from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated,IsAdminUser
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -7,12 +7,12 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import CustomTokenObtainPairSerializer,CustomTokenRefreshSerializer
+from .serializers import CustomTokenObtainPairSerializer,CustomTokenRefreshSerializer,GetUserApiSerializers
 from .serializers import SignUpApiSerializers
-from accounts.models import User
+from accounts.models import User, Profile
 
 
-class SignUpApiView(GenericAPIView):
+class SignUpApiView(generics.GenericAPIView):
     serializer_class = SignUpApiSerializers
 
     def post(self, request):
@@ -31,25 +31,18 @@ class CudtomTokenObtainPairView(TokenObtainPairView):
 class CustomTokenRefreshView(TokenRefreshView):
     serializer_class = CustomTokenRefreshSerializer
     
-class GetMeApi(GenericAPIView):
+class GetMeApiView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
-    def get(self, request):
-        user = request.user
-        data = {
-            "id" : user.id,
-            "email" : user.email,
-            "type" : user.user_type,
-        }
-        return Response(data, status=status.HTTP_200_OK)
+    serializer_class = GetUserApiSerializers
+    queryset = Profile.objects.all()
+    
+    def get_object(self):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, user=self.request.user)
+        return obj
     
     
-class GetUserApi(GenericAPIView):
+class GetUserApiView(generics.RetrieveAPIView):
     permission_classes = [IsAdminUser]
-    def get(self, request, pk):
-        user = get_object_or_404(User, pk=pk)
-        data = {
-            "id" : user.id,
-            "email" : user.email,
-            "type" : user.user_type,
-        }
-        return Response(data, status=status.HTTP_200_OK)
+    serializer_class = GetUserApiSerializers
+    queryset = Profile.objects.all()

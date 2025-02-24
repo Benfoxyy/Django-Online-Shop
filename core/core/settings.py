@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -317,11 +318,14 @@ REST_FRAMEWORK = {
 }
 
 
-# CORS_ALLOW_ALL_ORIGINS: True
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=7),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=8),
+}
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:5500",
-]
+
+# cors headers config
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # -------------------------
